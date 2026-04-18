@@ -9,6 +9,7 @@ import {
 import appCss from "../styles.css?url";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ErrorBoundary } from "@/components/layout/ErrorBoundary";
 
 function NotFoundComponent() {
   return (
