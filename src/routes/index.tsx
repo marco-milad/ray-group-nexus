@@ -1,26 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { homeCopy } from "@/data/en/home";
+import { HeroSection } from "@/components/sections/home/HeroSection";
+import { EcosystemSection } from "@/components/sections/home/EcosystemSection";
+import { BrandsGridSection } from "@/components/sections/home/BrandsGridSection";
+import { PhysiciansSection } from "@/components/sections/home/PhysiciansSection";
+import { NetworkPreviewSection } from "@/components/sections/home/NetworkPreviewSection";
+import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: homeCopy.seo.title },
+      { name: "description", content: homeCopy.seo.description },
+      { property: "og:title", content: homeCopy.seo.title },
+      { property: "og:description", content: homeCopy.seo.description },
+    ],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <HeroSection />
+      <EcosystemSection />
+      <BrandsGridSection />
+      <PhysiciansSection />
+      <NetworkPreviewSection />
+      <ContactCtaSection />
+    </>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
