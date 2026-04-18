@@ -19,7 +19,7 @@ import { aboutCopy } from "./about";
 import { investorsCopy } from "./investors";
 import { contactCopy } from "./contact";
 import { platformsCopy } from "./platforms";
-import { servicesCopy } from "./services";
+import { servicesCopy } from "./servicesPage";
 import { networkCopy } from "./network";
 
 import { ecosystemCopy } from "./sections/ecosystem";
