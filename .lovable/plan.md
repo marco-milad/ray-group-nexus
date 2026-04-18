@@ -1,46 +1,21 @@
 
-## Phase 3 — Orchestration, Edge States & Polish (Final)
+## Phase 3 Implementation Report — Plan
 
-### Strict execution sequence
+This is a **report-generation task**, not a code change. The output is a single Markdown document the user will share for external spec review. I'll deliver it inline as the response (no file write needed unless the user asks).
 
-**Step A — Rename only (atomic batch):**
-1. Create `src/components/layout/SectionShell.tsx` with the exact contents of the current `Section.tsx`.
-2. Update all imports across the codebase: `import { Section } from "@/components/layout/Section"` → `import { SectionShell } from "@/components/layout/SectionShell"`, and every `<Section ...>` JSX usage → `<SectionShell ...>`. Affected files (~30) live under `src/components/sections/{home,about,services,network,investors,contact,shared}/` plus any route files using it directly.
-3. Delete the old `src/components/layout/Section.tsx`.
-4. **Gate:** run `tsc --noEmit`. Must be clean. If not, fix before Step B.
+### Report structure
 
-**Step B — Build orchestration primitives** (only after Step A passes):
-- `src/types/state.ts` (re-export from `lib/stateUtils.ts`)
-- `src/types/section.ts` — `SectionContract<TData>`
-- `src/types/page.ts` — `PageContext<TCopy>`
-- `src/hooks/usePageOrchestrator.ts`
-- Verify existing `src/hooks/useUIState.ts` matches spec (extend if needed)
+1. **Files Created / Modified** — grouped by phase (1A foundation → 1B copy → 1C utilities → 2A layout+3 pages → 2B remaining 4 pages → 3 orchestration). Verified against current `src/` tree.
+2. **Spec Compliance** — table per major deliverable with ✅ / ⚠️ / ❌.
+3. **Deviations from Master Spec** — concrete list:
+   - Stack: TanStack Start v1 file-based routing instead of `src/App.tsx` + React Router
+   - Animations: `<Reveal>` (IntersectionObserver + CSS) instead of Framer Motion
+   - Renames: `Section.tsx` → `SectionShell.tsx` (visual) + new `Section.tsx` (orchestration consumer)
+   - Charts: CSS bar charts instead of a chart library on Investors page
+   - 404: handled via `__root.tsx` `notFoundComponent`, not a `src/pages/NotFound/`
+   - Empty-state context keys: camelCase (`networkFilter`) instead of kebab-case (`network-filter`) to match TS-friendly `keyof`
+4. **Open Items** — Phase 2 deferrals: interactive map, Arabic copy population, contact form backend wiring, dev DebugBar
+5. **Verification Status** — `tsc --noEmit` clean; visual parity confirmed on all 7 routes; orchestration partial-error path implemented but not yet runtime-tested with an injected error
 
-**Step C — Build state UI components:**
-- `src/components/ui/states/Skeleton.tsx` (150ms delay, shape variants)
-- `src/components/ui/states/EmptyState.tsx`
-- `src/components/ui/states/ErrorState.tsx` (inline/page/banner variants + retry)
-- `src/components/ui/states/StateRenderer.tsx`
-- `src/components/ui/states/PageLoader.tsx`
-
-**Step D — Build composition + boundaries:**
-- `src/components/layout/Page.tsx` (new — orchestration provider)
-- `src/components/layout/Section.tsx` (new — orchestration consumer; safe to create now that old one is gone)
-- `src/components/layout/SectionWrapper.tsx` (per-section error boundary)
-- `src/components/layout/ErrorBanner.tsx`
-- `src/components/layout/ErrorBoundary.tsx` (mount in `__root.tsx`)
-
-**Step E — Expand copy** in `src/data/en/global.ts`: add `errors.{persistentError, imageLoadError, brandNotFound, networkError}`, `loadingStates`, `emptyStates.{networkFilter, search, pressArticles, servicesCategory, generic}`.
-
-**Step F — Refactor 7 routes onto `<Page>` + `<Section>`:**
-`/`, `/about`, `/services`, `/network`, `/platforms`, `/platforms/$slug`, `/contact`, `/investors`. Each existing visual section component keeps using `<SectionShell>` internally and now accepts `data` via the orchestration child render prop. Static-copy sections get `state: 'success'` contracts.
-
-**Step G — Final gates:**
-- `tsc --noEmit` clean
-- Grep: zero raw `<img>` for brand logos
-- All `<Skeleton>` instances use 150ms delay
-- All 7 routes render with visual parity
-- Inject test error in one section → partial-error banner; rest of page renders
-
-### Already satisfied (no work)
-`BrandLogo`, `getBrand` + FALLBACK_BRAND, `getCopy` with dev warnings, branded 404 in `__root.tsx`, router-level error component, `Reveal` for scroll animations.
+### Approval needed
+Confirm the report should be **delivered inline in chat** (default), or also **written to `docs/IMPLEMENTATION_REPORT.md`** in the repo for the external reviewer.
