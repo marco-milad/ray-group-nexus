@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { investorsCopy } from "@/data/en/investors";
+import { Page } from "@/components/layout/Page";
+import { Section } from "@/components/layout/Section";
+import type { SectionContract } from "@/types/section";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InvestorsHeroSection } from "@/components/sections/investors/InvestorsHeroSection";
@@ -39,32 +42,41 @@ const TABS = [
 
 function InvestorsPage() {
   const labels = investorsCopy.tabs;
-  return (
-    <>
-      <InvestorsHeroSection />
-      <SectionShell>
-        <Tabs defaultValue="thesis" className="w-full">
-          <div className="overflow-x-auto">
-            <TabsList className="mx-auto inline-flex h-auto w-max min-w-full justify-start gap-1 bg-muted/60 p-1.5 sm:flex-wrap sm:justify-center">
-              {TABS.map((t) => (
-                <TabsTrigger
-                  key={t.value}
-                  value={t.value}
-                  className="whitespace-nowrap text-xs sm:text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm"
-                >
-                  {labels[t.value as keyof typeof labels]}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
+  const sections: Record<string, SectionContract> = {
+    hero: { id: "hero", data: investorsCopy.hero, state: "success", required: true },
+    tabs: { id: "tabs", data: {}, state: "success", required: false },
+  };
 
-          {TABS.map(({ value, Component }) => (
-            <TabsContent key={value} value={value} className="mt-10">
-              <Component />
-            </TabsContent>
-          ))}
-        </Tabs>
-      </SectionShell>
-    </>
+  return (
+    <Page pageId="investors" copy={investorsCopy} sections={sections}>
+      <Section id="hero" skeletonVariant="hero">{() => <InvestorsHeroSection />}</Section>
+      <Section id="tabs">
+        {() => (
+          <SectionShell>
+            <Tabs defaultValue="thesis" className="w-full">
+              <div className="overflow-x-auto">
+                <TabsList className="mx-auto inline-flex h-auto w-max min-w-full justify-start gap-1 bg-muted/60 p-1.5 sm:flex-wrap sm:justify-center">
+                  {TABS.map((t) => (
+                    <TabsTrigger
+                      key={t.value}
+                      value={t.value}
+                      className="whitespace-nowrap text-xs sm:text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm"
+                    >
+                      {labels[t.value as keyof typeof labels]}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
+
+              {TABS.map(({ value, Component }) => (
+                <TabsContent key={value} value={value} className="mt-10">
+                  <Component />
+                </TabsContent>
+              ))}
+            </Tabs>
+          </SectionShell>
+        )}
+      </Section>
+    </Page>
   );
 }
