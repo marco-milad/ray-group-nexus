@@ -1,6 +1,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
+
 interface RevealProps {
   children: React.ReactNode;
   className?: string;
@@ -21,7 +25,9 @@ export function Reveal({
   const ref = React.useRef<HTMLElement | null>(null);
   const [visible, setVisible] = React.useState(false);
 
-  React.useEffect(() => {
+  // After mount, sync visibility for elements already in viewport (above-the-fold heroes).
+  // This avoids the flash where IntersectionObserver hasn't fired yet on first paint.
+  useIsoLayoutEffect(() => {
     if (typeof window === "undefined") return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
@@ -30,6 +36,11 @@ export function Reveal({
     }
     const node = ref.current;
     if (!node) return;
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setVisible(true);
+      return;
+    }
     const obs = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
