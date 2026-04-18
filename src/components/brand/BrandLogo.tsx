@@ -8,23 +8,23 @@ interface BrandLogoProps {
   className?: string;
 }
 
-/**
- * BrandLogo — fallback chain:
- *   requested variant → other variant → text fallback (brand.color bg)
- */
 export function BrandLogo({ brand, variant = "light", className }: BrandLogoProps) {
   const primary = variant === "light" ? brand.logo.light : brand.logo.dark;
   const alt = variant === "light" ? brand.logo.dark : brand.logo.light;
 
-  // Compute initial src; if both empty → text fallback immediately
   const initial = primary || alt || "";
   const [src, setSrc] = React.useState(initial);
   const [failed, setFailed] = React.useState(!initial);
 
+  // Tracks whether we already tried the alt URL this render cycle
+  const triedAltRef = React.useRef(false);
+
+  // Reset when primary/alt change (variant switch, logo update, re-fetch)
   React.useEffect(() => {
     const next = primary || alt || "";
     setSrc(next);
     setFailed(!next);
+    triedAltRef.current = false;
   }, [primary, alt]);
 
   if (failed) {
@@ -46,10 +46,10 @@ export function BrandLogo({ brand, variant = "light", className }: BrandLogoProp
     <img
       src={src}
       alt={`${brand.name} logo`}
-      loading="lazy"
       className={cn("object-contain", className)}
       onError={() => {
-        if (src === primary && alt && alt !== primary) {
+        if (!triedAltRef.current && alt && src !== alt) {
+          triedAltRef.current = true;
           setSrc(alt);
         } else {
           setFailed(true);
