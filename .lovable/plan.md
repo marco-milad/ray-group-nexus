@@ -1,65 +1,37 @@
 
-## Phase 1A — Foundation (No UI)
+## Phase 1B — Remaining Copy Files
 
-Adapting the spec to TanStack Start + Tailwind v4. No components or pages built yet — only configuration, types, and copy files.
+Add the remaining page copy files and a brand lookup helper. No UI work — copy + types only.
 
-### 1. Design tokens & fonts
-- Update `src/styles.css`:
-  - Add Google Fonts `@import` for **Montserrat** (EN) and **Alexandria** (AR, future)
-  - Add Ray Lab brand color tokens + sub-brand colors as CSS custom properties under `:root`
-  - Register them in the existing `@theme inline` block so they become Tailwind utilities (`bg-rl-green`, `text-rl-eerie`, `bg-cairo-scan`, etc.)
-  - Add `--font-en` / `--font-ar` and wire into `@theme inline` as `--font-sans`
-  - Set `body` to use Montserrat by default
+### Files to create
 
-> Note: Tailwind v4 uses CSS-based config, so there's no `tailwind.config.ts`. All tokens live in `styles.css` — same outcome, idiomatic syntax.
+1. **`src/data/en/investors.ts`** — full 9-section investors copy (hero, thesis, performance, shareholders, strategy, risks, expansion, exit, governance, press, tabs). Verbatim from the spec, typed `as const` + exported `InvestorsCopy`.
 
-### 2. Folder structure
-Create empty placeholder directories (with a `.gitkeep` or barrel `index.ts` where useful) so the structure exists for 1B:
-- `src/components/ui/{Button,Badge,Card,StatCard,BrandChip,BrandLogo,SectionHeader,states}/`
-- `src/components/layout/{Navbar,Footer,PageWrapper}/`
-- `src/data/en/sections/`
-- `src/types/`
-- `src/hooks/`
-- `src/lib/`
+2. **`src/data/en/contact.ts`** — contact page copy (hero, form fields, offices, inquiry types). Verbatim, typed.
 
-> Pages will live in `src/routes/` (TanStack file-based routing), **not** `src/pages/`. One route file per top-level page (about.tsx, platforms.tsx, network.tsx, services.tsx, investors.tsx, contact.tsx) — created in 1B.
+3. **`src/data/en/platforms.ts`** — platforms page copy. Spec didn't ship verbatim copy in 1B — I'll author a structured shell aligned to the 6 sub-brands (Cairo Scan, TechnoScan, CRC, MedRay, Specialized Clinics, Ray Medical) with: seo, hero, intro, brand-card framework (eyebrow/headline per brand placeholder), and a CTA strip. Conservative content matching the brand voice already established in `home.ts` / `about.ts` — easy to swap when client copy lands.
 
-### 3. TypeScript types (`src/types/`)
-- `brand.ts` — Brand, sub-brand identifiers, brand color map
-- `branch.ts` — Branch location shape (country, city, brand, services)
-- `investor.ts` — Shareholder / DFI consortium shape
+4. **`src/data/en/network.ts`** — full Network Intelligence Preview copy from the master spec (countries grid, brand distribution, growth insight, map-coming-soon). No interactive map. Verbatim from master prompt.
 
-### 4. Copy infrastructure (`src/lib/`)
-- `getCopy.ts` — key-based path resolver with locale support, dev-mode missing-key warnings, fallback string. Imports from `@/data/en` (and a stub `@/data/ar` for future).
+5. **`src/data/en/services.ts`** — services page copy. Spec didn't ship verbatim — I'll author a structured shell: seo, hero, three service pillars matching `ecosystemCopy` (Diagnostics / Clinics / Teleradiology) expanded into modality lists (MRI, CT, PET-CT, Mammography, Ultrasound, Lab, Teleradiology), and a CTA strip.
 
-### 5. Copy files — Phase 1A scope only
-All typed with `as const` + exported `*Copy` type.
+6. **`src/data/en/index.ts`** — extend the existing barrel to export all new copy modules + add to the `sections` namespace where applicable. Preserve `COPY_VERSION = 'v1'`. Verify nothing existing breaks.
 
-**Global & shared:**
-- `src/data/en/global.ts` — brand, nav, CTAs, footer, errors
-- `src/data/en/index.ts` — barrel export + `COPY_VERSION = 'v1'`
-- `src/data/ar/index.ts` — empty stub for getCopy fallback
+7. **`src/lib/getBrand.ts`** — safe brand-id lookup helper:
+   - `FALLBACK_BRAND` constant (Ray Lab Group default — neutral green).
+   - `getBrand(id)` returns the matching brand entry from a small registry keyed off `Brand` type in `src/types/brand.ts`, or `FALLBACK_BRAND` if missing.
+   - Dev-mode `console.warn` on miss (matches `getCopy` pattern).
 
-**Reusable sections (`src/data/en/sections/`):**
-- `ecosystem.ts` — Diagnostics / Clinics / Teleradiology cards
-- `stats.ts` — 8 KPI stats
-- `physicians.ts` — referring physicians 4-step flow
-- `networkPreview.ts` — homepage network teaser
-- `contactCta.ts` — bottom-of-page CTA strip
+### Already in place — skipped
+- `src/lib/getCopy.ts` — already created in 1A, working as spec'd.
+- `src/data/en/index.ts` already has `COPY_VERSION` — just extend it.
 
-**Page copy:**
-- `src/data/en/home.ts` — seo, hero, brands intro
-- `src/data/en/about.ts` — seo, hero, vision, mission, values, timeline (8 events), tech partners
+### Out of scope (deferred)
+- TS interfaces beyond brand registry (1C handles `branchData`, `investorData`, `pathways`, `categories`).
+- Any UI / route changes.
+- AR translations (stub stays empty).
 
-### 6. Verification
-- `index.tsx` route stays as placeholder for now (1B will replace it)
-- Confirm `npm run build` passes — TanStack route tree regenerates cleanly, no missing imports, no TS errors
-- `getCopy('home.hero.headline')` resolves correctly
-
-### Out of scope for 1A (deferred to 1B / later)
-- Framer Motion (using CSS + tw-animate-css instead)
-- All UI components, layout shell, pages
-- Remaining copy files: platforms, network (full), services, investors, contact, brands, branchData, investorData, pathways, categories
-- Logo/asset loading and BrandLogo fallback hierarchy
-
-After approval, I'll switch to default mode and execute this foundation pass.
+### Verification
+- `tsc --noEmit` clean.
+- `getCopy('investors.hero.headline')`, `getCopy('contact.form.submit')`, `getCopy('network.countries.items.0.country')`, `getCopy('platforms.hero.headline')`, `getCopy('services.hero.headline')` all resolve.
+- `getBrand('cairo-scan')` returns brand entry; `getBrand('unknown')` returns `FALLBACK_BRAND` + warns in dev.
