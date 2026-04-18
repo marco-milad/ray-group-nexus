@@ -80,6 +80,10 @@ export function CountriesGridSection() {
             </article>
           ))}
         </div>
+      ) : (
+        <p className="mt-12 text-center text-muted-foreground">
+          {globalCopy.errors.emptyState}
+        </p>
       )}
     </Section>
   );
