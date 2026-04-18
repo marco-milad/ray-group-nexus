@@ -22,13 +22,13 @@ import { cn } from "@/lib/utils";
 
 const links = globalCopy.nav.links;
 
-const primaryLinks = [
+const primaryLinks: ReadonlyArray<{ to: "/about" | "/services" | "/network" | "/investors" | "/contact"; label: string }> = [
   { to: "/about", label: links.about },
   { to: "/services", label: links.services },
   { to: "/network", label: links.network },
   { to: "/investors", label: links.investors },
   { to: "/contact", label: links.contact },
-] as const;
+];
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
