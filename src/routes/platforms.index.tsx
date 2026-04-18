@@ -19,7 +19,7 @@ const COUNTRY_LABEL: Record<string, string> = {
   malta: "Malta",
 };
 
-export const Route = createFileRoute("/platforms")({
+export const Route = createFileRoute("/platforms/")({
   head: () => ({
     meta: [
       { title: platformsCopy.seo.title },
