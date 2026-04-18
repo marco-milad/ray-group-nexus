@@ -16,15 +16,17 @@ export function MapComingSoonSection() {
         >
           <Map className="h-6 w-6" style={{ color: "var(--rl-green)" }} />
         </div>
-        <div
-          className="mt-5 text-xs font-semibold uppercase tracking-[0.18em]"
-          style={{ color: "var(--rl-green)" }}
-        >
-          {mapTeaser.eyebrow} · Phase 2
-        </div>
-        <h3 className="mt-3 text-2xl font-bold text-foreground md:text-3xl">
+        <h3 className="mt-5 text-2xl font-bold text-foreground md:text-3xl">
           {mapTeaser.headline}
         </h3>
+        <div className="mt-4 flex justify-center">
+          <span
+            className="inline-flex items-center rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white"
+            style={{ backgroundColor: "#F57C00" }}
+          >
+            🗓 Interactive Map — Coming Phase 2
+          </span>
+        </div>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
           {mapTeaser.body}
         </p>
