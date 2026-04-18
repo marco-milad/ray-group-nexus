@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { platformsCopy } from "@/data/en/platforms";
 import { brands } from "@/data/en/brands";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { Reveal } from "@/components/ui/reveal";
@@ -63,7 +63,7 @@ function PlatformsPage() {
         </PageWrapper>
       </section>
 
-      <Section bg="bg-background">
+      <SectionShell bg="bg-background">
         <SectionHeader
           eyebrow={overview.eyebrow}
           headline={overview.headline}
@@ -106,7 +106,7 @@ function PlatformsPage() {
             </Link>
           ))}
         </div>
-      </Section>
+      </SectionShell>
 
       <ContactCtaSection />
     </>

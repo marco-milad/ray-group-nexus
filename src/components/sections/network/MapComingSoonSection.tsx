@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Map } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { Button } from "@/components/ui/button";
 import { networkCopy } from "@/data/en/network";
 import { globalCopy } from "@/data/en/global";
@@ -8,7 +8,7 @@ import { globalCopy } from "@/data/en/global";
 export function MapComingSoonSection() {
   const { mapTeaser } = networkCopy;
   return (
-    <Section bg="bg-muted/30">
+    <SectionShell bg="bg-muted/30">
       <div className="mx-auto max-w-3xl rounded-3xl border-2 border-dashed border-border bg-card/50 p-10 text-center md:p-14">
         <div
           className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl"
@@ -40,6 +40,6 @@ export function MapComingSoonSection() {
           </Button>
         </div>
       </div>
-    </Section>
+    </SectionShell>
   );
 }

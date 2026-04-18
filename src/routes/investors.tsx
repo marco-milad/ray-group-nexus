@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { investorsCopy } from "@/data/en/investors";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InvestorsHeroSection } from "@/components/sections/investors/InvestorsHeroSection";
 import { ThesisTab } from "@/components/sections/investors/ThesisTab";
@@ -42,7 +42,7 @@ function InvestorsPage() {
   return (
     <>
       <InvestorsHeroSection />
-      <Section>
+      <SectionShell>
         <Tabs defaultValue="thesis" className="w-full">
           <div className="overflow-x-auto">
             <TabsList className="mx-auto inline-flex h-auto w-max min-w-full justify-start gap-1 bg-muted/60 p-1.5 sm:flex-wrap sm:justify-center">
@@ -64,7 +64,7 @@ function InvestorsPage() {
             </TabsContent>
           ))}
         </Tabs>
-      </Section>
+      </SectionShell>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { networkCopy } from "@/data/en/network";
@@ -9,7 +9,7 @@ import { globalCopy } from "@/data/en/global";
 export function CountriesGridSection() {
   const { countries } = networkCopy;
   return (
-    <Section>
+    <SectionShell>
       <SectionHeader
         eyebrow={countries.eyebrow}
         headline={countries.headline}
@@ -85,6 +85,6 @@ export function CountriesGridSection() {
           {globalCopy.errors.emptyState}
         </p>
       )}
-    </Section>
+    </SectionShell>
   );
 }

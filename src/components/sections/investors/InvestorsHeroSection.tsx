@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { investorsCopy } from "@/data/en/investors";
@@ -7,7 +7,7 @@ import { investorsCopy } from "@/data/en/investors";
 export function InvestorsHeroSection() {
   const { hero } = investorsCopy;
   return (
-    <Section size="lg" bg="bg-gradient-to-b from-background to-muted/30">
+    <SectionShell size="lg" bg="bg-gradient-to-b from-background to-muted/30">
       <SectionHeader
         eyebrow={hero.eyebrow}
         headline={hero.headline}
@@ -25,6 +25,6 @@ export function InvestorsHeroSection() {
           <Link to="/contact">{hero.secondaryCta}</Link>
         </Button>
       </div>
-    </Section>
+    </SectionShell>
   );
 }

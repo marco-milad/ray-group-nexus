@@ -1,4 +1,4 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { aboutCopy } from "@/data/en/about";
 import { cn } from "@/lib/utils";
@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 export function TimelineSection() {
   const { timeline } = aboutCopy;
   return (
-    <Section bg="bg-background">
+    <SectionShell bg="bg-background">
       <SectionHeader eyebrow={timeline.eyebrow} headline={timeline.headline} />
 
       <div className="relative mt-16 max-w-5xl mx-auto">
@@ -53,6 +53,6 @@ export function TimelineSection() {
           })}
         </ol>
       </div>
-    </Section>
+    </SectionShell>
   );
 }

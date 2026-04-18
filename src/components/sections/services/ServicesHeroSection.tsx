@@ -1,4 +1,4 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { StatCard } from "@/components/ui/stat-card";
 import { servicesCopy } from "@/data/en/servicesPage";
@@ -7,7 +7,7 @@ export function ServicesHeroSection() {
   const { hero, stats } = servicesCopy;
   const items = [stats.equipment, stats.types, stats.exams];
   return (
-    <Section size="lg" bg="bg-gradient-to-b from-background to-muted/30">
+    <SectionShell size="lg" bg="bg-gradient-to-b from-background to-muted/30">
       <SectionHeader
         eyebrow={hero.eyebrow}
         headline={hero.headline}
@@ -19,6 +19,6 @@ export function ServicesHeroSection() {
           <StatCard key={s.label} value={s.value} label={s.label} />
         ))}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

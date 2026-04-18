@@ -7,7 +7,7 @@ import {
 import { ArrowLeft, MapPin, Calendar, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageWrapper } from "@/components/layout/PageWrapper";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { Reveal } from "@/components/ui/reveal";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
@@ -159,7 +159,7 @@ function BrandPage() {
       </section>
 
       {/* Services */}
-      <Section bg="bg-background">
+      <SectionShell bg="bg-background">
         <div className="max-w-3xl">
           <div
             className="text-xs font-semibold uppercase tracking-[0.18em]"
@@ -213,10 +213,10 @@ function BrandPage() {
             ))}
           </div>
         )}
-      </Section>
+      </SectionShell>
 
       {/* Ecosystem note */}
-      <Section bg="bg-[color:var(--rl-light-bg)]" size="sm">
+      <SectionShell bg="bg-[color:var(--rl-light-bg)]" size="sm">
         <div className="rounded-2xl border border-border/60 bg-card p-8 md:p-10 max-w-4xl mx-auto">
           <div
             className="text-xs font-semibold uppercase tracking-[0.18em]"
@@ -239,7 +239,7 @@ function BrandPage() {
             </Button>
           </div>
         </div>
-      </Section>
+      </SectionShell>
 
       <ContactCtaSection />
     </>

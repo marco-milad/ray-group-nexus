@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { CheckCircle2 } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -61,7 +61,7 @@ export function ContactFormSection() {
   const inquiryValue = watch("inquiryType");
 
   return (
-    <Section bg="bg-muted/30">
+    <SectionShell bg="bg-muted/30">
       <div className="mx-auto max-w-2xl rounded-3xl border border-border/60 bg-card p-6 shadow-sm md:p-10">
         <h2 className="text-2xl font-bold text-foreground md:text-3xl">
           {contactCopy.form.title}
@@ -199,6 +199,6 @@ export function ContactFormSection() {
           </form>
         )}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

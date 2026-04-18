@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/reveal";
 import { PageWrapper } from "./PageWrapper";
 
-interface SectionProps {
+interface SectionShellProps {
   children: React.ReactNode;
   className?: string;
   /** Background utility, e.g. "bg-background" or inline style class */
@@ -13,14 +13,14 @@ interface SectionProps {
   size?: "sm" | "md" | "lg";
 }
 
-export function Section({
+export function SectionShell({
   children,
   className,
   bg,
   fullBleed = false,
   id,
   size = "md",
-}: SectionProps) {
+}: SectionShellProps) {
   const padding =
     size === "sm" ? "py-12 md:py-16" : size === "lg" ? "py-20 md:py-32" : "py-16 md:py-24";
 

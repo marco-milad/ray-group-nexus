@@ -1,4 +1,4 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { networkCopy } from "@/data/en/network";
 
@@ -7,7 +7,7 @@ export function BrandDistributionSection() {
   const max = Math.max(...brandDistribution.items.map((i) => i.branches), 1);
 
   return (
-    <Section bg="bg-muted/30">
+    <SectionShell bg="bg-muted/30">
       <SectionHeader
         eyebrow={brandDistribution.eyebrow}
         headline={brandDistribution.headline}
@@ -48,6 +48,6 @@ export function BrandDistributionSection() {
           );
         })}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

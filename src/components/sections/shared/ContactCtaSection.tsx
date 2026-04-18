@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { contactCtaCopy } from "@/data/en/sections/contactCta";
 
 export function ContactCtaSection() {
   return (
-    <Section bg="bg-background" size="md">
+    <SectionShell bg="bg-background" size="md">
       <div
         className="rounded-3xl border border-border/60 p-10 md:p-14 text-center relative overflow-hidden"
         style={{
@@ -29,6 +29,6 @@ export function ContactCtaSection() {
           </Button>
         </div>
       </div>
-    </Section>
+    </SectionShell>
   );
 }

@@ -1,5 +1,5 @@
 import { Briefcase, Stethoscope, Newspaper } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { Button } from "@/components/ui/button";
 import { contactCopy } from "@/data/en/contact";
 
@@ -15,7 +15,7 @@ export function InquiryTypeCardsSection() {
   >).map((k) => ({ key: k, ...contactCopy.inquiryTypes[k] }));
 
   return (
-    <Section bg="bg-muted/30">
+    <SectionShell bg="bg-muted/30">
       <div className="grid gap-5 md:grid-cols-3">
         {items.map((it) => {
           const Icon = ICONS[it.key];
@@ -52,6 +52,6 @@ export function InquiryTypeCardsSection() {
           );
         })}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

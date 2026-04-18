@@ -1,5 +1,5 @@
 import { Sparkles } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { getFeaturedServices } from "@/data/en/services";
 import { brands } from "@/data/en/brands";
@@ -11,7 +11,7 @@ export function FeaturedServicesSection() {
   if (featured.length === 0) return null;
 
   return (
-    <Section bg="bg-muted/30">
+    <SectionShell bg="bg-muted/30">
       <SectionHeader
         eyebrow="Featured"
         headline="Flagship Diagnostic Services"
@@ -52,6 +52,6 @@ export function FeaturedServicesSection() {
           </article>
         ))}
       </div>
-    </Section>
+    </SectionShell>
   );
 }
