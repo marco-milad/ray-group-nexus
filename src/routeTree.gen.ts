@@ -16,6 +16,7 @@ import { Route as InvestorsRouteImport } from './routes/investors'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlatformsIndexRouteImport } from './routes/platforms.index'
 import { Route as PlatformsSlugRouteImport } from './routes/platforms.$slug'
 
 const ServicesRoute = ServicesRouteImport.update({
@@ -53,6 +54,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlatformsIndexRoute = PlatformsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PlatformsRoute,
+} as any)
 const PlatformsSlugRoute = PlatformsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/platforms': typeof PlatformsRouteWithChildren
   '/services': typeof ServicesRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
+  '/platforms/': typeof PlatformsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,9 +82,9 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/investors': typeof InvestorsRoute
   '/network': typeof NetworkRoute
-  '/platforms': typeof PlatformsRouteWithChildren
   '/services': typeof ServicesRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
+  '/platforms': typeof PlatformsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +96,7 @@ export interface FileRoutesById {
   '/platforms': typeof PlatformsRouteWithChildren
   '/services': typeof ServicesRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
+  '/platforms/': typeof PlatformsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +109,7 @@ export interface FileRouteTypes {
     | '/platforms'
     | '/services'
     | '/platforms/$slug'
+    | '/platforms/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -108,9 +117,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/investors'
     | '/network'
-    | '/platforms'
     | '/services'
     | '/platforms/$slug'
+    | '/platforms'
   id:
     | '__root__'
     | '/'
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/platforms'
     | '/services'
     | '/platforms/$slug'
+    | '/platforms/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/platforms/': {
+      id: '/platforms/'
+      path: '/'
+      fullPath: '/platforms/'
+      preLoaderRoute: typeof PlatformsIndexRouteImport
+      parentRoute: typeof PlatformsRoute
+    }
     '/platforms/$slug': {
       id: '/platforms/$slug'
       path: '/$slug'
@@ -196,10 +213,12 @@ declare module '@tanstack/react-router' {
 
 interface PlatformsRouteChildren {
   PlatformsSlugRoute: typeof PlatformsSlugRoute
+  PlatformsIndexRoute: typeof PlatformsIndexRoute
 }
 
 const PlatformsRouteChildren: PlatformsRouteChildren = {
   PlatformsSlugRoute: PlatformsSlugRoute,
+  PlatformsIndexRoute: PlatformsIndexRoute,
 }
 
 const PlatformsRouteWithChildren = PlatformsRoute._addFileChildren(
@@ -218,3 +237,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
