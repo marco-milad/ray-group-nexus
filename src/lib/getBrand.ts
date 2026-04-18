@@ -11,8 +11,8 @@ import { brands } from "@/data/en/brands";
  * Neutral group default returned when a brand id cannot be resolved.
  */
 export const FALLBACK_BRAND: Brand = {
-  id: "ray-medical",
-  slug: "ray-medical",
+  id: "unknown",
+  slug: "unknown",
   name: "Ray Lab Group",
   country: "egypt",
   color: "var(--rl-green)",
