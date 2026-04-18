@@ -15,11 +15,7 @@ export function CountriesGridSection() {
         headline={countries.headline}
         subheadline={countries.subheadline}
       />
-      {countries.items.length === 0 ? (
-        <p className="mt-12 text-center text-muted-foreground">
-          {globalCopy.errors.emptyState}
-        </p>
-      ) : (
+      {countries.items.length > 0 ? (
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {countries.items.map((c) => (
             <article

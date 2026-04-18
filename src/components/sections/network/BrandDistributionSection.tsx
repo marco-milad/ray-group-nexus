@@ -16,6 +16,7 @@ export function BrandDistributionSection() {
       <div className="mx-auto mt-12 max-w-3xl space-y-5">
         {brandDistribution.items.map((b) => {
           const pct = (b.branches / max) * 100;
+          const note = "note" in b ? b.note : undefined;
           return (
             <div key={b.brand}>
               <div className="flex items-baseline justify-between">
@@ -40,10 +41,8 @@ export function BrandDistributionSection() {
                   }}
                 />
               </div>
-              {b.note && (
-                <p className="mt-1 text-xs italic text-muted-foreground">
-                  {b.note}
-                </p>
+              {note && (
+                <p className="mt-1 text-xs italic text-muted-foreground">{note}</p>
               )}
             </div>
           );
