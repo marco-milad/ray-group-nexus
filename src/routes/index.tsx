@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const sections: Record<string, SectionContract> = {
     hero: { id: "hero", data: homeCopy.hero, state: "success", required: true },
-    ecosystem: { id: "ecosystem", data: homeCopy.ecosystem ?? {}, state: "success", required: false },
+    ecosystem: { id: "ecosystem", data: {}, state: "success", required: false },
     brands: { id: "brands", data: {}, state: "success", required: false },
     physicians: { id: "physicians", data: {}, state: "success", required: false },
     networkPreview: { id: "networkPreview", data: {}, state: "success", required: false },
