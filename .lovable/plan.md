@@ -1,53 +1,53 @@
 
-## Phase 1C — Types & Structured Data (Final)
+## Phase 2A — Layout + Pages Implementation
 
-### Type changes (replace existing)
+Build the shared layout and first 3 pages (Home, About, Platforms) with all sections.
 
-1. **`src/types/brand.ts`** — replace. New shape: `{ id, slug, name, country: 'egypt'|'ksa'|'jordan'|'malta', color, founded, branches, serviceIds[], description, logo:{light,dark} }`. Drops `BrandId` union, `BRAND_COLORS`, etc.
+### UI Atoms (src/components/ui/)
+- **stat-card.tsx** — Number + label + optional note
+- **section-header.tsx** — Eyebrow + headline + headlineAccent + subheadline
+- **brand-chip.tsx** — Colored dot + brand name
+- **reveal.tsx** — IntersectionObserver + CSS fade-in animation
 
-2. **`src/types/branch.ts`** — replace. New shape: `{ id, brandId, name, city, country, coordinates, serviceIds[] }`.
+### Brand Component (src/components/brand/)
+- **BrandLogo.tsx** — Props: brand, variant?, className?; fallback chain: requested variant → other variant → text div with brand.color bg
 
-3. **`src/types/investor.ts`** — replace. New shape: `{ id, name, shortName, portfolio, focus, color, type }`.
+### Layout Shell (src/components/layout/)
+- **Navbar.tsx** — Sticky, backdrop-blur, logo left, nav center, Contact CTA right, platforms dropdown (6 brands), mobile sheet drawer
+- **Footer.tsx** — Dark bg, brand chips, quick links, social icons, copyright from globalCopy
+- **PageWrapper.tsx** — max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+- **Section.tsx** — `<section>` wrapper with `<Reveal>` and consistent py-16/24 spacing
 
-4. **`src/types/service.ts`** — NEW. `ServiceCategoryId`, `ServicePriority`, `ServiceCategory`, `ServiceItem`, `ClinicalPathway`.
+### Route Updates
 
-### File rename (resolves naming collision)
+**__root.tsx** — Add `<Navbar />` + `<main><Outlet /></main>` + `<Footer />` inside existing root shell; keep notFoundComponent
 
-5. **`src/data/en/services.ts`** → rename to **`src/data/en/servicesPage.ts`** (export stays `servicesCopy`). Update import in `src/data/en/index.ts`.
+**index.tsx (Home)** — Replace placeholder with 5 sections:
+- HeroSection — homeCopy.hero + 4 stats from statsCopy
+- EcosystemSection — ecosystemCopy 3 cards
+- BrandsGridSection — Cairo Scan featured (col-span-2) + 5 others = 6 cards, each with BrandLogo
+- PhysiciansSection — green bg, physiciansCopy.flow 4 steps
+- NetworkPreviewSection — networkPreviewCopy headline + 3-country mini-stats from networkCopy.countries.items
 
-### New data files (verbatim from spec)
+**about.tsx (About)** — 5 sections:
+- AboutHeroSection — aboutCopy.hero
+- VisionMissionSection — aboutCopy.vision + aboutCopy.mission
+- ValuesSection — 4 value cards from aboutCopy.values.items
+- TimelineSection — 8 events alternating layout (L/R desktop, stacked mobile)
+- TechPartnersSection — 4 partner cards
 
-6. **`src/data/en/categories.ts`** — `categories[]` + `getCategoryById`.
-7. **`src/data/en/services.ts`** (new file, structured catalogue) — full service catalogue + indexed O(1) helpers (`getServiceById`, `getServicesByBrand`, `getServicesByCategory`, `getFeaturedServices`, `getServicesSortedByPriority`).
-8. **`src/data/en/pathways.ts`** — `pathways[]` + helpers.
-9. **`src/data/en/brands.ts`** — 6 brands with `serviceIds` + Cloudinary logos.
-10. **`src/data/en/investorData.ts`** — 5 shareholders (will add the missing `import type { Investor }`).
+**platforms.tsx (Platforms Overview)** — 6 brand cards grid (3/2/1 cols responsive), each card links to /platforms/$slug with Link params; uses platformsCopy.hero + platformsCopy.overview
 
-### Helpers
+**platforms.$slug.tsx (Dynamic Brand)** — Loader: getBrand(params.slug), throw notFound() if brand.id === 'unknown'; sections: brand hero with BrandLogo, services list via getServicesByBrand(brand.slug) grouped by category, ecosystem note, CTA strip; head() with brand name in title; errorComponent + notFoundComponent per stack rules
 
-11. **`src/lib/getBrand.ts`** — refactor: drop `brandsArray` parameter, import `brands` from `@/data/en/brands` directly. Update `FALLBACK_BRAND` to match new `Brand` shape.
-
-12. **`src/lib/stateUtils.ts`** — NEW, **using user's exact spec**:
-    ```ts
-    export type UIState = 'idle' | 'loading' | 'success' | 'error' | 'empty'
-    export const STATE_PRIORITY: Record<UIState, number> = {
-      error: 0, loading: 1, empty: 2, success: 3, idle: 4,
-    }
-    export function resolveState(states: UIState[]): UIState {
-      return states.reduce((winner, current) =>
-        STATE_PRIORITY[current] < STATE_PRIORITY[winner] ? current : winner
-      )
-    }
-    ```
-
-### Index barrel
-
-13. **`src/data/en/index.ts`** — only update the `services` import path to `./servicesPage`. Data files (brands, services catalogue, categories, pathways, investorData) are NOT added to the copy barrel — they're imported directly via `@/data/en/<file>`, keeping `getCopy()` namespace clean.
+### Key Paths
+- NetworkPreviewSection: networkPreviewCopy + networkCopy.countries.items (Egypt, Saudi Arabia, Jordan)
+- BrandsGridSection: brands array from src/data/en/brands.ts
+- Brand detail: getBrand(slug), getServicesByBrand(slug)
 
 ### Verification
-
-- `tsc --noEmit` clean.
-- `getCopy('services.hero.headline')` still resolves (copy moved to `servicesPage.ts`).
-- `getBrand('cairo-scan').name === 'Cairo Scan'`; `getBrand('xxx')` returns `FALLBACK_BRAND` + dev warn.
-- `getServicesByBrand('cairo-scan').length > 0`, `getCategoryById('imaging')?.label === 'Imaging & Radiology'`.
-- `resolveState(['success','loading','error']) === 'error'`.
+- tsc --noEmit clean
+- /, /about, /platforms, /platforms/cairo-scan render
+- /platforms/unknown → 404 (brand.id === 'unknown' triggers notFound())
+- Mobile nav drawer functional
+- Scroll reveal triggers once per section
