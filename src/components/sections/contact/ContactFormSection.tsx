@@ -32,6 +32,8 @@ type FormValues = z.infer<typeof schema>;
 
 export function ContactFormSection() {
   const [submitted, setSubmitted] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
   const {
     register,
     handleSubmit,
@@ -151,23 +153,27 @@ export function ContactFormSection() {
 
             <div>
               <Label htmlFor="inquiryType">{fields.inquiryType.label}</Label>
-              <Select
-                value={inquiryValue}
-                onValueChange={(v) =>
-                  setValue("inquiryType", v, { shouldValidate: true })
-                }
-              >
-                <SelectTrigger id="inquiryType" className="mt-1.5">
-                  <SelectValue placeholder={fields.inquiryType.placeholder} />
-                </SelectTrigger>
-                <SelectContent>
-                  {fields.inquiryType.options.map((opt) => (
-                    <SelectItem key={opt} value={opt}>
-                      {opt}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              {mounted ? (
+                <Select
+                  value={inquiryValue}
+                  onValueChange={(v) =>
+                    setValue("inquiryType", v, { shouldValidate: true })
+                  }
+                >
+                  <SelectTrigger id="inquiryType" className="mt-1.5">
+                    <SelectValue placeholder={fields.inquiryType.placeholder} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {fields.inquiryType.options.map((opt) => (
+                      <SelectItem key={opt} value={opt}>
+                        {opt}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <div className="mt-1.5 h-10 w-full rounded-md border border-input bg-background" />
+              )}
               {errors.inquiryType && (
                 <p className="mt-1 text-xs text-destructive">{errors.inquiryType.message}</p>
               )}
