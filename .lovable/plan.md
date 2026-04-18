@@ -1,53 +1,37 @@
 
-## Phase 2A — Layout + Pages Implementation
+## Phase 2B — Remaining Pages + Routing (Final)
 
-Build the shared layout and first 3 pages (Home, About, Platforms) with all sections.
+### Pre-execution checks (in plan, before build)
 
-### UI Atoms (src/components/ui/)
-- **stat-card.tsx** — Number + label + optional note
-- **section-header.tsx** — Eyebrow + headline + headlineAccent + subheadline
-- **brand-chip.tsx** — Colored dot + brand name
-- **reveal.tsx** — IntersectionObserver + CSS fade-in animation
+1. **ShareholdersTab import** — corrected to: `import { investors } from '@/data/en/investorData'`
+2. **react-hook-form + zod** — will verify presence in `package.json` first. If both present → use them. If either missing → fall back to native HTML5 validation (`required`, `type="email"`, `maxLength`, `pattern`) + minimal React state for submit/success/error. No new deps installed.
 
-### Brand Component (src/components/brand/)
-- **BrandLogo.tsx** — Props: brand, variant?, className?; fallback chain: requested variant → other variant → text div with brand.color bg
+### Build (no other changes from prior approval)
 
-### Layout Shell (src/components/layout/)
-- **Navbar.tsx** — Sticky, backdrop-blur, logo left, nav center, Contact CTA right, platforms dropdown (6 brands), mobile sheet drawer
-- **Footer.tsx** — Dark bg, brand chips, quick links, social icons, copyright from globalCopy
-- **PageWrapper.tsx** — max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-- **Section.tsx** — `<section>` wrapper with `<Reveal>` and consistent py-16/24 spacing
+**Pages**
+- `src/routes/network.tsx` → 5 sections (Hero, CountriesGrid, BrandDistribution, GrowthInsight, MapComingSoon)
+- `src/routes/services.tsx` → Hero+stats, FeaturedServices, CategoryTabs (shadcn `<Tabs>` over `categories[]`), Pathways
+- `src/routes/investors.tsx` → Hero + 9 shadcn `<Tabs>` (Thesis, Performance, Shareholders, Strategy, Risks, Expansion, Press, Governance, Exit)
+- `src/routes/contact.tsx` → Hero, Form, Offices (2 Malta), InquiryTypeCards (3)
 
-### Route Updates
+**Section components** under `src/components/sections/{network,services,investors,contact}/` — one file per section.
 
-**__root.tsx** — Add `<Navbar />` + `<main><Outlet /></main>` + `<Footer />` inside existing root shell; keep notFoundComponent
+**Other**
+- 404: improve existing `__root.tsx` `notFoundComponent` with brand styling + back-to-home (no new route file — TanStack file-based routing handles unmatched URLs via root).
+- Navbar: update Services/Network/Investors/Contact links from `/` stubs to real paths.
+- `src/data/en/index.ts`: verify `contactCopy` is already exported (it is per file listing); no change needed.
 
-**index.tsx (Home)** — Replace placeholder with 5 sections:
-- HeroSection — homeCopy.hero + 4 stats from statsCopy
-- EcosystemSection — ecosystemCopy 3 cards
-- BrandsGridSection — Cairo Scan featured (col-span-2) + 5 others = 6 cards, each with BrandLogo
-- PhysiciansSection — green bg, physiciansCopy.flow 4 steps
-- NetworkPreviewSection — networkPreviewCopy headline + 3-country mini-stats from networkCopy.countries.items
-
-**about.tsx (About)** — 5 sections:
-- AboutHeroSection — aboutCopy.hero
-- VisionMissionSection — aboutCopy.vision + aboutCopy.mission
-- ValuesSection — 4 value cards from aboutCopy.values.items
-- TimelineSection — 8 events alternating layout (L/R desktop, stacked mobile)
-- TechPartnersSection — 4 partner cards
-
-**platforms.tsx (Platforms Overview)** — 6 brand cards grid (3/2/1 cols responsive), each card links to /platforms/$slug with Link params; uses platformsCopy.hero + platformsCopy.overview
-
-**platforms.$slug.tsx (Dynamic Brand)** — Loader: getBrand(params.slug), throw notFound() if brand.id === 'unknown'; sections: brand hero with BrandLogo, services list via getServicesByBrand(brand.slug) grouped by category, ecosystem note, CTA strip; head() with brand name in title; errorComponent + notFoundComponent per stack rules
-
-### Key Paths
-- NetworkPreviewSection: networkPreviewCopy + networkCopy.countries.items (Egypt, Saudi Arabia, Jordan)
-- BrandsGridSection: brands array from src/data/en/brands.ts
-- Brand detail: getBrand(slug), getServicesByBrand(slug)
+**Stack alignment**
+- No Framer Motion / AnimatePresence — use existing `<Reveal>` (CSS + IntersectionObserver) per project rule.
+- No `src/App.tsx` — TanStack file-based routing via `src/routes/`.
+- All copy from `src/data/en/`. Zero hardcoded strings.
+- Empty-state fallback for any list that could be empty (e.g., category with 0 services).
+- `head()` per route from each page's `seo` block.
 
 ### Verification
-- tsc --noEmit clean
-- /, /about, /platforms, /platforms/cairo-scan render
-- /platforms/unknown → 404 (brand.id === 'unknown' triggers notFound())
-- Mobile nav drawer functional
-- Scroll reveal triggers once per section
+- `tsc --noEmit` clean
+- `/network`, `/services`, `/investors`, `/contact` render
+- Services + Investors tabs interactive
+- Contact form: validates, shows success state on submit (simulated, no backend)
+- Unknown URL → branded 404
+- Navbar links resolve correctly
