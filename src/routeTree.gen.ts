@@ -9,14 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PlatformsRouteImport } from './routes/platforms'
+import { Route as NetworkRouteImport } from './routes/network'
+import { Route as InvestorsRouteImport } from './routes/investors'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlatformsSlugRouteImport } from './routes/platforms.$slug'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlatformsRoute = PlatformsRouteImport.update({
   id: '/platforms',
   path: '/platforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NetworkRoute = NetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestorsRoute = InvestorsRouteImport.update({
+  id: '/investors',
+  path: '/investors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -38,43 +62,112 @@ const PlatformsSlugRoute = PlatformsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/investors': typeof InvestorsRoute
+  '/network': typeof NetworkRoute
   '/platforms': typeof PlatformsRouteWithChildren
+  '/services': typeof ServicesRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/investors': typeof InvestorsRoute
+  '/network': typeof NetworkRoute
   '/platforms': typeof PlatformsRouteWithChildren
+  '/services': typeof ServicesRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/investors': typeof InvestorsRoute
+  '/network': typeof NetworkRoute
   '/platforms': typeof PlatformsRouteWithChildren
+  '/services': typeof ServicesRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/platforms' | '/platforms/$slug'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/investors'
+    | '/network'
+    | '/platforms'
+    | '/services'
+    | '/platforms/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/platforms' | '/platforms/$slug'
-  id: '__root__' | '/' | '/about' | '/platforms' | '/platforms/$slug'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/investors'
+    | '/network'
+    | '/platforms'
+    | '/services'
+    | '/platforms/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/investors'
+    | '/network'
+    | '/platforms'
+    | '/services'
+    | '/platforms/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  InvestorsRoute: typeof InvestorsRoute
+  NetworkRoute: typeof NetworkRoute
   PlatformsRoute: typeof PlatformsRouteWithChildren
+  ServicesRoute: typeof ServicesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/platforms': {
       id: '/platforms'
       path: '/platforms'
       fullPath: '/platforms'
       preLoaderRoute: typeof PlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/network': {
+      id: '/network'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/investors': {
+      id: '/investors'
+      path: '/investors'
+      fullPath: '/investors'
+      preLoaderRoute: typeof InvestorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -116,8 +209,21 @@ const PlatformsRouteWithChildren = PlatformsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  InvestorsRoute: InvestorsRoute,
+  NetworkRoute: NetworkRoute,
   PlatformsRoute: PlatformsRouteWithChildren,
+  ServicesRoute: ServicesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
