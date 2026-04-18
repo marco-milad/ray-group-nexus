@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { networkPreviewCopy } from "@/data/en/sections/networkPreview";
@@ -10,7 +10,7 @@ export function NetworkPreviewSection() {
   const items = networkCopy.countries.items;
 
   return (
-    <Section bg="bg-background">
+    <SectionShell bg="bg-background">
       <SectionHeader
         eyebrow={networkPreviewCopy.eyebrow}
         headline={networkPreviewCopy.headline}
@@ -58,6 +58,6 @@ export function NetworkPreviewSection() {
           </Link>
         </Button>
       </div>
-    </Section>
+    </SectionShell>
   );
 }

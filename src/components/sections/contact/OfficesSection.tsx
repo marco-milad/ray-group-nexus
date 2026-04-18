@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { contactCopy } from "@/data/en/contact";
 
@@ -7,7 +7,7 @@ export function OfficesSection() {
   const { offices } = contactCopy;
   const items = [offices.primary, offices.secondary];
   return (
-    <Section>
+    <SectionShell>
       <SectionHeader headline={offices.title} />
       <div className="mx-auto mt-10 grid max-w-4xl gap-5 md:grid-cols-2">
         {items.map((o) => (
@@ -30,6 +30,6 @@ export function OfficesSection() {
           </article>
         ))}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

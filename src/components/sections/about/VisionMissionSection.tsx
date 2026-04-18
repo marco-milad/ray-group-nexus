@@ -1,10 +1,10 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { aboutCopy } from "@/data/en/about";
 
 export function VisionMissionSection() {
   const blocks = [aboutCopy.vision, aboutCopy.mission];
   return (
-    <Section bg="bg-background">
+    <SectionShell bg="bg-background">
       <div className="grid gap-6 md:grid-cols-2">
         {blocks.map((b) => (
           <div
@@ -24,6 +24,6 @@ export function VisionMissionSection() {
           </div>
         ))}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

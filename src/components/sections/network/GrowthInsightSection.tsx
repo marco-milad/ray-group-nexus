@@ -1,4 +1,4 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { networkCopy } from "@/data/en/network";
 
@@ -7,7 +7,7 @@ export function GrowthInsightSection() {
   const max = Math.max(...growthInsight.data.map((d) => d.added), 1);
 
   return (
-    <Section>
+    <SectionShell>
       <SectionHeader
         eyebrow={growthInsight.eyebrow}
         headline={growthInsight.headline}
@@ -45,6 +45,6 @@ export function GrowthInsightSection() {
           {growthInsight.soWhat}
         </p>
       </blockquote>
-    </Section>
+    </SectionShell>
   );
 }

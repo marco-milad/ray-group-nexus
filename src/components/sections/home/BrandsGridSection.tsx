@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,7 @@ export function BrandsGridSection() {
   const others = brands.filter((b) => b.id !== featured.id);
 
   return (
-    <Section bg="bg-[color:var(--rl-light-bg)]">
+    <SectionShell bg="bg-[color:var(--rl-light-bg)]">
       <SectionHeader
         eyebrow={homeCopy.brands.eyebrow}
         headline={homeCopy.brands.headline}
@@ -40,7 +40,7 @@ export function BrandsGridSection() {
           <Link to="/platforms">{homeCopy.brands.cta}</Link>
         </Button>
       </div>
-    </Section>
+    </SectionShell>
   );
 }
 

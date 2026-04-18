@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { aboutCopy } from "@/data/en/about";
+import { Page } from "@/components/layout/Page";
+import { Section } from "@/components/layout/Section";
+import type { SectionContract } from "@/types/section";
 import { AboutHeroSection } from "@/components/sections/about/AboutHeroSection";
 import { VisionMissionSection } from "@/components/sections/about/VisionMissionSection";
 import { ValuesSection } from "@/components/sections/about/ValuesSection";
@@ -20,14 +23,25 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const sections: Record<string, SectionContract> = {
+    hero: { id: "hero", data: aboutCopy.hero, state: "success", required: true },
+    visionMission: { id: "visionMission", data: {}, state: "success", required: false },
+    values: { id: "values", data: {}, state: "success", required: false },
+    timeline: { id: "timeline", data: {}, state: "success", required: false },
+    techPartners: { id: "techPartners", data: {}, state: "success", required: false },
+    contactCta: { id: "contactCta", data: {}, state: "success", required: false },
+  };
+
   return (
-    <>
-      <AboutHeroSection />
-      <VisionMissionSection />
-      <ValuesSection />
-      <TimelineSection />
-      <TechPartnersSection />
-      <ContactCtaSection />
-    </>
+    <Page pageId="about" copy={aboutCopy} sections={sections}>
+      <Section id="hero" skeletonVariant="hero">{() => <AboutHeroSection />}</Section>
+      <Section id="visionMission">{() => <VisionMissionSection />}</Section>
+      <Section id="values">{() => <ValuesSection />}</Section>
+      <Section id="timeline">{() => <TimelineSection />}</Section>
+      <Section id="techPartners" skeletonVariant="brand-chip" skeletonCount={6}>
+        {() => <TechPartnersSection />}
+      </Section>
+      <Section id="contactCta">{() => <ContactCtaSection />}</Section>
+    </Page>
   );
 }

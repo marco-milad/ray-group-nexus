@@ -1,4 +1,4 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { getPathwaysSorted } from "@/data/en/pathways";
 import { servicesCopy } from "@/data/en/servicesPage";
@@ -7,7 +7,7 @@ import { globalCopy } from "@/data/en/global";
 export function PathwaysSection() {
   const items = getPathwaysSorted();
   return (
-    <Section bg="bg-muted/30">
+    <SectionShell bg="bg-muted/30">
       <SectionHeader
         eyebrow={servicesCopy.pathways.eyebrow}
         headline={servicesCopy.pathways.headline}
@@ -43,6 +43,6 @@ export function PathwaysSection() {
           ))}
         </div>
       )}
-    </Section>
+    </SectionShell>
   );
 }

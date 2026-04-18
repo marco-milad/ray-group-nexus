@@ -1,4 +1,4 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { categories } from "@/data/en/categories";
@@ -13,7 +13,7 @@ export function CategoryTabsSection() {
   const first = sorted[0]?.id ?? "imaging";
 
   return (
-    <Section>
+    <SectionShell>
       <SectionHeader
         eyebrow={servicesCopy.browse.eyebrow}
         headline={servicesCopy.browse.headline}
@@ -82,6 +82,6 @@ export function CategoryTabsSection() {
           );
         })}
       </Tabs>
-    </Section>
+    </SectionShell>
   );
 }

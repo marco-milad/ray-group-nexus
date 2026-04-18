@@ -1,11 +1,11 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { aboutCopy } from "@/data/en/about";
 
 export function ValuesSection() {
   const { values } = aboutCopy;
   return (
-    <Section bg="bg-[color:var(--rl-light-bg)]">
+    <SectionShell bg="bg-[color:var(--rl-light-bg)]">
       <SectionHeader eyebrow={values.eyebrow} headline={values.headline} />
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {values.items.map((v) => (
@@ -21,6 +21,6 @@ export function ValuesSection() {
           </div>
         ))}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

@@ -9,6 +9,7 @@ import {
 import appCss from "../styles.css?url";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ErrorBoundary } from "@/components/layout/ErrorBoundary";
 
 function NotFoundComponent() {
   return (
@@ -97,7 +98,9 @@ function RootComponent() {
     <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
       <main className="flex-1">
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>

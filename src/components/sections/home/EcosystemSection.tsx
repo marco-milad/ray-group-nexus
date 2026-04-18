@@ -1,5 +1,5 @@
 import { ScanLine, Stethoscope, MonitorPlay } from "lucide-react";
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ecosystemCopy } from "@/data/en/sections/ecosystem";
 
@@ -11,7 +11,7 @@ const cards = [
 
 export function EcosystemSection() {
   return (
-    <Section bg="bg-background">
+    <SectionShell bg="bg-background">
       <SectionHeader
         eyebrow={ecosystemCopy.eyebrow}
         headline={ecosystemCopy.headline}
@@ -37,6 +37,6 @@ export function EcosystemSection() {
           </div>
         ))}
       </div>
-    </Section>
+    </SectionShell>
   );
 }

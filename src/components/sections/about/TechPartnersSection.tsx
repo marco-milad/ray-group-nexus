@@ -1,11 +1,11 @@
-import { Section } from "@/components/layout/Section";
+import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { aboutCopy } from "@/data/en/about";
 
 export function TechPartnersSection() {
   const { techPartners } = aboutCopy;
   return (
-    <Section bg="bg-[color:var(--rl-light-bg)]">
+    <SectionShell bg="bg-[color:var(--rl-light-bg)]">
       <SectionHeader
         eyebrow={techPartners.eyebrow}
         headline={techPartners.headline}
@@ -32,6 +32,6 @@ export function TechPartnersSection() {
           </div>
         ))}
       </div>
-    </Section>
+    </SectionShell>
   );
 }
