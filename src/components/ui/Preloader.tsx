@@ -8,12 +8,16 @@ const TAGLINE_WORDS = ["Diagnostic", "Intelligence.", "Delivered", "at", "Scale.
 
 type Phase = "typing" | "tagline" | "swap" | "logo" | "exit";
 
-export function Preloader({ onComplete }: { onComplete: () => void }) {
+export function Preloader({ onComplete, skip = false }: { onComplete: () => void; skip?: boolean }) {
   const [phase, setPhase] = React.useState<Phase>("typing");
   const [visibleChars, setVisibleChars] = React.useState(0);
   const [visibleWords, setVisibleWords] = React.useState(0);
 
   React.useEffect(() => {
+    if (skip) {
+      onComplete();
+      return;
+    }
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     // Phase 1 — type brand name char by char
@@ -42,7 +46,9 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
     timers.push(setTimeout(() => onComplete(), swapStart + 2200));
 
     return () => timers.forEach(clearTimeout);
-  }, [onComplete]);
+  }, [onComplete, skip]);
+
+  if (skip) return null;
 
   const textVisible = phase === "typing" || phase === "tagline";
   const logoVisible = phase === "logo" || phase === "exit";
