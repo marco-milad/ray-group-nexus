@@ -89,10 +89,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  const [ready, setReady] = React.useState(() => {
-    if (typeof window === "undefined") return true;
-    return sessionStorage.getItem("preloader-shown") === "true";
-  });
+  // Always start with ready=false so server and client agree (no hydration mismatch).
+  // The preloader is part of the SSR HTML and covers the screen from first paint.
+  const [ready, setReady] = React.useState(false);
+  const [skipPreloader, setSkipPreloader] = React.useState(false);
+
+  React.useEffect(() => {
+    // Returning visitor — skip the preloader animation entirely.
+    if (sessionStorage.getItem("preloader-shown") === "true") {
+      setSkipPreloader(true);
+      setReady(true);
+    }
+  }, []);
 
   const handleComplete = () => {
     sessionStorage.setItem("preloader-shown", "true");
@@ -101,7 +109,7 @@ function RootComponent() {
 
   return (
     <>
-      {!ready && <Preloader onComplete={handleComplete} />}
+      {!ready && <Preloader onComplete={handleComplete} skip={skipPreloader} />}
       <div
         className="flex min-h-screen flex-col bg-background"
         style={{
