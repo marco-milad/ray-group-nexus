@@ -34,7 +34,9 @@ function NetworkPage() {
 
   return (
     <Page pageId="network" copy={networkCopy} sections={sections}>
-      <Section id="hero" skeletonVariant="hero">{() => <NetworkHeroSection />}</Section>
+      <Section id="hero" skeletonVariant="hero">
+        {() => <NetworkHeroSection />}
+      </Section>
       <Section id="countries" emptyContext="networkFilter">
         {() => <CountriesGridSection />}
       </Section>

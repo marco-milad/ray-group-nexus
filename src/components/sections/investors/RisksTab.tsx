@@ -30,9 +30,7 @@ export function RisksTab() {
                 {r.status}
               </span>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {r.mitigation}
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.mitigation}</p>
           </article>
         ))}
       </div>

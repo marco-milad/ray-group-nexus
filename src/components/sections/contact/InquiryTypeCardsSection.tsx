@@ -10,9 +10,9 @@ const ICONS = {
 } as const;
 
 export function InquiryTypeCardsSection() {
-  const items = (Object.keys(contactCopy.inquiryTypes) as Array<
-    keyof typeof contactCopy.inquiryTypes
-  >).map((k) => ({ key: k, ...contactCopy.inquiryTypes[k] }));
+  const items = (
+    Object.keys(contactCopy.inquiryTypes) as Array<keyof typeof contactCopy.inquiryTypes>
+  ).map((k) => ({ key: k, ...contactCopy.inquiryTypes[k] }));
 
   return (
     <SectionShell bg="bg-muted/30">
@@ -31,18 +31,14 @@ export function InquiryTypeCardsSection() {
                 <Icon className="h-6 w-6" style={{ color: "var(--rl-green)" }} />
               </div>
               <h3 className="mt-4 text-lg font-bold text-foreground">{it.title}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {it.body}
-              </p>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{it.body}</p>
               <Button
                 variant="outline"
                 size="sm"
                 className="mt-5 w-full"
                 onClick={() => {
                   if (typeof document !== "undefined") {
-                    document
-                      .getElementById("contact-form")
-                      ?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
               >

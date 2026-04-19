@@ -17,16 +17,11 @@ export function TechPartnersSection() {
             key={p.shortName}
             className="rounded-2xl border border-border/60 bg-card p-6 text-center"
           >
-            <div className="text-2xl font-bold tracking-tight text-foreground">
-              {p.shortName}
-            </div>
+            <div className="text-2xl font-bold tracking-tight text-foreground">{p.shortName}</div>
             <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
               {p.name}
             </div>
-            <div
-              className="mt-4 text-xs font-medium"
-              style={{ color: "var(--rl-green)" }}
-            >
+            <div className="mt-4 text-xs font-medium" style={{ color: "var(--rl-green)" }}>
               {p.modalities}
             </div>
           </div>

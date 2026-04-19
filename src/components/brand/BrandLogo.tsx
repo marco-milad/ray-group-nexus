@@ -46,6 +46,8 @@ export function BrandLogo({ brand, variant = "light", className }: BrandLogoProp
     <img
       src={src}
       alt={`${brand.name} logo`}
+      width={160}
+      height={40}
       className={cn("object-contain", className)}
       onError={() => {
         if (!triedAltRef.current && alt && src !== alt) {

@@ -18,10 +18,7 @@ export function ExitTab() {
             key={s.title}
             className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
           >
-            <h3
-              className="text-lg font-bold"
-              style={{ color: "var(--rl-green)" }}
-            >
+            <h3 className="text-lg font-bold" style={{ color: "var(--rl-green)" }}>
               {s.title}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>

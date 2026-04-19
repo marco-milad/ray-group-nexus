@@ -34,7 +34,9 @@ function AboutPage() {
 
   return (
     <Page pageId="about" copy={aboutCopy} sections={sections}>
-      <Section id="hero" skeletonVariant="hero">{() => <AboutHeroSection />}</Section>
+      <Section id="hero" skeletonVariant="hero">
+        {() => <AboutHeroSection />}
+      </Section>
       <Section id="visionMission">{() => <VisionMissionSection />}</Section>
       <Section id="values">{() => <ValuesSection />}</Section>
       <Section id="timeline">{() => <TimelineSection />}</Section>

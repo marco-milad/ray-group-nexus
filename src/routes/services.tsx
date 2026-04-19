@@ -32,7 +32,9 @@ function ServicesPage() {
 
   return (
     <Page pageId="services" copy={servicesCopy} sections={sections}>
-      <Section id="hero" skeletonVariant="hero">{() => <ServicesHeroSection />}</Section>
+      <Section id="hero" skeletonVariant="hero">
+        {() => <ServicesHeroSection />}
+      </Section>
       <Section id="featured">{() => <FeaturedServicesSection />}</Section>
       <Section id="categories" emptyContext="servicesCategory">
         {() => <CategoryTabsSection />}

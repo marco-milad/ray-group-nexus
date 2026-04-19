@@ -21,16 +21,10 @@ export function BrandDistributionSection() {
             <div key={b.brand}>
               <div className="flex items-baseline justify-between">
                 <div>
-                  <span className="text-sm font-semibold text-foreground">
-                    {b.brand}
-                  </span>
-                  <span className="ml-2 text-xs text-muted-foreground">
-                    {b.country}
-                  </span>
+                  <span className="text-sm font-semibold text-foreground">{b.brand}</span>
+                  <span className="ml-2 text-xs text-muted-foreground">{b.country}</span>
                 </div>
-                <span className="text-sm font-bold text-foreground">
-                  {b.branches}
-                </span>
+                <span className="text-sm font-bold text-foreground">{b.branches}</span>
               </div>
               <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-border/60">
                 <div
@@ -41,9 +35,7 @@ export function BrandDistributionSection() {
                   }}
                 />
               </div>
-              {note && (
-                <p className="mt-1 text-xs italic text-muted-foreground">{note}</p>
-              )}
+              {note && <p className="mt-1 text-xs italic text-muted-foreground">{note}</p>}
             </div>
           );
         })}

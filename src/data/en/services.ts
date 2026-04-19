@@ -331,8 +331,7 @@ export const services: ServiceItem[] = [
   {
     id: "microbiology",
     name: "Microbiology",
-    description:
-      "Culture and sensitivity, virology, serology, and molecular PCR testing.",
+    description: "Culture and sensitivity, virology, serology, and molecular PCR testing.",
     categoryId: "lab",
     availableAt: ["cairo-scan"],
     icon: "microscope",
@@ -345,8 +344,7 @@ export const services: ServiceItem[] = [
   {
     id: "neuroradiology",
     name: "Neuroradiology",
-    description:
-      "Brain, spine, head & neck imaging — MRI-first protocol with double-reading QA.",
+    description: "Brain, spine, head & neck imaging — MRI-first protocol with double-reading QA.",
     categoryId: "teleradiology",
     availableAt: ["ray-medical"],
     icon: "brain",
@@ -358,8 +356,7 @@ export const services: ServiceItem[] = [
   {
     id: "msk-radiology",
     name: "MSK Radiology",
-    description:
-      "Joint, bone, and soft tissue imaging. MR Arthrography reporting available.",
+    description: "Joint, bone, and soft tissue imaging. MR Arthrography reporting available.",
     categoryId: "teleradiology",
     availableAt: ["ray-medical"],
     icon: "bone",
@@ -381,8 +378,7 @@ export const services: ServiceItem[] = [
   {
     id: "breast-imaging-reporting",
     name: "Breast Imaging Reporting",
-    description:
-      "Mammography, tomosynthesis, and breast MRI subspecialty reporting.",
+    description: "Mammography, tomosynthesis, and breast MRI subspecialty reporting.",
     categoryId: "teleradiology",
     availableAt: ["ray-medical"],
     icon: "shield-check",

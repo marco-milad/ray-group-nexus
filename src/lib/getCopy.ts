@@ -20,11 +20,7 @@ const copyMap: Record<SupportedLocale, Record<string, unknown>> = {
   ar: arCopy as Record<string, unknown>,
 };
 
-export function getCopy(
-  path: string,
-  fallback = "",
-  locale: SupportedLocale = "en",
-): string {
+export function getCopy(path: string, fallback = "", locale: SupportedLocale = "en"): string {
   const keys = path.split(".");
   const source = copyMap[locale] ?? copyMap.en;
   let result: unknown = source;

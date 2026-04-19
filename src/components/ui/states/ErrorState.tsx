@@ -35,8 +35,7 @@ export function ErrorState({
 }: ErrorStateProps) {
   const exhausted = retryCount >= maxRetries;
   const text =
-    message ??
-    (exhausted ? globalCopy.errors.persistentError : globalCopy.errors.genericError);
+    message ?? (exhausted ? globalCopy.errors.persistentError : globalCopy.errors.genericError);
 
   const wrapperClass =
     variant === "page"

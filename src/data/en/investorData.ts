@@ -15,8 +15,7 @@ export const investors: Investor[] = [
     shortName: "EBRD",
     name: "European Bank for Reconstruction and Development",
     portfolio: "€52.3B",
-    focus:
-      "Multilateral development investment bank — 2,099 projects worldwide",
+    focus: "Multilateral development investment bank — 2,099 projects worldwide",
     color: "#003082",
     type: "multilateral",
   },
@@ -25,8 +24,7 @@ export const investors: Investor[] = [
     shortName: "FMO",
     name: "Nederlandse Financierings-Maatschappij voor Ontwikkelingslanden",
     portfolio: "€9.2B",
-    focus:
-      "Dutch development bank — Foreign Affairs & Economic Affairs mandate",
+    focus: "Dutch development bank — Foreign Affairs & Economic Affairs mandate",
     color: "#00539F",
     type: "development-finance",
   },
@@ -44,8 +42,7 @@ export const investors: Investor[] = [
     shortName: "DEG",
     name: "Deutsche Investitions- und Entwicklungsgesellschaft",
     portfolio: "€8.2B",
-    focus:
-      "German DFI (KfW Group) — long-term private sector investments in emerging markets",
+    focus: "German DFI (KfW Group) — long-term private sector investments in emerging markets",
     color: "#00965E",
     type: "development-finance",
   },

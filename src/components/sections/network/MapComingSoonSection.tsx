@@ -27,17 +27,10 @@ export function MapComingSoonSection() {
             🗓 Interactive Map — Coming Phase 2
           </span>
         </div>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          {mapTeaser.body}
-        </p>
-        <p className="mt-3 text-sm italic text-muted-foreground">
-          {mapTeaser.note}
-        </p>
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground">{mapTeaser.body}</p>
+        <p className="mt-3 text-sm italic text-muted-foreground">{mapTeaser.note}</p>
         <div className="mt-7">
-          <Button
-            asChild
-            style={{ backgroundColor: "var(--rl-green)", color: "white" }}
-          >
+          <Button asChild style={{ backgroundColor: "var(--rl-green)", color: "white" }}>
             <Link to="/contact">{globalCopy.cta.contactUs}</Link>
           </Button>
         </div>

@@ -8,23 +8,15 @@ export const pathways: ClinicalPathway[] = [
   {
     id: "oncology",
     name: "Oncology",
-    description:
-      "Staging, monitoring, and surveillance across all cancer pathways.",
+    description: "Staging, monitoring, and surveillance across all cancer pathways.",
     icon: "target",
-    serviceIds: [
-      "pet-ct",
-      "ct-scan",
-      "mri",
-      "isotopic-scan",
-      "oncology-imaging",
-    ],
+    serviceIds: ["pet-ct", "ct-scan", "mri", "isotopic-scan", "oncology-imaging"],
     order: 1,
   },
   {
     id: "womens-health",
     name: "Women's Health",
-    description:
-      "Comprehensive imaging for breast health, fertility, and gynecological care.",
+    description: "Comprehensive imaging for breast health, fertility, and gynecological care.",
     icon: "heart",
     serviceIds: [
       "mammography-digital",
@@ -39,8 +31,7 @@ export const pathways: ClinicalPathway[] = [
   {
     id: "neurology",
     name: "Neurology",
-    description:
-      "Brain, spine, and nerve imaging for neurological conditions.",
+    description: "Brain, spine, and nerve imaging for neurological conditions.",
     icon: "brain",
     serviceIds: ["mri", "ct-scan", "eeg", "emg", "neuroradiology"],
     order: 3,
@@ -48,23 +39,15 @@ export const pathways: ClinicalPathway[] = [
   {
     id: "cardiology",
     name: "Cardiology",
-    description:
-      "Comprehensive cardiac assessment from resting ECG to advanced echo.",
+    description: "Comprehensive cardiac assessment from resting ECG to advanced echo.",
     icon: "heart-pulse",
-    serviceIds: [
-      "ecg",
-      "ecg-treadmill",
-      "ecg-holter",
-      "echo-ultrasound",
-      "doppler-ultrasound",
-    ],
+    serviceIds: ["ecg", "ecg-treadmill", "ecg-holter", "echo-ultrasound", "doppler-ultrasound"],
     order: 4,
   },
   {
     id: "orthopaedics",
     name: "Orthopaedics & MSK",
-    description:
-      "Joint, bone, and soft tissue imaging for musculoskeletal conditions.",
+    description: "Joint, bone, and soft tissue imaging for musculoskeletal conditions.",
     icon: "bone",
     serviceIds: [
       "mri",
@@ -80,8 +63,7 @@ export const pathways: ClinicalPathway[] = [
   {
     id: "spine",
     name: "Spine & Back Pain",
-    description:
-      "Imaging and guided procedures for spinal conditions and chronic back pain.",
+    description: "Imaging and guided procedures for spinal conditions and chronic back pain.",
     icon: "align-center",
     serviceIds: ["mri", "ct-scan", "xray", "emg", "pain-therapy"],
     order: 6,
@@ -89,8 +71,7 @@ export const pathways: ClinicalPathway[] = [
   {
     id: "hepatology",
     name: "Liver & GI",
-    description:
-      "Liver, GI tract, and abdominal imaging and laboratory assessment.",
+    description: "Liver, GI tract, and abdominal imaging and laboratory assessment.",
     icon: "filter",
     serviceIds: [
       "fibroscan",
@@ -105,22 +86,12 @@ export const pathways: ClinicalPathway[] = [
   {
     id: "general-health",
     name: "General Health Check",
-    description:
-      "Routine screening and diagnostic packages for proactive health management.",
+    description: "Routine screening and diagnostic packages for proactive health management.",
     icon: "clipboard-check",
-    serviceIds: [
-      "xray",
-      "ecg",
-      "ultrasound-standard",
-      "haematology",
-      "biochemistry",
-      "dexa",
-    ],
+    serviceIds: ["xray", "ecg", "ultrasound-standard", "haematology", "biochemistry", "dexa"],
     order: 8,
   },
 ];
 
-export const getPathwayById = (id: string) =>
-  pathways.find((p) => p.id === id);
-export const getPathwaysSorted = () =>
-  [...pathways].sort((a, b) => a.order - b.order);
+export const getPathwayById = (id: string) => pathways.find((p) => p.id === id);
+export const getPathwaysSorted = () => [...pathways].sort((a, b) => a.order - b.order);

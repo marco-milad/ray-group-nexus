@@ -27,9 +27,7 @@ export interface OrchestratorResult {
   errorSections: string[];
 }
 
-export function usePageOrchestrator(
-  sections: Record<string, SectionContract>,
-): OrchestratorResult {
+export function usePageOrchestrator(sections: Record<string, SectionContract>): OrchestratorResult {
   return useMemo(() => {
     const all = Object.values(sections);
     const required = all.filter((s) => s.required !== false);
@@ -38,10 +36,8 @@ export function usePageOrchestrator(
     const reqStates = required.map((s) => s.state);
 
     const hasErrors = states.some((s) => s === "error");
-    const criticalError =
-      reqStates.length > 0 && reqStates.every((s) => s === "error");
-    const allLoading =
-      states.length > 0 && states.every((s) => s === "loading" || s === "idle");
+    const criticalError = reqStates.length > 0 && reqStates.every((s) => s === "error");
+    const allLoading = states.length > 0 && states.every((s) => s === "loading" || s === "idle");
     const hasPartialErrors = hasErrors && !criticalError;
 
     const readySections = all

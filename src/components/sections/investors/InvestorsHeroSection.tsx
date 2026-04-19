@@ -15,10 +15,7 @@ export function InvestorsHeroSection() {
         subheadline={hero.subheadline}
       />
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <Button
-          size="lg"
-          style={{ backgroundColor: "var(--rl-green)", color: "white" }}
-        >
+        <Button size="lg" style={{ backgroundColor: "var(--rl-green)", color: "white" }}>
           {hero.primaryCta}
         </Button>
         <Button asChild size="lg" variant="outline">

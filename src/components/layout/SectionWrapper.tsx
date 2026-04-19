@@ -29,11 +29,7 @@ export class SectionWrapper extends Component<SectionWrapperProps, SectionWrappe
   componentDidCatch(error: Error, info: ErrorInfo) {
     if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
-      console.error(
-        `[SectionWrapper] Error in section "${this.props.sectionName}":`,
-        error,
-        info,
-      );
+      console.error(`[SectionWrapper] Error in section "${this.props.sectionName}":`, error, info);
     }
   }
 

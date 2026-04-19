@@ -28,10 +28,7 @@ export function CountriesGridSection() {
                 </span>
                 <div>
                   <h3 className="text-xl font-bold text-foreground">{c.country}</h3>
-                  <p
-                    className="text-sm font-medium"
-                    style={{ color: "var(--rl-green)" }}
-                  >
+                  <p className="text-sm font-medium" style={{ color: "var(--rl-green)" }}>
                     {c.branches} branches
                   </p>
                 </div>
@@ -57,13 +54,12 @@ export function CountriesGridSection() {
                   <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                     Cities
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {c.cities.join(" · ")}
-                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">{c.cities.join(" · ")}</p>
                 </div>
               </div>
 
-              <p className="mt-5 border-l-2 pl-3 text-sm italic leading-relaxed text-foreground/80"
+              <p
+                className="mt-5 border-l-2 pl-3 text-sm italic leading-relaxed text-foreground/80"
                 style={{ borderColor: "var(--rl-green)" }}
               >
                 {c.soWhat}
@@ -81,9 +77,7 @@ export function CountriesGridSection() {
           ))}
         </div>
       ) : (
-        <p className="mt-12 text-center text-muted-foreground">
-          {globalCopy.errors.emptyState}
-        </p>
+        <p className="mt-12 text-center text-muted-foreground">{globalCopy.errors.emptyState}</p>
       )}
     </SectionShell>
   );

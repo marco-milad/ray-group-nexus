@@ -44,9 +44,7 @@ export function TimelineSection() {
                   <h3 className="mt-1 text-lg md:text-xl font-semibold text-foreground">
                     {e.title}
                   </h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    {e.body}
-                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{e.body}</p>
                 </div>
               </li>
             );

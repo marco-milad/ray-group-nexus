@@ -22,9 +22,7 @@ export function Footer() {
               >
                 R
               </span>
-              <span className="text-lg font-semibold tracking-tight">
-                {globalCopy.brand.name}
-              </span>
+              <span className="text-lg font-semibold tracking-tight">{globalCopy.brand.name}</span>
             </div>
             <p className="mt-4 max-w-md text-sm text-white/70 leading-relaxed">
               {globalCopy.footer.tagline}

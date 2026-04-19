@@ -8,13 +8,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export type SkeletonVariant =
-  | "card"
-  | "hero"
-  | "stat"
-  | "text"
-  | "brand-chip"
-  | "table-row";
+export type SkeletonVariant = "card" | "hero" | "stat" | "text" | "brand-chip" | "table-row";
 
 interface SkeletonProps {
   variant?: SkeletonVariant;
@@ -32,12 +26,7 @@ const VARIANT_CLASSES: Record<SkeletonVariant, string> = {
   "table-row": "h-[52px] w-full rounded-md",
 };
 
-export function Skeleton({
-  variant = "card",
-  count = 1,
-  delay = 150,
-  className,
-}: SkeletonProps) {
+export function Skeleton({ variant = "card", count = 1, delay = 150, className }: SkeletonProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -56,10 +45,7 @@ export function Skeleton({
   return (
     <div className={cn(containerClass, className)} aria-busy="true" aria-live="polite">
       {items.map((_, i) => (
-        <div
-          key={i}
-          className={cn("animate-pulse bg-muted/60", VARIANT_CLASSES[variant])}
-        />
+        <div key={i} className={cn("animate-pulse bg-muted/60", VARIANT_CLASSES[variant])} />
       ))}
     </div>
   );

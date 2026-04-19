@@ -43,7 +43,8 @@ export function ExpansionTab() {
               >
                 {m.metric}
               </div>
-              <p className="mt-3 border-l-2 pl-3 text-sm italic text-foreground/80"
+              <p
+                className="mt-3 border-l-2 pl-3 text-sm italic text-foreground/80"
                 style={{ borderColor: "var(--rl-green)" }}
               >
                 {m.soWhat}

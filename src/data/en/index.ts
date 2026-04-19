@@ -59,10 +59,4 @@ export {
   servicesCopy,
   networkCopy,
 };
-export {
-  ecosystemCopy,
-  statsCopy,
-  physiciansCopy,
-  networkPreviewCopy,
-  contactCtaCopy,
-};
+export { ecosystemCopy, statsCopy, physiciansCopy, networkPreviewCopy, contactCtaCopy };

@@ -1,15 +1,12 @@
-import {
-  Outlet,
-  Link,
-  createRootRoute,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import * as React from "react";
 
 import appCss from "../styles.css?url";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ErrorBoundary } from "@/components/layout/ErrorBoundary";
+import { Preloader } from "@/components/ui/Preloader";
+import { FloatingActions } from "@/components/ui/FloatingActions";
 
 function NotFoundComponent() {
   return (
@@ -22,10 +19,7 @@ function NotFoundComponent() {
         >
           R
         </div>
-        <h1
-          className="mt-6 text-7xl font-bold tracking-tight"
-          style={{ color: "var(--rl-green)" }}
-        >
+        <h1 className="mt-6 text-7xl font-bold tracking-tight" style={{ color: "var(--rl-green)" }}>
           404
         </h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
@@ -95,15 +89,35 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const [ready, setReady] = React.useState(() => {
+    if (typeof window === "undefined") return true;
+    return sessionStorage.getItem("preloader-shown") === "true";
+  });
+
+  const handleComplete = () => {
+    sessionStorage.setItem("preloader-shown", "true");
+    setReady(true);
+  };
+
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Navbar />
-      <main className="flex-1">
-        <ErrorBoundary>
-          <Outlet />
-        </ErrorBoundary>
-      </main>
-      <Footer />
-    </div>
+    <>
+      {!ready && <Preloader onComplete={handleComplete} />}
+      <div
+        className="flex min-h-screen flex-col bg-background"
+        style={{
+          opacity: ready ? 1 : 0,
+          transition: "opacity 0.3s ease",
+        }}
+      >
+        <Navbar />
+        <main className="flex-1">
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
+        </main>
+        <Footer />
+        <FloatingActions />
+      </div>
+    </>
   );
 }

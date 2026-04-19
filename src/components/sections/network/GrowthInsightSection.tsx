@@ -29,9 +29,7 @@ export function GrowthInsightSection() {
                   }}
                 />
               </div>
-              <div className="mt-2 text-xs font-medium text-muted-foreground">
-                {d.year}
-              </div>
+              <div className="mt-2 text-xs font-medium text-muted-foreground">{d.year}</div>
             </div>
           );
         })}

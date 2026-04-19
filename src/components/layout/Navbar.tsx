@@ -2,27 +2,17 @@ import * as React from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { globalCopy } from "@/data/en/global";
 import { brands } from "@/data/en/brands";
 import { cn } from "@/lib/utils";
 
 const links = globalCopy.nav.links;
 
-const primaryLinks: ReadonlyArray<{ to: "/about" | "/services" | "/network" | "/investors" | "/contact"; label: string }> = [
+const primaryLinks: ReadonlyArray<{
+  to: "/about" | "/services" | "/network" | "/investors" | "/contact";
+  label: string;
+}> = [
   { to: "/about", label: links.about },
   { to: "/services", label: links.services },
   { to: "/network", label: links.network },
@@ -30,9 +20,13 @@ const primaryLinks: ReadonlyArray<{ to: "/about" | "/services" | "/network" | "/
   { to: "/contact", label: links.contact },
 ];
 
+const LOGO_URL =
+  "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482775/Ray_Lab_dual_logo_klipdn.svg";
+
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [logoError, setLogoError] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -44,72 +38,91 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b transition-all",
+        "sticky top-0 z-50 w-full transition-all duration-300",
         scrolled
-          ? "border-border/60 bg-background/80 backdrop-blur-md"
-          : "border-transparent bg-background/40 backdrop-blur-sm",
+          ? "border-b border-border/60 bg-background/95 backdrop-blur-md shadow-sm"
+          : "border-b border-transparent bg-background/60 backdrop-blur-sm",
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <span
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-bold text-white"
-            style={{ backgroundColor: "var(--rl-green)" }}
-            aria-hidden
-          >
-            R
-          </span>
-          <span className="text-base font-semibold tracking-tight">
-            {globalCopy.brand.name}
-          </span>
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          {logoError ? (
+            <div className="flex items-center gap-2">
+              <span
+                className="inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-bold text-white"
+                style={{ backgroundColor: "var(--rl-green)" }}
+              >
+                R
+              </span>
+              <span className="text-base font-semibold tracking-tight">
+                {globalCopy.brand.name}
+              </span>
+            </div>
+          ) : (
+            <img
+              src={LOGO_URL}
+              alt={globalCopy.brand.name}
+              className="h-8 w-auto object-contain"
+              onError={() => setLogoError(true)}
+            />
+          )}
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-1">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground">
-                {links.platforms}
-                <ChevronDown className="h-3.5 w-3.5" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-64">
-              <DropdownMenuLabel>
-                {globalCopy.nav.platformsDropdownLabel}
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link to="/platforms" className="cursor-pointer">
+          {/* Platforms — hover dropdown */}
+          <div className="relative group">
+            <Link
+              to="/platforms"
+              className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            >
+              {links.platforms}
+              <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" />
+            </Link>
+
+            {/* Dropdown panel */}
+            <div className="absolute left-0 top-full pt-1 hidden group-hover:block z-50">
+              <div className="w-64 rounded-md border border-border bg-background shadow-md">
+                <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                  {globalCopy.nav.platformsDropdownLabel}
+                </div>
+                <div className="h-px bg-border my-1" />
+                <Link
+                  to="/platforms"
+                  className="flex items-center px-2 py-1.5 text-sm rounded-md mx-1 hover:bg-accent"
+                >
                   All Platforms
                 </Link>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              {brands.map((b) => (
-                <DropdownMenuItem key={b.id} asChild>
+                <div className="h-px bg-border my-1" />
+                {brands.map((b) => (
                   <Link
+                    key={b.id}
                     to="/platforms/$slug"
                     params={{ slug: b.slug }}
-                    className="cursor-pointer"
+                    className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-md mx-1 mb-0.5 hover:bg-accent"
                   >
                     <span
-                      className="mr-2 inline-block h-2 w-2 rounded-full"
+                      className="h-2 w-2 rounded-full shrink-0"
                       style={{ backgroundColor: b.color }}
-                      aria-hidden
                     />
                     {b.name}
                   </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                ))}
+              </div>
+            </div>
+          </div>
 
+          {/* Primary links */}
           {primaryLinks.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-              activeProps={{ className: "text-foreground bg-accent" }}
+              className="relative rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+              activeProps={{
+                className:
+                  "relative rounded-md px-3 py-2 text-sm font-medium text-foreground after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:rounded-full after:bg-[var(--rl-green)]",
+              }}
             >
               {l.label}
             </Link>
@@ -121,11 +134,8 @@ export function Navbar() {
           <Button
             asChild
             size="sm"
-            className="hidden sm:inline-flex"
-            style={{
-              backgroundColor: "var(--rl-green)",
-              color: "white",
-            }}
+            className="hidden sm:inline-flex rounded-md font-medium"
+            style={{ backgroundColor: "var(--rl-green)", color: "white" }}
           >
             <Link to="/contact">{globalCopy.cta.contactUs}</Link>
           </Button>
@@ -168,7 +178,7 @@ export function Navbar() {
                       className="flex items-center gap-2 rounded-md px-3 py-1.5 text-xs text-muted-foreground hover:bg-accent hover:text-foreground"
                     >
                       <span
-                        className="h-1.5 w-1.5 rounded-full"
+                        className="h-1.5 w-1.5 rounded-full shrink-0"
                         style={{ backgroundColor: b.color }}
                       />
                       {b.name}
@@ -181,13 +191,17 @@ export function Navbar() {
                     to={l.to}
                     onClick={() => setMobileOpen(false)}
                     className="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-accent"
+                    activeProps={{
+                      className:
+                        "rounded-md px-3 py-2 text-sm font-medium text-foreground bg-accent border-l-2 border-[var(--rl-green)]",
+                    }}
                   >
                     {l.label}
                   </Link>
                 ))}
                 <Button
                   asChild
-                  className="mt-4"
+                  className="mt-4 rounded-md"
                   style={{ backgroundColor: "var(--rl-green)", color: "white" }}
                 >
                   <Link to="/contact" onClick={() => setMobileOpen(false)}>

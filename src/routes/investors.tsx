@@ -49,7 +49,9 @@ function InvestorsPage() {
 
   return (
     <Page pageId="investors" copy={investorsCopy} sections={sections}>
-      <Section id="hero" skeletonVariant="hero">{() => <InvestorsHeroSection />}</Section>
+      <Section id="hero" skeletonVariant="hero">
+        {() => <InvestorsHeroSection />}
+      </Section>
       <Section id="tabs">
         {() => (
           <SectionShell>

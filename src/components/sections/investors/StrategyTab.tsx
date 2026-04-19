@@ -16,10 +16,7 @@ export function StrategyTab() {
             key={v.number}
             className="flex flex-col rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
           >
-            <div
-              className="text-3xl font-bold"
-              style={{ color: "var(--rl-green)" }}
-            >
+            <div className="text-3xl font-bold" style={{ color: "var(--rl-green)" }}>
               {v.number}
             </div>
             <h3 className="mt-3 text-lg font-bold text-foreground">{v.title}</h3>

@@ -1,9 +1,4 @@
-import {
-  createFileRoute,
-  Link,
-  notFound,
-  useRouter,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Calendar, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageWrapper } from "@/components/layout/PageWrapper";
@@ -70,9 +65,7 @@ export const Route = createFileRoute("/platforms/$slug")({
   },
   head: ({ loaderData }) => {
     const brand = loaderData?.brand;
-    const title = brand
-      ? `${brand.name} — Ray Lab Group`
-      : "Platform — Ray Lab Group";
+    const title = brand ? `${brand.name} — Ray Lab Group` : "Platform — Ray Lab Group";
     const description = brand?.description ?? "Ray Lab Group diagnostic platform.";
     return {
       meta: [
@@ -194,9 +187,7 @@ function BrandPage() {
               {grouped.map(({ category, items }) => (
                 <div key={category.id}>
                   <div className="flex items-baseline justify-between gap-4 border-b border-border/60 pb-3">
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {category.label}
-                    </h3>
+                    <h3 className="text-lg font-semibold text-foreground">{category.label}</h3>
                     <span className="text-xs text-muted-foreground">
                       {items.length} service{items.length === 1 ? "" : "s"}
                     </span>
@@ -207,13 +198,8 @@ function BrandPage() {
                         key={s.id}
                         className="rounded-xl border border-border/60 bg-card p-5 transition-shadow hover:shadow-md"
                       >
-                        <div className="text-sm font-semibold text-foreground">
-                          {s.name}
-                        </div>
-                        <div
-                          className="mt-1 text-xs font-medium"
-                          style={{ color: brand.color }}
-                        >
+                        <div className="text-sm font-semibold text-foreground">{s.name}</div>
+                        <div className="mt-1 text-xs font-medium" style={{ color: brand.color }}>
                           {s.highlight}
                         </div>
                         <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
@@ -244,10 +230,7 @@ function BrandPage() {
                 {platformsCopy.ecosystemNote}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  style={{ backgroundColor: brand.color, color: "white" }}
-                >
+                <Button asChild style={{ backgroundColor: brand.color, color: "white" }}>
                   <Link to="/contact">{labels.primaryCta}</Link>
                 </Button>
                 <Button asChild variant="outline">

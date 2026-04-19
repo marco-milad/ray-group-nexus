@@ -15,9 +15,7 @@ export function PathwaysSection() {
       />
 
       {items.length === 0 ? (
-        <p className="mt-12 text-center text-muted-foreground">
-          {globalCopy.errors.emptyState}
-        </p>
+        <p className="mt-12 text-center text-muted-foreground">{globalCopy.errors.emptyState}</p>
       ) : (
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((p) => (
@@ -33,9 +31,7 @@ export function PathwaysSection() {
                 {p.name.charAt(0)}
               </div>
               <h3 className="mt-4 text-base font-bold text-foreground">{p.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {p.description}
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
               <div className="mt-3 text-[11px] font-medium text-foreground/60">
                 {p.serviceIds.length} services
               </div>

@@ -30,7 +30,9 @@ function ContactPage() {
 
   return (
     <Page pageId="contact" copy={contactCopy} sections={sections}>
-      <Section id="hero" skeletonVariant="hero">{() => <ContactHeroSection />}</Section>
+      <Section id="hero" skeletonVariant="hero">
+        {() => <ContactHeroSection />}
+      </Section>
       <Section id="form">
         {() => (
           <div id="contact-form">

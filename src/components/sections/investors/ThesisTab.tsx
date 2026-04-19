@@ -16,16 +16,11 @@ export function ThesisTab() {
             key={p.number}
             className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
           >
-            <div
-              className="text-3xl font-bold tracking-tight"
-              style={{ color: "var(--rl-green)" }}
-            >
+            <div className="text-3xl font-bold tracking-tight" style={{ color: "var(--rl-green)" }}>
               {p.number}
             </div>
             <h3 className="mt-3 text-xl font-bold text-foreground">{p.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {p.body}
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
             <div
               className="mt-4 rounded-lg border-l-2 bg-muted/40 p-3"
               style={{ borderColor: "var(--rl-green)" }}

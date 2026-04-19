@@ -16,14 +16,9 @@ export function PerformanceTab() {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {performance.metrics.map((m) => (
-          <div
-            key={m.label}
-            className="rounded-2xl border border-border/60 bg-card p-5 shadow-sm"
-          >
+          <div key={m.label} className="rounded-2xl border border-border/60 bg-card p-5 shadow-sm">
             <StatCard value={m.value} label={m.label} note={m.note} />
-            <p className="mt-3 text-xs italic leading-relaxed text-muted-foreground">
-              {m.soWhat}
-            </p>
+            <p className="mt-3 text-xs italic leading-relaxed text-muted-foreground">{m.soWhat}</p>
           </div>
         ))}
       </div>
@@ -33,18 +28,13 @@ export function PerformanceTab() {
           <h3 className="text-base font-bold text-foreground">
             {performance.revenueBreakdown.title}
           </h3>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {performance.revenueBreakdown.note}
-          </p>
+          <p className="mt-1 text-xs text-muted-foreground">{performance.revenueBreakdown.note}</p>
           <div className="mt-5 space-y-4">
             {performance.revenueBreakdown.items.map((it) => (
               <div key={it.label}>
                 <div className="flex items-baseline justify-between">
                   <span className="text-sm font-medium text-foreground">{it.label}</span>
-                  <span
-                    className="text-sm font-bold"
-                    style={{ color: "var(--rl-green)" }}
-                  >
+                  <span className="text-sm font-bold" style={{ color: "var(--rl-green)" }}>
                     {it.display}
                   </span>
                 </div>
@@ -61,12 +51,8 @@ export function PerformanceTab() {
         </div>
 
         <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-          <h3 className="text-base font-bold text-foreground">
-            {performance.growthChart.title}
-          </h3>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {performance.growthChart.note}
-          </p>
+          <h3 className="text-base font-bold text-foreground">{performance.growthChart.title}</h3>
+          <p className="mt-1 text-xs text-muted-foreground">{performance.growthChart.note}</p>
           <div className="mt-6 grid grid-cols-5 items-end gap-3">
             {performance.growthChart.data.map((d) => {
               const h = (d.branches / maxBranches) * 100;
@@ -79,9 +65,7 @@ export function PerformanceTab() {
                       style={{ height: `${h}%`, backgroundColor: "var(--rl-green)" }}
                     />
                   </div>
-                  <div className="mt-2 text-[11px] font-medium text-muted-foreground">
-                    {d.year}
-                  </div>
+                  <div className="mt-2 text-[11px] font-medium text-muted-foreground">{d.year}</div>
                 </div>
               );
             })}

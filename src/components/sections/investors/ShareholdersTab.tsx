@@ -58,9 +58,7 @@ export function ShareholdersTab() {
               </div>
             </div>
             <h3 className="mt-4 text-sm font-semibold text-foreground">{inv.name}</h3>
-            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-              {inv.focus}
-            </p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{inv.focus}</p>
           </article>
         ))}
       </div>
@@ -85,9 +83,7 @@ export function ShareholdersTab() {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-foreground">{it.label}</h4>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {it.body}
-                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{it.body}</p>
                 </div>
               </div>
             );

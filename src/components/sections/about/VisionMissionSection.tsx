@@ -7,10 +7,7 @@ export function VisionMissionSection() {
     <SectionShell bg="bg-background">
       <div className="grid gap-6 md:grid-cols-2">
         {blocks.map((b) => (
-          <div
-            key={b.eyebrow}
-            className="rounded-2xl border border-border/60 bg-card p-8 md:p-10"
-          >
+          <div key={b.eyebrow} className="rounded-2xl border border-border/60 bg-card p-8 md:p-10">
             <div
               className="text-xs font-semibold uppercase tracking-[0.18em]"
               style={{ color: "var(--rl-green)" }}

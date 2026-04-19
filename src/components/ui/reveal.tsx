@@ -1,9 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-const useIsoLayoutEffect =
-  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
-
+const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
 interface RevealProps {
   children: React.ReactNode;
@@ -16,12 +14,7 @@ interface RevealProps {
  * Reveal — IntersectionObserver-driven scroll fade-in.
  * Respects prefers-reduced-motion. Triggers once, then stays visible.
  */
-export function Reveal({
-  children,
-  className,
-  delay = 0,
-  as: Tag = "div",
-}: RevealProps) {
+export function Reveal({ children, className, delay = 0, as: Tag = "div" }: RevealProps) {
   const ref = React.useRef<HTMLElement | null>(null);
   const [visible, setVisible] = React.useState(false);
 

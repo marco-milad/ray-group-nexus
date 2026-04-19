@@ -53,10 +53,7 @@ export function CategoryTabsSection() {
                       className="flex flex-col rounded-xl border border-border/60 bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
                     >
                       <h4 className="text-base font-semibold text-foreground">{s.name}</h4>
-                      <p
-                        className="mt-1 text-xs font-medium"
-                        style={{ color: "var(--rl-green)" }}
-                      >
+                      <p className="mt-1 text-xs font-medium" style={{ color: "var(--rl-green)" }}>
                         {s.highlight}
                       </p>
                       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">

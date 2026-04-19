@@ -43,9 +43,7 @@ export function useUIState<T>(options: UseUIStateOptions = {}): UseUIStateReturn
         const result = await fn();
         setData(result);
         const isEmpty =
-          result === null ||
-          result === undefined ||
-          (Array.isArray(result) && result.length === 0);
+          result === null || result === undefined || (Array.isArray(result) && result.length === 0);
         setState(isEmpty ? "empty" : "success");
       } catch (err) {
         const e = err instanceof Error ? err : new Error(String(err));

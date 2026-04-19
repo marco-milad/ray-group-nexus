@@ -29,9 +29,7 @@ export function getBrand(id: string): Brand {
   if (!match) {
     if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
-      console.warn(
-        `[getBrand] Unknown brand id: "${id}". Using FALLBACK_BRAND.`,
-      );
+      console.warn(`[getBrand] Unknown brand id: "${id}". Using FALLBACK_BRAND.`);
     }
     return FALLBACK_BRAND;
   }

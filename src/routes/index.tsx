@@ -34,7 +34,9 @@ function HomePage() {
 
   return (
     <Page pageId="home" copy={homeCopy} sections={sections}>
-      <Section id="hero" skeletonVariant="hero">{() => <HeroSection />}</Section>
+      <Section id="hero" skeletonVariant="hero">
+        {() => <HeroSection />}
+      </Section>
       <Section id="ecosystem">{() => <EcosystemSection />}</Section>
       <Section id="brands" skeletonVariant="brand-chip" skeletonCount={6}>
         {() => <BrandsGridSection />}
