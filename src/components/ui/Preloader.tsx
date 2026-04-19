@@ -46,7 +46,9 @@ export function Preloader({ onComplete, skip = false }: { onComplete: () => void
     timers.push(setTimeout(() => onComplete(), swapStart + 2200));
 
     return () => timers.forEach(clearTimeout);
-  }, [onComplete]);
+  }, [onComplete, skip]);
+
+  if (skip) return null;
 
   const textVisible = phase === "typing" || phase === "tagline";
   const logoVisible = phase === "logo" || phase === "exit";
