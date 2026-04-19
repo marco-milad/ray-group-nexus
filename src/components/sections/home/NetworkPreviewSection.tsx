@@ -39,7 +39,7 @@ export function NetworkPreviewSection() {
                     {c.flag}
                   </span>
                   <img
-                    src={`https://flagcdn.com/w40/${c.country === "Egypt" ? "eg" : c.country === "Saudi Arabia" ? "sa" : "jo"}.png`}
+                    src={`https://flagcdn.com/${c.country === "Egypt" ? "eg" : c.country === "Saudi Arabia" ? "sa" : "jo"}.svg`}
                     alt=""
                     aria-hidden
                     width={36}
