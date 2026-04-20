@@ -2,8 +2,9 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Send } from "lucide-react";
 import { SectionShell } from "@/components/layout/SectionShell";
+import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,7 +34,9 @@ type FormValues = z.infer<typeof schema>;
 export function ContactFormSection() {
   const [submitted, setSubmitted] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
+
   React.useEffect(() => setMounted(true), []);
+
   const {
     register,
     handleSubmit,
@@ -54,7 +57,6 @@ export function ContactFormSection() {
   });
 
   const onSubmit = async (_values: FormValues) => {
-    // Simulated submit — no backend wired.
     await new Promise((r) => setTimeout(r, 700));
     setSubmitted(true);
     reset();
@@ -63,144 +65,167 @@ export function ContactFormSection() {
   const inquiryValue = watch("inquiryType");
 
   return (
-    <SectionShell bg="bg-muted/30">
-      <div className="mx-auto max-w-2xl rounded-3xl border border-border/60 bg-card p-6 shadow-sm md:p-10">
-        <h2 className="text-2xl font-bold text-foreground md:text-3xl">{contactCopy.form.title}</h2>
+    <SectionShell bg="bg-[color:var(--rl-light-bg)]">
+      <Reveal>
+        <div
+          className="mx-auto max-w-2xl rounded-3xl border border-border/60 bg-card p-6 shadow-sm md:p-10"
+          style={{ borderTopColor: "var(--rl-green)", borderTopWidth: "3px" }}
+        >
+          <h2 className="text-2xl font-bold text-foreground md:text-3xl mb-8">
+            {contactCopy.form.title}
+          </h2>
 
-        {submitted ? (
-          <div
-            className="mt-8 rounded-2xl border-l-4 bg-muted/40 p-6"
-            style={{ borderColor: "var(--rl-green)" }}
-            role="status"
-          >
-            <div className="flex items-start gap-3">
-              <CheckCircle2
-                className="h-6 w-6 flex-shrink-0"
-                style={{ color: "var(--rl-green)" }}
-              />
-              <div>
-                <h3 className="text-lg font-bold text-foreground">
-                  {contactCopy.form.successTitle}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {contactCopy.form.successBody}
-                </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mt-4"
-                  onClick={() => setSubmitted(false)}
-                >
-                  Send another message
-                </Button>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5" noValidate>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="firstName">{fields.firstName.label}</Label>
-                <Input
-                  id="firstName"
-                  placeholder={fields.firstName.placeholder}
-                  className="mt-1.5"
-                  {...register("firstName")}
-                />
-                {errors.firstName && (
-                  <p className="mt-1 text-xs text-destructive">{errors.firstName.message}</p>
-                )}
-              </div>
-              <div>
-                <Label htmlFor="lastName">{fields.lastName.label}</Label>
-                <Input
-                  id="lastName"
-                  placeholder={fields.lastName.placeholder}
-                  className="mt-1.5"
-                  {...register("lastName")}
-                />
-                {errors.lastName && (
-                  <p className="mt-1 text-xs text-destructive">{errors.lastName.message}</p>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="email">{fields.email.label}</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder={fields.email.placeholder}
-                className="mt-1.5"
-                {...register("email")}
-              />
-              {errors.email && (
-                <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>
-              )}
-            </div>
-
-            <div>
-              <Label htmlFor="organisation">{fields.organisation.label}</Label>
-              <Input
-                id="organisation"
-                placeholder={fields.organisation.placeholder}
-                className="mt-1.5"
-                {...register("organisation")}
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="inquiryType">{fields.inquiryType.label}</Label>
-              {mounted ? (
-                <Select
-                  value={inquiryValue}
-                  onValueChange={(v) => setValue("inquiryType", v, { shouldValidate: true })}
-                >
-                  <SelectTrigger id="inquiryType" className="mt-1.5">
-                    <SelectValue placeholder={fields.inquiryType.placeholder} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {fields.inquiryType.options.map((opt) => (
-                      <SelectItem key={opt} value={opt}>
-                        {opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              ) : (
-                <div className="mt-1.5 h-10 w-full rounded-md border border-input bg-background" />
-              )}
-              {errors.inquiryType && (
-                <p className="mt-1 text-xs text-destructive">{errors.inquiryType.message}</p>
-              )}
-            </div>
-
-            <div>
-              <Label htmlFor="message">{fields.message.label}</Label>
-              <Textarea
-                id="message"
-                rows={5}
-                placeholder={fields.message.placeholder}
-                className="mt-1.5"
-                {...register("message")}
-              />
-              {errors.message && (
-                <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full"
-              disabled={isSubmitting}
-              style={{ backgroundColor: "var(--rl-green)", color: "white" }}
+          {submitted ? (
+            <div
+              className="rounded-2xl border-l-4 p-6"
+              style={{
+                borderColor: "var(--rl-green)",
+                backgroundColor: "color-mix(in oklab, var(--rl-green) 5%, white)",
+              }}
+              role="status"
             >
-              {isSubmitting ? contactCopy.form.submitting : contactCopy.form.submit}
-            </Button>
-          </form>
-        )}
-      </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2
+                  className="h-6 w-6 flex-shrink-0 mt-0.5"
+                  style={{ color: "var(--rl-green)" }}
+                />
+                <div>
+                  <h3 className="text-lg font-bold text-foreground">
+                    {contactCopy.form.successTitle}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {contactCopy.form.successBody}
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="mt-4"
+                    onClick={() => setSubmitted(false)}
+                  >
+                    Send another message
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+              {/* First + Last name */}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <Label htmlFor="firstName">{fields.firstName.label}</Label>
+                  <Input
+                    id="firstName"
+                    placeholder={fields.firstName.placeholder}
+                    className="mt-1.5"
+                    {...register("firstName")}
+                  />
+                  {errors.firstName && (
+                    <p className="mt-1 text-xs text-destructive">{errors.firstName.message}</p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="lastName">{fields.lastName.label}</Label>
+                  <Input
+                    id="lastName"
+                    placeholder={fields.lastName.placeholder}
+                    className="mt-1.5"
+                    {...register("lastName")}
+                  />
+                  {errors.lastName && (
+                    <p className="mt-1 text-xs text-destructive">{errors.lastName.message}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Email */}
+              <div>
+                <Label htmlFor="email">{fields.email.label}</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder={fields.email.placeholder}
+                  className="mt-1.5"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>
+                )}
+              </div>
+
+              {/* Organisation */}
+              <div>
+                <Label htmlFor="organisation">{fields.organisation.label}</Label>
+                <Input
+                  id="organisation"
+                  placeholder={fields.organisation.placeholder}
+                  className="mt-1.5"
+                  {...register("organisation")}
+                />
+              </div>
+
+              {/* Inquiry type */}
+              <div>
+                <Label htmlFor="inquiryType">{fields.inquiryType.label}</Label>
+                {mounted ? (
+                  <Select
+                    value={inquiryValue}
+                    onValueChange={(v) => setValue("inquiryType", v, { shouldValidate: true })}
+                  >
+                    <SelectTrigger id="inquiryType" className="mt-1.5">
+                      <SelectValue placeholder={fields.inquiryType.placeholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {fields.inquiryType.options.map((opt) => (
+                        <SelectItem key={opt} value={opt}>
+                          {opt}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <div className="mt-1.5 h-10 w-full rounded-md border border-input bg-background" />
+                )}
+                {errors.inquiryType && (
+                  <p className="mt-1 text-xs text-destructive">{errors.inquiryType.message}</p>
+                )}
+              </div>
+
+              {/* Message */}
+              <div>
+                <Label htmlFor="message">{fields.message.label}</Label>
+                <Textarea
+                  id="message"
+                  rows={5}
+                  placeholder={fields.message.placeholder}
+                  className="mt-1.5"
+                  {...register("message")}
+                />
+                {errors.message && (
+                  <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>
+                )}
+              </div>
+
+              {/* Submit */}
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full group font-semibold"
+                disabled={isSubmitting}
+                style={{ backgroundColor: "var(--rl-green)", color: "white" }}
+              >
+                {isSubmitting ? (
+                  contactCopy.form.submitting
+                ) : (
+                  <>
+                    {contactCopy.form.submit}
+                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
+        </div>
+      </Reveal>
     </SectionShell>
   );
 }
