@@ -1,58 +1,76 @@
 
-## Diagnosis: Why content flashes before the preloader
+## Diagnosis
 
-The flash is a classic SSR hydration mismatch. Here is the exact sequence with the current code in `src/routes/__root.tsx`:
+The `process is not defined` error comes from TanStack Start's bundled SSR output containing literal `process.env.TSS_PRERENDERING` and `process.env.TSS_SHELL` references. In the Cloudflare Workers runtime there is no `process` global, and these reads happen at module top-level — before any compatibility shim could load — so the Worker throws on first request.
 
-1. **Server render (Cloudflare Worker)**: `typeof window === "undefined"` is true, so the initializer returns `ready = true`. The server emits HTML with the **full page** (Navbar + Outlet + Footer) at `opacity: 1`, and **no `<Preloader>`** in the DOM.
-2. **Browser receives HTML**: Before any JS runs, the browser paints that fully-rendered page. **This is the flash.**
-3. **Hydration starts**: React runs the same `useState` initializer on the client. Now `typeof window !== "undefined"`, so it checks `sessionStorage.getItem("preloader-shown")`. On a first visit it returns `null`, so `ready` becomes `false`.
-4. **React reconciles**: `<Preloader>` mounts on top, and the page wrapper switches to `opacity: 0`. The preloader now covers the already-painted content.
-5. Preloader finishes → `ready = true` → content fades in.
+Your `define` attempt was the right idea, but two things blocked it:
 
-Two things make this worse:
-- The server HTML and the first client render disagree on `ready` → React logs a hydration warning and the server-painted DOM is visible for the entire time between paint and hydration (often 200–800 ms on a cold Worker + slow network).
-- `Preloader` is rendered as a sibling **after** the content wrapper in the tree, but it relies on `position: fixed` + `z-index: 9999` to cover. It only covers **after** it mounts, not during the pre-hydration paint window.
+1. **Wrong file is now active.** I renamed `wrangler.toml` → `wrangler.deploy.toml` last turn to unblock the build. The Cloudflare Vite plugin only auto-discovers `wrangler.toml`/`wrangler.jsonc`, so it no longer sees your config at build time and therefore does not run the Worker build pass that would consume those `define`s. Your "main field doesn't point to existing file" error was the plugin loading the toml *before* the build wrote `dist/server/server.js` — a chicken-and-egg.
+2. **`nodejs_compat_v2`** alone does not polyfill bare `process` references that survive bundling — it polyfills `node:process` *imports*. The `define` approach (compile-time string replacement) is the correct fix, not a runtime polyfill.
 
-Root cause in one line: the preloader's "should I show?" decision lives in client-only `sessionStorage`, but the server has to commit to an HTML output before it can know that — so the server always ships "no preloader, content visible," and the client has to undo that after paint.
-
-## The correct fix for SSR on Cloudflare Workers
-
-You cannot read `sessionStorage` on the server. So the server must always ship HTML in the **safe default state** that matches what a first-time visitor will see, and the client only **removes** the preloader — never adds it after paint.
-
-Concretely:
-
-1. **Server-side default = preloader visible, content hidden.** The server always renders `<Preloader>` and the content wrapper at `opacity: 0`. This means the very first paint the browser does — before any JS — is the dark preloader screen. No flash possible, because content is never visible first.
-
-2. **Client decides whether to skip.** After hydration, a `useEffect` checks `sessionStorage`. If `preloader-shown === "true"`, it immediately sets `ready = true` and the preloader fades out instantly (or is skipped entirely). If not, the preloader runs its animation as normal and then sets `ready = true` on completion.
-
-3. **Avoid hydration mismatch.** Because both server and client render the same initial state (`ready = false`, preloader present), React hydrates cleanly with no warning and no DOM swap.
-
-4. **Inline critical CSS for the preloader background on `<body>` or `<html>`** so that even the brief moment between HTML parse and React hydration shows the dark `--rl-eerie` background, not a white flash. Set `background-color: var(--rl-eerie)` on `body` in `styles.css` (or via inline style in `RootShell`). The content wrapper keeps its own `bg-background` which overrides once visible.
+The right architecture: keep the Worker config under a name the Vite plugin does *not* auto-load during build (`wrangler.deploy.toml`), use Vite `define` to inline-replace the three `process.env.*` reads at build time, and deploy with `wrangler deploy --config wrangler.deploy.toml`.
 
 ## Plan
 
-**File: `src/routes/__root.tsx`**
-- Change `useState` initializer to always return `false` (no `typeof window` branch). Server and client now agree: preloader shows, content hidden.
-- Add a `useEffect` that runs once on mount: if `sessionStorage.getItem("preloader-shown") === "true"`, call `setReady(true)` immediately (returning visitor — preloader gets skipped/instant-fade).
-- Keep `handleComplete` as-is for first-time visitors.
-- Keep the content wrapper's `opacity` tied to `ready` so it stays hidden under the preloader.
+### 1. `vite.config.ts` — keep `define`, but make replacements bulletproof
 
-**File: `src/components/ui/Preloader.tsx`**
-- Add a `skip` prop (boolean). When `true`, the component renders nothing (or fades out in one frame) and calls `onComplete` immediately via `useEffect`. This handles returning visitors cleanly without running the 3-second animation.
-- No other changes to the animation logic.
+Current `define` is correct in shape but the keys must match exactly what's in the bundle. Add the plain `process.env` fallback so any other stray reads collapse to `{}` instead of throwing.
 
-**File: `src/styles.css`**
-- Add `body { background-color: var(--rl-eerie); }` so the pre-hydration paint matches the preloader background. This eliminates the white flash before React even runs.
+```ts
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-**No changes** to `vercel.json`, `wrangler.toml`, the routes, or any other file. This is purely a render-order fix.
+export default defineConfig({
+  vite: {
+    define: {
+      "process.env.NODE_ENV": JSON.stringify("production"),
+      "process.env.TSS_PRERENDERING": JSON.stringify("false"),
+      "process.env.TSS_SHELL": JSON.stringify("false"),
+    },
+  },
+});
+```
 
-### Why this works on Cloudflare Workers SSR specifically
-- The Worker emits HTML that is identical to the first client render → no hydration mismatch, no React warning, no DOM swap.
-- The preloader is in the server HTML, so it covers the screen from the very first paint, before JS even loads.
-- `sessionStorage` access is deferred to `useEffect`, which only runs after hydration — that is the only place it is legal to read it in an SSR app.
-- Returning visitors see the preloader for ~1 frame at most (then it skips), which is imperceptible and far better than the current flash.
+(No change from current — confirmed correct.)
 
-### Verification after the change
-- Hard reload (Cmd+Shift+R): preloader visible immediately, no content flash, full animation plays, content fades in.
-- Soft reload after that: preloader either invisible or visible for one frame, content appears immediately.
-- Check browser console: no "hydration mismatch" warnings from React.
+### 2. `wrangler.deploy.toml` — keep, but switch back to `nodejs_compat`
+
+`nodejs_compat_v2` requires `compatibility_date >= 2024-09-23` and changes module resolution semantics in ways the Lovable preset isn't tuned for. Use plain `nodejs_compat` with a recent date.
+
+```toml
+name = "ray-lab-group"
+main = "dist/server/server.js"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "dist/client"
+
+[vars]
+NODE_ENV = "production"
+```
+
+### 3. Do NOT recreate `wrangler.toml` / `wrangler.jsonc`
+
+That's what causes the "main field doesn't point to existing file" build failure — the Cloudflare Vite plugin auto-loads it during config resolution, before the build has produced `dist/server/server.js`. Keep the deploy config under the non-default name.
+
+### 4. Deploy command
+
+After `bun run build`, deploy with:
+```
+wrangler deploy --config wrangler.deploy.toml
+```
+
+### Why this works
+- `define` performs **build-time string replacement** in the bundled output. After build, `dist/server/server.js` line 709–710 will read literally `var IS_PRERENDERING = "false" === "true";` — no `process` reference survives. The runtime error disappears at its source.
+- The Worker config stays out of Vite's auto-discovery path, so the build can produce `dist/server/server.js` first, and `wrangler deploy` reads the config second.
+- `nodejs_compat` is the supported flag for the date range and covers any remaining `node:*` imports the bundle may need.
+
+### Files to change
+1. `wrangler.deploy.toml` — change `compatibility_date` to `"2024-11-01"` and `compatibility_flags` to `["nodejs_compat"]`.
+2. `vite.config.ts` — no change (already correct).
+3. No new `wrangler.toml` / `wrangler.jsonc`.
+
+### Verification
+- `bun run build` completes; `dist/server/server.js` exists.
+- `grep "process.env.TSS" dist/server/server.js` returns nothing.
+- `wrangler deploy --config wrangler.deploy.toml` succeeds; first request to the Worker returns HTML, no `ReferenceError`.
