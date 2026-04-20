@@ -41,7 +41,7 @@ export const brands: Brand[] = [
     logo: {
       light:
         "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482758/cairoscan_dual_logo_2_t8hngo.svg",
-      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482778/cairoscan_dual_logo_pksj3y.svg",
+      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684144/cairo_eng_qq0fsm.svg",
     },
   },
   {
@@ -78,7 +78,7 @@ export const brands: Brand[] = [
     logo: {
       light:
         "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482760/logo_technoscan_H_W-11_ffaabx.svg",
-      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482762/logo_technoscan_H_W-1_e88ylq.svg",
+      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684373/techno_eng_uptq3p.svg",
     },
   },
   {
