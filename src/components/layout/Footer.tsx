@@ -6,7 +6,7 @@ import { BrandChip } from "@/components/ui/brand-chip";
 import * as React from "react";
 
 const LOGO_URL =
-  "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482763/Ray_Lab_dual_logo_1_pshzij.svg";
+  "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776657151/svg_final_fwh3x1.svg";
 
 const footerStats = [
   { value: "40+", label: "Branches" },

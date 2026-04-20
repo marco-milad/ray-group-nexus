@@ -23,10 +23,42 @@ const primaryLinks: ReadonlyArray<{
 const LOGO_URL =
   "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482775/Ray_Lab_dual_logo_klipdn.svg";
 
+function NavLink({
+  to,
+  label,
+}: {
+  to: "/about" | "/services" | "/network" | "/investors" | "/contact";
+  label: string;
+}) {
+  const [hovered, setHovered] = React.useState(false);
+
+  return (
+    <Link
+      to={to}
+      className="relative rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 cursor-pointer"
+      style={{
+        color: hovered ? "var(--rl-green)" : "var(--rl-eerie)",
+        backgroundColor: hovered ? "rgba(79,153,7,0.08)" : "transparent",
+        opacity: hovered ? 1 : 0.75,
+      }}
+      activeProps={{
+        className:
+          "relative rounded-md px-3 py-2 text-sm font-medium after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:rounded-full after:bg-[var(--rl-green)]",
+        style: { color: "var(--rl-green)", opacity: 1 },
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {label}
+    </Link>
+  );
+}
+
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [logoError, setLogoError] = React.useState(false);
+  const [platformHov, setPlatformHov] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -72,60 +104,64 @@ export function Navbar() {
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-1">
           {/* Platforms — hover dropdown */}
-          <div className="relative group">
+          <div
+            className="relative"
+            onMouseEnter={() => setPlatformHov(true)}
+            onMouseLeave={() => setPlatformHov(false)}
+          >
             <Link
               to="/platforms"
-              className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 cursor-pointer"
+              style={{
+                color: platformHov ? "var(--rl-green)" : "var(--rl-eerie)",
+                backgroundColor: platformHov ? "rgba(79,153,7,0.08)" : "transparent",
+                opacity: platformHov ? 1 : 0.75,
+              }}
             >
               {links.platforms}
-              <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" />
+              <ChevronDown
+                className="h-3.5 w-3.5 transition-transform duration-200"
+                style={{ transform: platformHov ? "rotate(180deg)" : "rotate(0deg)" }}
+              />
             </Link>
 
             {/* Dropdown panel */}
-            <div className="absolute left-0 top-full pt-1 hidden group-hover:block z-50">
-              <div className="w-64 rounded-md border border-border bg-background shadow-md">
-                <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                  {globalCopy.nav.platformsDropdownLabel}
-                </div>
-                <div className="h-px bg-border my-1" />
-                <Link
-                  to="/platforms"
-                  className="flex items-center px-2 py-1.5 text-sm rounded-md mx-1 hover:bg-accent"
-                >
-                  All Platforms
-                </Link>
-                <div className="h-px bg-border my-1" />
-                {brands.map((b) => (
+            {platformHov && (
+              <div className="absolute left-0 top-full pt-1 z-50">
+                <div className="w-64 rounded-md border border-border bg-background shadow-md">
+                  <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                    {globalCopy.nav.platformsDropdownLabel}
+                  </div>
+                  <div className="h-px bg-border my-1" />
                   <Link
-                    key={b.id}
-                    to="/platforms/$slug"
-                    params={{ slug: b.slug }}
-                    className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-md mx-1 mb-0.5 hover:bg-accent"
+                    to="/platforms"
+                    className="flex items-center px-2 py-1.5 text-sm rounded-md mx-1 hover:bg-accent"
                   >
-                    <span
-                      className="h-2 w-2 rounded-full shrink-0"
-                      style={{ backgroundColor: b.color }}
-                    />
-                    {b.name}
+                    All Platforms
                   </Link>
-                ))}
+                  <div className="h-px bg-border my-1" />
+                  {brands.map((b) => (
+                    <Link
+                      key={b.id}
+                      to="/platforms/$slug"
+                      params={{ slug: b.slug }}
+                      className="flex items-center gap-2 px-2 py-1.5 text-sm rounded-md mx-1 mb-0.5 hover:bg-accent"
+                    >
+                      <span
+                        className="h-2 w-2 rounded-full shrink-0"
+                        style={{ backgroundColor: b.color }}
+                      />
+                      {b.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Primary links */}
           {primaryLinks.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className="relative rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
-              activeProps={{
-                className:
-                  "relative rounded-md px-3 py-2 text-sm font-medium text-foreground after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:rounded-full after:bg-[var(--rl-green)]",
-              }}
-            >
-              {l.label}
-            </Link>
+            <NavLink key={l.to} to={l.to} label={l.label} />
           ))}
         </nav>
 

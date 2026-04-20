@@ -1,14 +1,20 @@
 import * as React from "react";
 
 const LOGO_URL =
-  "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482763/Ray_Lab_dual_logo_1_pshzij.svg";
+  "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776657151/svg_final_fwh3x1.svg";
 
 const BRAND_TEXT = "RAYLAB GROUP";
 const TAGLINE_WORDS = ["Diagnostic", "Intelligence.", "Delivered", "at", "Scale."];
 
 type Phase = "typing" | "tagline" | "swap" | "logo" | "exit";
 
-export function Preloader({ onComplete, skip = false }: { onComplete: () => void; skip?: boolean }) {
+export function Preloader({
+  onComplete,
+  skip = false,
+}: {
+  onComplete: () => void;
+  skip?: boolean;
+}) {
   const [phase, setPhase] = React.useState<Phase>("typing");
   const [visibleChars, setVisibleChars] = React.useState(0);
   const [visibleWords, setVisibleWords] = React.useState(0);

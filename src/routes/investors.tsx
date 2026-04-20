@@ -81,11 +81,23 @@ function InvestorsPage() {
                       <TabsTrigger
                         key={t.value}
                         value={t.value}
-                        className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 text-xs font-semibold transition-all duration-200"
+                        className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 text-xs font-semibold transition-all duration-200 cursor-pointer"
                         style={{
                           backgroundColor: isActive ? "var(--rl-green)" : "transparent",
                           color: isActive ? "white" : "var(--rl-muted)",
                           boxShadow: isActive ? "0 2px 8px rgba(79,153,7,0.3)" : "none",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isActive) {
+                            e.currentTarget.style.backgroundColor = "rgba(79,153,7,0.08)";
+                            e.currentTarget.style.color = "var(--rl-green)";
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isActive) {
+                            e.currentTarget.style.backgroundColor = "transparent";
+                            e.currentTarget.style.color = "var(--rl-muted)";
+                          }
                         }}
                       >
                         <Icon className="h-3.5 w-3.5 shrink-0" />
