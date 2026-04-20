@@ -1,4 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import * as React from "react";
+import {
+  Lightbulb,
+  BarChart2,
+  Users,
+  TrendingUp,
+  ShieldAlert,
+  Map,
+  Newspaper,
+  Building,
+  Rocket,
+} from "lucide-react";
 import { investorsCopy } from "@/data/en/investors";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -16,6 +28,18 @@ import { PressTab } from "@/components/sections/investors/PressTab";
 import { GovernanceTab } from "@/components/sections/investors/GovernanceTab";
 import { ExitTab } from "@/components/sections/investors/ExitTab";
 
+const TABS = [
+  { value: "thesis", Component: ThesisTab, icon: Lightbulb },
+  { value: "performance", Component: PerformanceTab, icon: BarChart2 },
+  { value: "shareholders", Component: ShareholdersTab, icon: Users },
+  { value: "strategy", Component: StrategyTab, icon: TrendingUp },
+  { value: "risks", Component: RisksTab, icon: ShieldAlert },
+  { value: "expansion", Component: ExpansionTab, icon: Map },
+  { value: "press", Component: PressTab, icon: Newspaper },
+  { value: "governance", Component: GovernanceTab, icon: Building },
+  { value: "exit", Component: ExitTab, icon: Rocket },
+] as const;
+
 export const Route = createFileRoute("/investors")({
   head: () => ({
     meta: [
@@ -28,20 +52,10 @@ export const Route = createFileRoute("/investors")({
   component: InvestorsPage,
 });
 
-const TABS = [
-  { value: "thesis", Component: ThesisTab },
-  { value: "performance", Component: PerformanceTab },
-  { value: "shareholders", Component: ShareholdersTab },
-  { value: "strategy", Component: StrategyTab },
-  { value: "risks", Component: RisksTab },
-  { value: "expansion", Component: ExpansionTab },
-  { value: "press", Component: PressTab },
-  { value: "governance", Component: GovernanceTab },
-  { value: "exit", Component: ExitTab },
-] as const;
-
 function InvestorsPage() {
   const labels = investorsCopy.tabs;
+  const [active, setActive] = React.useState("thesis");
+
   const sections: Record<string, SectionContract> = {
     hero: { id: "hero", data: investorsCopy.hero, state: "success", required: true },
     tabs: { id: "tabs", data: {}, state: "success", required: false },
@@ -52,26 +66,39 @@ function InvestorsPage() {
       <Section id="hero" skeletonVariant="hero">
         {() => <InvestorsHeroSection />}
       </Section>
+
       <Section id="tabs">
         {() => (
           <SectionShell>
-            <Tabs defaultValue="thesis" className="w-full">
-              <div className="overflow-x-auto">
-                <TabsList className="mx-auto inline-flex h-auto w-max min-w-full justify-start gap-1 bg-muted/60 p-1.5 sm:flex-wrap sm:justify-center">
-                  {TABS.map((t) => (
-                    <TabsTrigger
-                      key={t.value}
-                      value={t.value}
-                      className="whitespace-nowrap text-xs sm:text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm"
-                    >
-                      {labels[t.value as keyof typeof labels]}
-                    </TabsTrigger>
-                  ))}
+            <Tabs value={active} onValueChange={setActive} className="w-full">
+              {/* Navigation bar */}
+              <div className="sticky top-16 z-40 rounded-2xl p-2 mb-8 overflow-x-auto border border-border/60 bg-card shadow-sm">
+                <TabsList className="inline-flex h-auto w-max min-w-full justify-start gap-1 bg-transparent p-0 sm:flex-wrap sm:justify-center">
+                  {TABS.map((t) => {
+                    const Icon = t.icon;
+                    const isActive = active === t.value;
+                    return (
+                      <TabsTrigger
+                        key={t.value}
+                        value={t.value}
+                        className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 text-xs font-semibold transition-all duration-200"
+                        style={{
+                          backgroundColor: isActive ? "var(--rl-green)" : "transparent",
+                          color: isActive ? "white" : "var(--rl-muted)",
+                          boxShadow: isActive ? "0 2px 8px rgba(79,153,7,0.3)" : "none",
+                        }}
+                      >
+                        <Icon className="h-3.5 w-3.5 shrink-0" />
+                        {labels[t.value as keyof typeof labels]}
+                      </TabsTrigger>
+                    );
+                  })}
                 </TabsList>
               </div>
 
+              {/* Tab content */}
               {TABS.map(({ value, Component }) => (
-                <TabsContent key={value} value={value} className="mt-10">
+                <TabsContent key={value} value={value} className="mt-0">
                   <Component />
                 </TabsContent>
               ))}

@@ -54,12 +54,13 @@ export function Reveal({ children, className, delay = 0, as: Tag = "div" }: Reve
   return (
     <Component
       ref={ref as React.Ref<HTMLElement>}
-      className={cn(
-        "transition-all duration-700 ease-out will-change-transform",
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
-        className,
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
+      className={cn("will-change-transform", className)}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(32px)",
+        transitionDelay: `${delay}ms`,
+        transition: "opacity 1.2s ease-out, transform 1.2s ease-out",
+      }}
     >
       {children}
     </Component>
