@@ -1,5 +1,6 @@
+import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { BrandLogo } from "@/components/brand/BrandLogo";
@@ -21,6 +22,14 @@ export function BrandsGridSection() {
   const lastCard = others[others.length - 1];
   const middleCards = others.slice(0, -1);
 
+  const allBrands = [featured, ...middleCards, lastCard];
+  const [visibleCount, setVisibleCount] = React.useState(0);
+
+  React.useEffect(() => {
+    const timers = allBrands.map((_, i) => setTimeout(() => setVisibleCount(i + 1), 200 + i * 180));
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
   return (
     <SectionShell bg="bg-[color:var(--rl-light-bg)]">
       <SectionHeader
@@ -30,28 +39,32 @@ export function BrandsGridSection() {
       />
 
       <div className="mt-12 grid gap-5 lg:grid-cols-3">
-        {/* Row 1 — Featured (2 cols) + first other (1 col) */}
         <div className="lg:col-span-2">
-          <BrandCard brand={featured} featured />
+          <BrandCard brand={featured} featured index={0} visibleCount={visibleCount} />
         </div>
         <div>
-          <BrandCard brand={middleCards[0]} />
+          <BrandCard brand={middleCards[0]} index={1} visibleCount={visibleCount} />
         </div>
-
-        {/* Row 2 — 3 cards */}
-        {middleCards.slice(1).map((b) => (
-          <BrandCard key={b.id} brand={b} />
+        {middleCards.slice(1).map((b, i) => (
+          <BrandCard key={b.id} brand={b} index={i + 2} visibleCount={visibleCount} />
         ))}
-
-        {/* Row 3 — Last card full width */}
         <div className="lg:col-span-3">
-          <BrandCard brand={lastCard} wide />
+          <BrandCard brand={lastCard} wide index={5} visibleCount={visibleCount} />
         </div>
       </div>
 
+      {/* CTA — أقوى */}
       <div className="mt-10 flex justify-center">
-        <Button asChild size="lg" style={{ backgroundColor: "var(--rl-green)", color: "white" }}>
-          <Link to="/platforms">{homeCopy.brands.cta}</Link>
+        <Button
+          asChild
+          size="lg"
+          className="group font-semibold"
+          style={{ backgroundColor: "var(--rl-green)", color: "white" }}
+        >
+          <Link to="/network" className="flex items-center gap-2">
+            {homeCopy.brands.cta}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </Button>
       </div>
     </SectionShell>
@@ -62,32 +75,47 @@ function BrandCard({
   brand,
   featured = false,
   wide = false,
+  index = 0,
+  visibleCount = 0,
 }: {
   brand: (typeof brands)[number];
   featured?: boolean;
   wide?: boolean;
+  index?: number;
+  visibleCount?: number;
 }) {
   const hasLogo = !!(brand.logo.light || brand.logo.dark);
+  const [hovered, setHovered] = React.useState(false);
 
   return (
     <Link
       to="/platforms/$slug"
       params={{ slug: brand.slug }}
       className={cn(
-        "group relative flex overflow-hidden rounded-2xl border border-border/60 bg-card transition-all hover:-translate-y-0.5 hover:shadow-lg h-full",
+        "group relative flex overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full",
         wide ? "flex-row items-center gap-8 p-7" : "flex-col p-6",
       )}
+      style={{
+        opacity: visibleCount > index ? 1 : 0,
+        transform: visibleCount > index ? "translateY(0)" : "translateY(24px)",
+        transition:
+          "opacity 0.7s ease, transform 0.7s ease, border-color 0.3s ease, box-shadow 0.3s ease",
+        borderColor: hovered ? `${brand.color}60` : undefined,
+        boxShadow: hovered ? `0 8px 30px ${brand.color}20` : undefined,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       {/* Color accent */}
       {wide ? (
         <span
-          className="absolute inset-y-0 left-0 w-1 rounded-l-2xl"
+          className="absolute inset-y-0 left-0 w-1 rounded-l-2xl transition-all duration-300"
           style={{ backgroundColor: brand.color }}
           aria-hidden
         />
       ) : (
         <span
-          className="absolute inset-x-0 top-0 h-1"
+          className="absolute inset-x-0 top-0 h-1 transition-all duration-300"
           style={{ backgroundColor: brand.color }}
           aria-hidden
         />
@@ -108,16 +136,30 @@ function BrandCard({
           )}
         </div>
         {!wide && (
-          <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
+          <ArrowUpRight
+            className="h-4 w-4 shrink-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            style={{ color: hovered ? brand.color : undefined }}
+          />
         )}
       </div>
 
       {/* Content */}
       <div className={cn("flex flex-col flex-1", !wide && "mt-5")}>
         {wide && (
-          <h3 className="text-lg font-semibold mb-2" style={{ color: brand.color }}>
-            {brand.name}
-          </h3>
+          <>
+            {/* Ray Medical — special badge */}
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="text-lg font-semibold" style={{ color: brand.color }}>
+                {brand.name}
+              </h3>
+              <span
+                className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+                style={{ backgroundColor: brand.color }}
+              >
+                Teleradiology
+              </span>
+            </div>
+          </>
         )}
         <p
           className={cn(
@@ -144,7 +186,10 @@ function BrandCard({
       </div>
 
       {wide && (
-        <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground ml-auto" />
+        <ArrowUpRight
+          className="h-5 w-5 shrink-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ml-auto"
+          style={{ color: hovered ? brand.color : undefined }}
+        />
       )}
     </Link>
   );
