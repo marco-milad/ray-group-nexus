@@ -53,7 +53,6 @@ export function BrandsGridSection() {
         </div>
       </div>
 
-      {/* CTA — أقوى */}
       <div className="mt-10 flex justify-center">
         <Button
           asChild
@@ -93,7 +92,7 @@ function BrandCard({
       params={{ slug: brand.slug }}
       className={cn(
         "group relative flex overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full",
-        wide ? "flex-row items-center gap-8 p-7" : "flex-col p-6",
+        wide ? "flex-col p-6 sm:flex-row sm:items-center sm:gap-8 sm:p-7" : "flex-col p-6",
       )}
       style={{
         opacity: visibleCount > index ? 1 : 0,
@@ -109,7 +108,7 @@ function BrandCard({
       {/* Color accent */}
       {wide ? (
         <span
-          className="absolute inset-y-0 left-0 w-1 rounded-l-2xl transition-all duration-300"
+          className="absolute inset-y-0 left-0 w-1 rounded-l-2xl transition-all duration-300 hidden sm:block"
           style={{ backgroundColor: brand.color }}
           aria-hidden
         />
@@ -121,8 +120,19 @@ function BrandCard({
         />
       )}
 
+      {/* Wide — top accent on mobile */}
+      {wide && (
+        <span
+          className="absolute inset-x-0 top-0 h-1 block sm:hidden"
+          style={{ backgroundColor: brand.color }}
+          aria-hidden
+        />
+      )}
+
       {/* Logo / Badge */}
-      <div className={cn("flex items-center", wide ? "pl-4 shrink-0 w-48" : "justify-between")}>
+      <div
+        className={cn("flex items-center", wide ? "shrink-0 sm:pl-4 sm:w-48" : "justify-between")}
+      >
         <div className="flex h-12 items-center">
           {hasLogo ? (
             <BrandLogo brand={brand} variant="dark" className="h-10 w-auto max-w-[160px]" />
@@ -144,22 +154,19 @@ function BrandCard({
       </div>
 
       {/* Content */}
-      <div className={cn("flex flex-col flex-1", !wide && "mt-5")}>
+      <div className={cn("flex flex-col flex-1", !wide && "mt-5", wide && "mt-4 sm:mt-0")}>
         {wide && (
-          <>
-            {/* Ray Medical — special badge */}
-            <div className="flex items-center gap-2 mb-2">
-              <h3 className="text-lg font-semibold" style={{ color: brand.color }}>
-                {brand.name}
-              </h3>
-              <span
-                className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
-                style={{ backgroundColor: brand.color }}
-              >
-                Teleradiology
-              </span>
-            </div>
-          </>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-lg font-semibold" style={{ color: brand.color }}>
+              {brand.name}
+            </h3>
+            <span
+              className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+              style={{ backgroundColor: brand.color }}
+            >
+              Teleradiology
+            </span>
+          </div>
         )}
         <p
           className={cn(
@@ -187,7 +194,7 @@ function BrandCard({
 
       {wide && (
         <ArrowUpRight
-          className="h-5 w-5 shrink-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ml-auto"
+          className="h-5 w-5 shrink-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ml-auto hidden sm:block"
           style={{ color: hovered ? brand.color : undefined }}
         />
       )}
