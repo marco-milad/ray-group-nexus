@@ -15,6 +15,7 @@ const cards = [
     to: "/services",
     color: "var(--rl-green)",
     bg: "color-mix(in oklab, var(--rl-green) 10%, transparent)",
+    tagline: null,
   },
   {
     key: "clinics",
@@ -24,6 +25,7 @@ const cards = [
     to: "/platforms/specialized-clinics",
     color: "var(--clinics)",
     bg: "color-mix(in oklab, var(--clinics) 10%, transparent)",
+    tagline: null,
   },
   {
     key: "teleradiology",
@@ -33,6 +35,7 @@ const cards = [
     to: "/platforms/ray-medical",
     color: "var(--ray-medical)",
     bg: "color-mix(in oklab, var(--ray-medical) 10%, transparent)",
+    tagline: "Remote radiology reporting — results in 90 minutes, 24/7",
   },
 ];
 
@@ -56,7 +59,7 @@ export function EcosystemSection() {
       </Reveal>
 
       <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {cards.map(({ key, icon: Icon, copy, step, to, color, bg }, i) => (
+        {cards.map(({ key, icon: Icon, copy, step, to, color, bg, tagline }, i) => (
           <div
             key={key}
             className="group relative rounded-2xl border border-border/60 bg-card p-7 flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
@@ -90,6 +93,20 @@ export function EcosystemSection() {
 
             {/* Content */}
             <h3 className="mt-5 text-xl font-semibold text-foreground">{copy.title}</h3>
+
+            {/* Tagline — teleradiology only */}
+            {tagline && (
+              <p
+                className="mt-1.5 text-xs font-semibold rounded-full px-2.5 py-1 w-fit"
+                style={{
+                  backgroundColor: `color-mix(in oklab, var(--ray-medical) 10%, transparent)`,
+                  color: "var(--ray-medical)",
+                }}
+              >
+                {tagline}
+              </p>
+            )}
+
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-1">{copy.body}</p>
 
             {/* CTA */}

@@ -4,11 +4,13 @@ import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
 import type { SectionContract } from "@/types/section";
 import { HeroSection } from "@/components/sections/home/HeroSection";
+import { AudienceRoutingSection } from "@/components/sections/home/AudienceRoutingSection";
 import { EcosystemSection } from "@/components/sections/home/EcosystemSection";
 import { BrandsGridSection } from "@/components/sections/home/BrandsGridSection";
 import { PhysiciansSection } from "@/components/sections/home/PhysiciansSection";
 import { NetworkPreviewSection } from "@/components/sections/home/NetworkPreviewSection";
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
+import { InvestorBadgesSection } from "@/components/sections/home/InvestorBadgesSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,10 +27,12 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const sections: Record<string, SectionContract> = {
     hero: { id: "hero", data: homeCopy.hero, state: "success", required: true },
+    audienceRouting: { id: "audienceRouting", data: {}, state: "success", required: false },
     ecosystem: { id: "ecosystem", data: {}, state: "success", required: false },
     brands: { id: "brands", data: {}, state: "success", required: false },
     physicians: { id: "physicians", data: {}, state: "success", required: false },
     networkPreview: { id: "networkPreview", data: {}, state: "success", required: false },
+    investorBadges: { id: "investorBadges", data: {}, state: "success", required: false },
     contactCta: { id: "contactCta", data: {}, state: "success", required: false },
   };
 
@@ -37,12 +41,14 @@ function HomePage() {
       <Section id="hero" skeletonVariant="hero">
         {() => <HeroSection />}
       </Section>
+      <Section id="audienceRouting">{() => <AudienceRoutingSection />}</Section>
       <Section id="ecosystem">{() => <EcosystemSection />}</Section>
       <Section id="brands" skeletonVariant="brand-chip" skeletonCount={6}>
         {() => <BrandsGridSection />}
       </Section>
       <Section id="physicians">{() => <PhysiciansSection />}</Section>
       <Section id="networkPreview">{() => <NetworkPreviewSection />}</Section>
+      <Section id="investorBadges">{() => <InvestorBadgesSection />}</Section>
       <Section id="contactCta">{() => <ContactCtaSection />}</Section>
     </Page>
   );

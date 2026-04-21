@@ -9,13 +9,40 @@ import { statsCopy } from "@/data/en/sections/stats";
 import { useCountUp } from "@/hooks/useCountUp";
 
 const heroStats = [
-  { ...statsCopy.exams, icon: Microscope, raw: 1600000, suffix: "M+", display: "1.6" },
-  { ...statsCopy.branches, icon: Building2, raw: 40, suffix: "+", display: "40" },
-  { ...statsCopy.countries, icon: Globe, raw: 4, suffix: "", display: "4" },
-  { ...statsCopy.consultants, icon: Users, raw: 60, suffix: "+", display: "60" },
+  {
+    ...statsCopy.exams,
+    icon: Microscope,
+    raw: 1600000,
+    suffix: "M+",
+    display: "1.6",
+    context: "Across all platforms in 2025",
+  },
+  {
+    ...statsCopy.branches,
+    icon: Building2,
+    raw: 40,
+    suffix: "+",
+    display: "40",
+    context: "Largest multi-country network in MENA private diagnostics",
+  },
+  {
+    ...statsCopy.countries,
+    icon: Globe,
+    raw: 4,
+    suffix: "",
+    display: "4",
+    context: "Egypt, Saudi Arabia, Jordan & Malta HQ",
+  },
+  {
+    ...statsCopy.consultants,
+    icon: Users,
+    raw: 60,
+    suffix: "+",
+    display: "60",
+    context: "Subspecialty radiologists via Ray Medical",
+  },
 ];
 
-// Single stat card with counter
 function StatCard({
   label,
   raw,
@@ -23,6 +50,7 @@ function StatCard({
   display,
   icon: Icon,
   animate,
+  context,
 }: {
   label: string;
   raw: number;
@@ -30,8 +58,8 @@ function StatCard({
   display: string;
   icon: React.ElementType;
   animate: boolean;
+  context?: string;
 }) {
-  // For 1.6M+ we count to 16 then show as 1.6
   const isMillions = raw > 999999;
   const target = isMillions ? 16 : raw;
   const count = useCountUp(target, 1800, animate);
@@ -60,7 +88,17 @@ function StatCard({
           <Icon className="h-4 w-4" />
         </div>
       </div>
+
+      {/* Label */}
       <div className="mt-2 text-xs md:text-sm font-medium text-foreground/70">{label}</div>
+
+      {/* Micro-context */}
+      {context && (
+        <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground/70 italic">
+          {context}
+        </p>
+      )}
+
       <div
         className="mt-3 h-0.5 w-8 rounded-full transition-all duration-300 group-hover:w-full"
         style={{ backgroundColor: "var(--rl-green)", opacity: 0.3 }}
@@ -171,6 +209,7 @@ export function HeroSection() {
                 display={s.display}
                 icon={s.icon}
                 animate={statsVisible}
+                context={s.context}
               />
             ))}
           </div>

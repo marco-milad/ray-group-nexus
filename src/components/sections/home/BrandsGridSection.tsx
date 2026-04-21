@@ -16,6 +16,13 @@ const COUNTRY_LABEL: Record<string, string> = {
   malta: "Malta",
 };
 
+const COUNTRY_FLAG: Record<string, string> = {
+  egypt: "🇪🇬",
+  ksa: "🇸🇦",
+  jordan: "🇯🇴",
+  malta: "🇲🇹",
+};
+
 export function BrandsGridSection() {
   const featured = brands.find((b) => b.slug === "cairo-scan") ?? brands[0];
   const others = brands.filter((b) => b.id !== featured.id);
@@ -85,6 +92,8 @@ function BrandCard({
 }) {
   const hasLogo = !!(brand.logo.light || brand.logo.dark);
   const [hovered, setHovered] = React.useState(false);
+  const isRayMedical = brand.slug === "ray-medical";
+  const isSpecializedClinics = brand.slug === "specialized-clinics";
 
   return (
     <Link
@@ -136,6 +145,14 @@ function BrandCard({
         <div className="flex h-12 items-center">
           {hasLogo ? (
             <BrandLogo brand={brand} variant="dark" className="h-10 w-auto max-w-[160px]" />
+          ) : isSpecializedClinics ? (
+            /* Specialized Clinics — initials placeholder */
+            <div
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black text-white"
+              style={{ backgroundColor: brand.color }}
+            >
+              SC
+            </div>
           ) : (
             <span
               className="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-bold text-white"
@@ -160,14 +177,19 @@ function BrandCard({
             <h3 className="text-lg font-semibold" style={{ color: brand.color }}>
               {brand.name}
             </h3>
-            <span
-              className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
-              style={{ backgroundColor: brand.color }}
-            >
-              Teleradiology
-            </span>
+            {/* Now Live badge */}
+            {isRayMedical && (
+              <span
+                className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+                style={{ backgroundColor: brand.color }}
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                Now Live
+              </span>
+            )}
           </div>
         )}
+
         <p
           className={cn(
             "text-muted-foreground leading-relaxed flex-1",
@@ -177,6 +199,7 @@ function BrandCard({
           {brand.description}
         </p>
 
+        {/* Footer — country flag + est + branches */}
         <div
           className={cn(
             "flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground",
@@ -184,7 +207,7 @@ function BrandCard({
           )}
         >
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: brand.color }} />
+            <span className="text-sm">{COUNTRY_FLAG[brand.country] ?? "🌍"}</span>
             {COUNTRY_LABEL[brand.country] ?? brand.country}
           </span>
           <span>· Est. {brand.founded}</span>

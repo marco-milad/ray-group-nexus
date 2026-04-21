@@ -75,7 +75,7 @@ export function PhysiciansSection() {
                       {s.step}
                     </div>
                     <span
-                      className="text-sm font-semibold transition-all duration-300"
+                      className="text-sm font-semibold transition-all duration-500"
                       style={{ opacity: activeStep === i ? 1 : 0.5 }}
                     >
                       {s.title}
@@ -139,9 +139,9 @@ export function PhysiciansSection() {
               size="lg"
               className="group bg-white text-foreground hover:bg-white/90 font-semibold"
             >
-              <Link to="/contact">
-                {physiciansCopy.cta}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <Link to="/contact" className="flex items-center gap-2">
+                Start a Referral
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
