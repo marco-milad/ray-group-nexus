@@ -1,10 +1,10 @@
 import * as React from "react";
-import { SectionShell } from "@/components/layout/SectionShell";
-import { SectionHeader } from "@/components/ui/section-header";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Microscope, LayoutGrid, Activity } from "lucide-react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { Reveal } from "@/components/ui/reveal";
+import { Button } from "@/components/ui/button";
 import { useCountUp } from "@/hooks/useCountUp";
-import { Microscope, LayoutGrid, Activity } from "lucide-react";
 import { servicesCopy } from "@/data/en/servicesPage";
 
 const statsConfig = [
@@ -46,10 +46,7 @@ function StatCard({
         </div>
         <div
           className="rounded-lg p-1.5"
-          style={{
-            backgroundColor: "rgba(79,153,7,0.08)",
-            color: "var(--rl-green)",
-          }}
+          style={{ backgroundColor: "rgba(79,153,7,0.08)", color: "var(--rl-green)" }}
         >
           <Icon className="h-4 w-4" />
         </div>
@@ -105,16 +102,70 @@ export function ServicesHeroSection() {
 
       <PageWrapper className="relative py-20 md:py-28">
         <Reveal>
-          <SectionHeader
-            eyebrow={hero.eyebrow}
-            headline={hero.headline}
-            headlineAccent={hero.headlineAccent}
-            subheadline={hero.subheadline}
-          />
+          <div className="max-w-3xl mx-auto text-center">
+            {/* Eyebrow */}
+            <div
+              className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/70 px-4 py-1.5 text-xs font-semibold tracking-wide backdrop-blur mb-6"
+              style={{ color: "var(--rl-eerie)", letterSpacing: "0.06em" }}
+            >
+              <span
+                className="h-2 w-2 rounded-full animate-pulse"
+                style={{ backgroundColor: "var(--rl-green)" }}
+              />
+              {hero.eyebrow}
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.04]">
+              {hero.headline}{" "}
+              <span style={{ color: "var(--rl-green)" }}>{hero.headlineAccent}</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p
+              className="mt-5 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed"
+              style={{ color: "var(--rl-eerie)", opacity: 0.65 }}
+            >
+              {hero.subheadline}
+            </p>
+
+            {/* Physician sub-headline */}
+            <p
+              className="mt-3 max-w-xl mx-auto text-sm font-medium"
+              style={{ color: "var(--rl-green)" }}
+            >
+              Trusted by 60+ consultant physicians across Egypt, KSA & Jordan — refer with
+              confidence.
+            </p>
+
+            {/* CTAs */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Button
+                asChild
+                size="lg"
+                className="group font-semibold"
+                style={{ backgroundColor: "var(--rl-green)", color: "white" }}
+              >
+                <Link to="/contact" className="flex items-center gap-2">
+                  Refer a Patient
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="font-semibold border-border/80"
+              >
+                <Link to="/network">View Our Network</Link>
+              </Button>
+            </div>
+          </div>
         </Reveal>
 
+        {/* Stats */}
         <Reveal delay={120}>
-          <div ref={statsRef} className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-3">
+          <div ref={statsRef} className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
             {statsConfig.map((s) => (
               <StatCard
                 key={s.label}

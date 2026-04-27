@@ -7,6 +7,7 @@ import { ServicesHeroSection } from "@/components/sections/services/ServicesHero
 import { FeaturedServicesSection } from "@/components/sections/services/FeaturedServicesSection";
 import { CategoryTabsSection } from "@/components/sections/services/CategoryTabsSection";
 import { PathwaysSection } from "@/components/sections/services/PathwaysSection";
+import { TeleradiologySection } from "@/components/sections/services/TeleradiologySection";
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/services")({
@@ -27,6 +28,7 @@ function ServicesPage() {
     featured: { id: "featured", data: {}, state: "success", required: false },
     categories: { id: "categories", data: {}, state: "success", required: false },
     pathways: { id: "pathways", data: {}, state: "success", required: false },
+    teleradiology: { id: "teleradiology", data: {}, state: "success", required: false },
     contactCta: { id: "contactCta", data: {}, state: "success", required: false },
   };
 
@@ -40,6 +42,7 @@ function ServicesPage() {
         {() => <CategoryTabsSection />}
       </Section>
       <Section id="pathways">{() => <PathwaysSection />}</Section>
+      <Section id="teleradiology">{() => <TeleradiologySection />}</Section>
       <Section id="contactCta">{() => <ContactCtaSection />}</Section>
     </Page>
   );

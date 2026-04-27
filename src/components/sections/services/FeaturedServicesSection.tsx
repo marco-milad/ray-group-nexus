@@ -1,18 +1,48 @@
+import * as React from "react";
+import { Link } from "@tanstack/react-router";
+import {
+  Scan,
+  Radio,
+  Bone,
+  CircleDashed,
+  Atom,
+  SquareDashed,
+  Activity,
+  Heart,
+  HeartPulse,
+  Zap,
+  FlaskConical,
+  Monitor,
+  ArrowRight,
+} from "lucide-react";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Reveal } from "@/components/ui/reveal";
 import { getFeaturedServices } from "@/data/en/services";
 import { brands } from "@/data/en/brands";
 import { servicesCopy } from "@/data/en/servicesPage";
-import * as React from "react";
+
+const SERVICE_ICONS: Record<string, React.ElementType> = {
+  scan: Scan,
+  radio: Radio,
+  bone: Bone,
+  "circle-dashed": CircleDashed,
+  atom: Atom,
+  "square-dashed": SquareDashed,
+  activity: Activity,
+  heart: Heart,
+  heartpulse: HeartPulse,
+  zap: Zap,
+  "flask-conical": FlaskConical,
+  monitor: Monitor,
+};
 
 export function FeaturedServicesSection() {
   const featured = getFeaturedServices();
   if (featured.length === 0) return null;
 
   return (
-    <SectionShell bg="bg-[color:var(--rl-light-bg)]">
-      <Reveal>
+<SectionShell bg="bg-background">      <Reveal>
         <SectionHeader
           eyebrow="Featured"
           headline="Flagship Diagnostic Services"
@@ -33,10 +63,11 @@ export function FeaturedServicesSection() {
 
 function ServiceCard({ service: s }: { service: ReturnType<typeof getFeaturedServices>[number] }) {
   const [hovered, setHovered] = React.useState(false);
+  const Icon = SERVICE_ICONS[s.icon ?? "scan"] ?? Scan;
 
   return (
     <article
-      className="group flex flex-col rounded-2xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full cursor-default"
+      className="group flex flex-col rounded-2xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-full"
       style={{
         borderTopColor: "var(--rl-green)",
         borderTopWidth: "2px",
@@ -47,6 +78,17 @@ function ServiceCard({ service: s }: { service: ReturnType<typeof getFeaturedSer
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      {/* Icon */}
+      <div
+        className="inline-flex h-11 w-11 items-center justify-center rounded-xl mb-4 transition-transform duration-300 group-hover:scale-110"
+        style={{
+          backgroundColor: "rgba(79,153,7,0.1)",
+          color: "var(--rl-green)",
+        }}
+      >
+        <Icon className="h-5 w-5" />
+      </div>
+
       {/* Service name */}
       <h3
         className="text-lg font-bold text-foreground transition-all duration-300"
@@ -99,9 +141,20 @@ function ServiceCard({ service: s }: { service: ReturnType<typeof getFeaturedSer
         </div>
       </div>
 
+      {/* Refer CTA */}
+      <Link
+        to="/contact"
+        search={{ service: s.name } as Record<string, string>}
+        className="group/btn mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-all duration-200"
+        style={{ color: "var(--rl-green)" }}
+      >
+        Refer for {s.name}
+        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
+      </Link>
+
       {/* Bottom accent */}
       <div
-        className="mt-4 h-px rounded-full transition-all duration-500"
+        className="mt-3 h-px rounded-full transition-all duration-500"
         style={{
           width: hovered ? "100%" : "2rem",
           backgroundColor: "var(--rl-green)",
