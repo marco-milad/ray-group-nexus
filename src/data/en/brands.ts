@@ -40,8 +40,8 @@ export const brands: Brand[] = [
       "Egypt's leading private provider of radiological and clinical laboratory services. 20 centres across Cairo and Giza.",
     logo: {
       light:
-        "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482758/cairoscan_dual_logo_2_t8hngo.svg",
-      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684144/cairo_eng_qq0fsm.svg",
+        "https://res.cloudinary.com/dcui0elwh/image/upload/v1777393710/%D9%83%D8%A7%D9%8A%D8%B1%D9%88_%D8%B2%D8%B2_cahyoo.svg",
+      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1777393710/%D9%83%D8%A7%D9%8A%D8%B1%D9%88_%D8%B2%D8%B2_cahyoo.svg",
     },
   },
   {
@@ -77,8 +77,8 @@ export const brands: Brand[] = [
       "Egypt's most widespread diagnostics brand. Founded by Prof. Dr. Osama Khalil — 35+ branches across Cairo, Delta, Canal cities, and Upper Egypt.",
     logo: {
       light:
-        "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482760/logo_technoscan_H_W-11_ffaabx.svg",
-      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684373/techno_eng_uptq3p.svg",
+        "https://res.cloudinary.com/dcui0elwh/image/upload/v1777393744/%D8%AA%D9%8A%D9%83%D9%86%D9%88_%D8%B2%D8%B2_k8rk8x.svg",
+      dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1777393744/%D8%AA%D9%8A%D9%83%D9%86%D9%88_%D8%B2%D8%B2_k8rk8x.svg",
     },
   },
   {
