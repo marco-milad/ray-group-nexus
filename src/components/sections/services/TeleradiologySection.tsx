@@ -236,7 +236,9 @@ export function TeleradiologySection() {
                 color: "white",
               }}
             >
-              <Link to="/platforms/ray-medical">Learn About Ray Medical</Link>
+              <Link to="/platforms/$slug" params={{ slug: "ray-medical" }}>
+                Learn About Ray Medical
+              </Link>
             </Button>
           </div>
         </Reveal>
