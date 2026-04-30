@@ -10,14 +10,13 @@ import { cn } from "@/lib/utils";
 const links = globalCopy.nav.links;
 
 const primaryLinks: ReadonlyArray<{
-  to: "/about" | "/services" | "/network" | "/investors" | "/contact";
+  to: "/about" | "/services" | "/network" | "/investors";
   label: string;
 }> = [
   { to: "/about", label: links.about },
   { to: "/services", label: links.services },
   { to: "/network", label: links.network },
   { to: "/investors", label: links.investors },
-  { to: "/contact", label: links.contact },
 ];
 
 const LOGO_URL =
@@ -27,7 +26,7 @@ function NavLink({
   to,
   label,
 }: {
-  to: "/about" | "/services" | "/network" | "/investors" | "/contact";
+  to: "/about" | "/services" | "/network" | "/investors";
   label: string;
 }) {
   const [hovered, setHovered] = React.useState(false);
@@ -42,9 +41,14 @@ function NavLink({
         opacity: hovered ? 1 : 0.75,
       }}
       activeProps={{
-        className:
-          "relative rounded-md px-3 py-2 text-sm font-medium after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:rounded-full after:bg-[var(--rl-green)]",
-        style: { color: "var(--rl-green)", opacity: 1 },
+        className: "relative rounded-md px-3 py-2 text-sm font-medium",
+        style: {
+          color: "var(--rl-green)",
+          opacity: 1,
+          borderBottom: "2px solid var(--rl-green)",
+          borderRadius: "0",
+          paddingBottom: "6px",
+        },
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -103,7 +107,7 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-1">
-          {/* Platforms — hover dropdown */}
+          {/* Platforms dropdown */}
           <div
             className="relative"
             onMouseEnter={() => setPlatformHov(true)}
@@ -125,7 +129,6 @@ export function Navbar() {
               />
             </Link>
 
-            {/* Dropdown panel */}
             {platformHov && (
               <div className="absolute left-0 top-full pt-1 z-50">
                 <div className="w-64 rounded-md border border-border bg-background shadow-md">
@@ -167,15 +170,17 @@ export function Navbar() {
 
         {/* CTA + Mobile trigger */}
         <div className="flex items-center gap-2">
+          {/* Contact Us — desktop only */}
           <Button
             asChild
             size="sm"
-            className="hidden sm:inline-flex rounded-md font-medium"
+            className="hidden lg:inline-flex rounded-md font-medium"
             style={{ backgroundColor: "var(--rl-green)", color: "white" }}
           >
             <Link to="/contact">{globalCopy.cta.contactUs}</Link>
           </Button>
 
+          {/* Hamburger — mobile only */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button

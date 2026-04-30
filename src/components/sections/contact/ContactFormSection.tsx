@@ -2,7 +2,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, Send } from "lucide-react";
+import { CheckCircle2, Send, Clock } from "lucide-react";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,7 @@ type FormValues = z.infer<typeof schema>;
 export function ContactFormSection() {
   const [submitted, setSubmitted] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
+  const [submittedName, setSubmittedName] = React.useState("");
 
   React.useEffect(() => setMounted(true), []);
 
@@ -56,8 +57,9 @@ export function ContactFormSection() {
     },
   });
 
-  const onSubmit = async (_values: FormValues) => {
+  const onSubmit = async (values: FormValues) => {
     await new Promise((r) => setTimeout(r, 700));
+    setSubmittedName(values.firstName);
     setSubmitted(true);
     reset();
   };
@@ -76,35 +78,51 @@ export function ContactFormSection() {
           </h2>
 
           {submitted ? (
+            /* ── Success state ── */
             <div
-              className="rounded-2xl border-l-4 p-6"
+              className="rounded-2xl p-8 text-center"
               style={{
-                borderColor: "var(--rl-green)",
-                backgroundColor: "color-mix(in oklab, var(--rl-green) 5%, white)",
+                backgroundColor: "color-mix(in oklab, var(--rl-green) 6%, white)",
+                border: "1px solid rgba(79,153,7,0.2)",
               }}
               role="status"
             >
-              <div className="flex items-start gap-3">
-                <CheckCircle2
-                  className="h-6 w-6 flex-shrink-0 mt-0.5"
-                  style={{ color: "var(--rl-green)" }}
-                />
-                <div>
-                  <h3 className="text-lg font-bold text-foreground">
-                    {contactCopy.form.successTitle}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {contactCopy.form.successBody}
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mt-4"
-                    onClick={() => setSubmitted(false)}
-                  >
-                    Send another message
-                  </Button>
-                </div>
+              <div
+                className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full"
+                style={{ backgroundColor: "rgba(79,153,7,0.12)" }}
+              >
+                <CheckCircle2 className="h-8 w-8" style={{ color: "var(--rl-green)" }} />
+              </div>
+
+              <h3 className="text-xl font-bold text-foreground">Thank you, {submittedName}!</h3>
+
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground max-w-sm mx-auto">
+                {contactCopy.form.successBody}
+              </p>
+
+              {/* Response time */}
+              <div
+                className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
+                style={{
+                  backgroundColor: "rgba(79,153,7,0.1)",
+                  color: "var(--rl-green)",
+                }}
+              >
+                <Clock className="h-3.5 w-3.5" />
+                Our team will respond within 1 business day
+              </div>
+
+              <div className="mt-6">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setSubmitted(false);
+                    setSubmittedName("");
+                  }}
+                >
+                  Send another message
+                </Button>
               </div>
             </div>
           ) : (
@@ -205,23 +223,31 @@ export function ContactFormSection() {
                 )}
               </div>
 
-              {/* Submit */}
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full group font-semibold"
-                disabled={isSubmitting}
-                style={{ backgroundColor: "var(--rl-green)", color: "white" }}
-              >
-                {isSubmitting ? (
-                  contactCopy.form.submitting
-                ) : (
-                  <>
-                    {contactCopy.form.submit}
-                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </>
-                )}
-              </Button>
+              {/* Submit + response time */}
+              <div className="space-y-3">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full group font-semibold"
+                  disabled={isSubmitting}
+                  style={{ backgroundColor: "var(--rl-green)", color: "white" }}
+                >
+                  {isSubmitting ? (
+                    contactCopy.form.submitting
+                  ) : (
+                    <>
+                      {contactCopy.form.submit}
+                      <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
+                </Button>
+
+                {/* Response time */}
+                <p className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
+                  <Clock className="h-3 w-3" />
+                  We respond within 1 business day
+                </p>
+              </div>
             </form>
           )}
         </div>
