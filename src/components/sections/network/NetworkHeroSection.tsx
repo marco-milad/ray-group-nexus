@@ -6,7 +6,7 @@ import { MapPin, Building2, Globe } from "lucide-react";
 import { networkCopy } from "@/data/en/network";
 
 const heroStats = [
-  { raw: 65, suffix: "+", label: "Branches", icon: Building2 },
+  { raw: 72, suffix: "+", label: "Branches", icon: Building2 },
   { raw: 3, suffix: "", label: "Countries", icon: Globe },
   { raw: 6, suffix: "", label: "Brands", icon: MapPin },
 ];

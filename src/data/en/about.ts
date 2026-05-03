@@ -107,7 +107,7 @@ export const aboutCopy = {
     eyebrow: "Technology Partners",
     headline: "Powered by Global MedTech Leaders",
     subheadline:
-      "Ray Lab Group's diagnostic infrastructure is built on equipment from the world's four leading medical imaging manufacturers.",
+      "A Malta-headquartered multinational diagnostic group operating across 3 operating markets through 6 specialised brands.",
     partners: [
       {
         name: "General Electric",

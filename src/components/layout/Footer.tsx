@@ -9,8 +9,8 @@ const LOGO_URL =
   "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776657151/svg_final_fwh3x1.svg";
 
 const footerStats = [
-  { value: "40+", label: "Branches" },
-  { value: "4", label: "Countries" },
+  { value: "74+", label: "Branches" },
+  { value: "3", label: "Markets" },
   { value: "1.6M+", label: "Annual Exams" },
   { value: "2019", label: "Est." },
 ];

@@ -8,8 +8,8 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { investorsCopy } from "@/data/en/investors";
 
 const heroStats = [
-  { raw: 65, suffix: "+", label: "Branches", icon: Building2 },
-  { raw: 3, suffix: "", label: "Countries", icon: Globe },
+  { raw: 74, suffix: "+", label: "Branches", icon: Building2 },
+  { raw: 3, suffix: "", label: "Markets", icon: Globe },
   { raw: 40, suffix: "%", label: "YoY Growth", icon: TrendingUp },
 ];
 
@@ -121,14 +121,24 @@ export function InvestorsHeroSection() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              {/* Primary CTA — يروح على contact مؤقتاً */}
               <Button
+                asChild
                 size="lg"
                 className="group"
                 style={{ backgroundColor: "var(--rl-green)", color: "white" }}
               >
-                {hero.primaryCta}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <Link
+                  to="/contact"
+                  search={{ inquiry: "investor-overview" } as Record<string, string>}
+                  className="flex items-center"
+                >
+                  {hero.primaryCta}
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
+
+              {/* Secondary CTA */}
               <Button asChild size="lg" variant="outline">
                 <Link to="/contact">{hero.secondaryCta}</Link>
               </Button>

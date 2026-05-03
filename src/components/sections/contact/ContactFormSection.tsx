@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSearch } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -36,7 +37,20 @@ export function ContactFormSection() {
   const [mounted, setMounted] = React.useState(false);
   const [submittedName, setSubmittedName] = React.useState("");
 
+  // Read query params
+  const search = useSearch({ strict: false }) as Record<string, string>;
+  const prefillService = search?.service ?? "";
+  const prefillSpecialty = search?.specialty ?? "";
+
   React.useEffect(() => setMounted(true), []);
+
+  // Build prefill message
+  const prefillMessage = React.useMemo(() => {
+    if (prefillService) return `I would like to refer a patient for: ${prefillService}`;
+    if (prefillSpecialty)
+      return `I would like to refer a patient for the ${prefillSpecialty} pathway`;
+    return "";
+  }, [prefillService, prefillSpecialty]);
 
   const {
     register,
@@ -53,9 +67,17 @@ export function ContactFormSection() {
       email: "",
       organisation: "",
       inquiryType: "",
-      message: "",
+      message: prefillMessage,
     },
   });
+
+  // Update message when prefill changes
+  React.useEffect(() => {
+    if (prefillMessage) {
+      setValue("message", prefillMessage);
+      setValue("inquiryType", "Physician Referral");
+    }
+  }, [prefillMessage, setValue]);
 
   const onSubmit = async (values: FormValues) => {
     await new Promise((r) => setTimeout(r, 700));
@@ -73,12 +95,31 @@ export function ContactFormSection() {
           className="mx-auto max-w-2xl rounded-3xl border border-border/60 bg-card p-6 shadow-sm md:p-10"
           style={{ borderTopColor: "var(--rl-green)", borderTopWidth: "3px" }}
         >
+          {/* Prefill banner */}
+          {(prefillService || prefillSpecialty) && !submitted && (
+            <div
+              className="mb-6 rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2"
+              style={{
+                backgroundColor: "rgba(79,153,7,0.08)",
+                color: "var(--rl-green)",
+                border: "1px solid rgba(79,153,7,0.2)",
+              }}
+            >
+              <span
+                className="h-2 w-2 rounded-full animate-pulse"
+                style={{ backgroundColor: "var(--rl-green)" }}
+              />
+              {prefillService
+                ? `Referring for: ${prefillService}`
+                : `Referring for: ${prefillSpecialty} pathway`}
+            </div>
+          )}
+
           <h2 className="text-2xl font-bold text-foreground md:text-3xl mb-8">
             {contactCopy.form.title}
           </h2>
 
           {submitted ? (
-            /* ── Success state ── */
             <div
               className="rounded-2xl p-8 text-center"
               style={{
@@ -100,7 +141,6 @@ export function ContactFormSection() {
                 {contactCopy.form.successBody}
               </p>
 
-              {/* Response time */}
               <div
                 className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
                 style={{
@@ -223,7 +263,7 @@ export function ContactFormSection() {
                 )}
               </div>
 
-              {/* Submit + response time */}
+              {/* Submit */}
               <div className="space-y-3">
                 <Button
                   type="submit"
@@ -241,8 +281,6 @@ export function ContactFormSection() {
                     </>
                   )}
                 </Button>
-
-                {/* Response time */}
                 <p className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
                   <Clock className="h-3 w-3" />
                   We respond within 1 business day

@@ -20,18 +20,18 @@ const heroStats = [
   {
     ...statsCopy.branches,
     icon: Building2,
-    raw: 40,
+    raw: 74,
     suffix: "+",
-    display: "40",
+    display: "74",
     context: "Largest multi-country network in MENA private diagnostics",
   },
   {
     ...statsCopy.countries,
     icon: Globe,
-    raw: 4,
+    raw: 3,
     suffix: "",
-    display: "4",
-    context: "Egypt, Saudi Arabia, Jordan & Malta HQ",
+    display: "3",
+    context: "Egypt, Saudi Arabia, Jordan ",
   },
   {
     ...statsCopy.consultants,

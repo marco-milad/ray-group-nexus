@@ -1,16 +1,8 @@
-// ═══════════════════════════════════════════════════════════
-// NETWORK INTELLIGENCE PREVIEW — src/data/en/network.ts
-//
-// Static, data-driven preview of the group's footprint.
-// No interactive map — replaced by countries grid + brand
-// distribution + growth insight panels.
-// ═══════════════════════════════════════════════════════════
-
 export const networkCopy = {
   seo: {
     title: "Network — Ray Lab Group",
     description:
-      "Ray Lab Group operates 65+ branches across Egypt, Saudi Arabia, and Jordan — the most geographically diverse private diagnostic network in MENA.",
+      "Ray Lab Group operates 74+ branches across Egypt, Saudi Arabia, and Jordan — the most geographically diverse private diagnostic network in MENA.",
   },
 
   hero: {
@@ -18,7 +10,7 @@ export const networkCopy = {
     headline: "Diagnostic Coverage",
     headlineAccent: "Across MENA.",
     subheadline:
-      "65+ branches across 3 countries, operating under 6 brands — unified by group governance and Ray Medical teleradiology infrastructure.",
+      "74+ branches across 3 operating markets, under 6 brands — unified by group governance and Ray Medical teleradiology infrastructure.",
   },
 
   countries: {
@@ -30,7 +22,7 @@ export const networkCopy = {
       {
         country: "Egypt",
         flag: "🇪🇬",
-        branches: 55,
+        branches: 64,
         brands: ["Cairo Scan", "TechnoScan", "Specialized Clinics"],
         cities: ["Cairo", "Alexandria", "Mansoura", "Tanta", "Ismailia", "Suez", "Assiut", "Sohag"],
         soWhat:
@@ -63,9 +55,9 @@ export const networkCopy = {
     subheadline:
       "Each brand is positioned for its local context — premium consultant-led, accessible neighbourhood, integrated clinic, or B2B teleradiology.",
     items: [
-      { brand: "Cairo Scan", country: "Egypt", branches: 30, color: "var(--cairo-scan)" },
-      { brand: "TechnoScan", country: "Egypt", branches: 20, color: "var(--technoscan)" },
-      { brand: "Specialized Clinics", country: "Egypt", branches: 5, color: "var(--clinics)" },
+      { brand: "Cairo Scan", country: "Egypt", branches: 20, color: "var(--cairo-scan)" },
+      { brand: "TechnoScan", country: "Egypt", branches: 35, color: "var(--technoscan)" },
+      { brand: "Specialized Clinics", country: "Egypt", branches: 9, color: "var(--clinics)" },
       { brand: "CRC", country: "Saudi Arabia", branches: 3, color: "var(--crc)" },
       { brand: "MedRay", country: "Jordan", branches: 7, color: "var(--medray)" },
       {

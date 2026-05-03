@@ -6,9 +6,9 @@ import { useCountUp } from "@/hooks/useCountUp";
 
 const aboutStats = [
   { value: "2019", label: "Founded", raw: 2019, suffix: "" },
-  { value: "4", label: "Countries", raw: 4, suffix: "" },
+  { value: "3", label: "Countries", raw: 3, suffix: "" },
   { value: "6", label: "Brands", raw: 6, suffix: "" },
-  { value: "40", label: "Branches", raw: 40, suffix: "+" },
+  { value: "74", label: "Branches", raw: 74, suffix: "+" },
 ];
 
 const AUDIENCE_TAGS = [
