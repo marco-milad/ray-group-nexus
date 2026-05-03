@@ -8,6 +8,9 @@ import { homeCopy } from "@/data/en/home";
 import { statsCopy } from "@/data/en/sections/stats";
 import { useCountUp } from "@/hooks/useCountUp";
 
+const BG_URL =
+  "https://res.cloudinary.com/dcui0elwh/image/upload/v1777850428/background_2_iibur3.jpg";
+
 const heroStats = [
   {
     ...statsCopy.exams,
@@ -31,7 +34,7 @@ const heroStats = [
     raw: 3,
     suffix: "",
     display: "3",
-    context: "Egypt, Saudi Arabia, Jordan ",
+    context: "Egypt, Saudi Arabia, Jordan",
   },
   {
     ...statsCopy.consultants,
@@ -63,7 +66,6 @@ function StatCard({
   const isMillions = raw > 999999;
   const target = isMillions ? 16 : raw;
   const count = useCountUp(target, 1800, animate);
-
   const displayValue = isMillions ? `${(count / 10).toFixed(1)}M+` : `${count}${suffix}`;
 
   return (
@@ -80,25 +82,17 @@ function StatCard({
         </div>
         <div
           className="rounded-lg p-1.5"
-          style={{
-            backgroundColor: "rgba(79,153,7,0.08)",
-            color: "var(--rl-green)",
-          }}
+          style={{ backgroundColor: "rgba(79,153,7,0.08)", color: "var(--rl-green)" }}
         >
           <Icon className="h-4 w-4" />
         </div>
       </div>
-
-      {/* Label */}
       <div className="mt-2 text-xs md:text-sm font-medium text-foreground/70">{label}</div>
-
-      {/* Micro-context */}
       {context && (
         <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground/70 italic">
           {context}
         </p>
       )}
-
       <div
         className="mt-3 h-0.5 w-8 rounded-full transition-all duration-300 group-hover:w-full"
         style={{ backgroundColor: "var(--rl-green)", opacity: 0.3 }}
@@ -129,13 +123,34 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(1200px 600px at 20% -10%, color-mix(in oklab, var(--rl-mantis) 22%, transparent), transparent 60%), radial-gradient(900px 500px at 100% 10%, color-mix(in oklab, var(--rl-pistachio) 18%, transparent), transparent 60%), var(--rl-light-bg)",
-      }}
-    >
+    <section className="relative overflow-hidden">
+      <style>{`
+        @keyframes zoomInOut {
+          from { transform: scale(1);    }
+          to   { transform: scale(1.12); }
+        }
+      `}</style>
+
+      {/* Background image with zoom animation */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url(${BG_URL})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          animation: "zoomInOut 20s ease-in-out infinite alternate",
+        }}
+      />
+
+      {/* White overlay for readability */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{ backgroundColor: "rgba(255,255,255,0.78)" }}
+      />
+
+      {/* Grid overlay */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
