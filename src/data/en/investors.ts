@@ -411,7 +411,7 @@ export const investorsCopy = {
       category: "Group Announcement",
       headline: "Ray Lab Group Completes 1.6 Million Diagnostic Examinations in 2025",
       date: "April 2025",
-      body: "Ray Lab Group announces record diagnostic output for 2025, driven by Egypt expansion and growing teleradiology demand. Total operating revenue reaches $36.2M across the group's four-country network.",
+      body: "Ray Lab Group announces record diagnostic output for 2025, driven by Egypt expansion and growing teleradiology demand. Total operating revenue reaches $36.2M across the group's three-market operating network.",
     },
     articles: [
       {

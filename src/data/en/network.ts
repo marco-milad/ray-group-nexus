@@ -74,7 +74,7 @@ export const networkCopy = {
     eyebrow: "Growth Insight",
     headline: "Branches Added per Year",
     subheadline:
-      "Branch openings have accelerated each year — 2025 marks the largest single-year expansion in group history.",
+      "Expansion has accelerated since 2023 — 2025 marks the largest single-year expansion in group history.",
     data: [
       { year: "2021", added: 4 },
       { year: "2022", added: 7 },

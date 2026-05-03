@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "@tanstack/react-router";
 import { Newspaper, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Reveal } from "@/components/ui/reveal";
@@ -13,7 +14,7 @@ export function PressTab() {
         <SectionHeader eyebrow={press.eyebrow} headline={press.headline} />
       </Reveal>
 
-      {/* Featured article — dark newspaper style */}
+      {/* Featured article */}
       <Reveal delay={100}>
         <article
           className="mx-auto mt-10 max-w-4xl rounded-2xl p-8 relative overflow-hidden"
@@ -67,14 +68,16 @@ export function PressTab() {
               {press.featured.body}
             </p>
 
-            {/* CTA */}
-            <button
+            {/* CTA — يروح على contact مؤقتاً */}
+            <Link
+              to="/contact"
+              search={{ inquiry: "press-release" } as Record<string, string>}
               className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold transition-all"
               style={{ color: "var(--rl-mantis)" }}
             >
               {press.readMore}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            </Link>
           </div>
         </article>
       </Reveal>
@@ -90,7 +93,9 @@ export function PressTab() {
         <div className="grid gap-3 sm:grid-cols-2">
           {press.articles.map((a, i) => (
             <Reveal key={i} delay={i * 80}>
-              <article
+              <Link
+                to="/contact"
+                search={{ inquiry: "press-inquiry" } as Record<string, string>}
                 className="group flex gap-4 rounded-xl border border-border/60 bg-card p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md h-full"
                 style={{ borderLeftColor: "var(--rl-green)", borderLeftWidth: "2px" }}
               >
@@ -115,7 +120,7 @@ export function PressTab() {
                   className="h-4 w-4 shrink-0 self-center text-muted-foreground opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0.5"
                   style={{ color: "var(--rl-green)" }}
                 />
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>

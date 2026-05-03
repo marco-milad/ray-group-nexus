@@ -5,12 +5,9 @@ import { aboutCopy } from "@/data/en/about";
 
 const partnerLogos: Record<string, string> = {
   GE: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/General_Electric_logo.svg/120px-General_Electric_logo.svg.png",
-  Siemens:
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Siemens-logo.svg/200px-Siemens-logo.svg.png",
-  Philips:
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Philips_logo_new.svg/200px-Philips_logo_new.svg.png",
-  Toshiba:
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Toshiba_logo.svg/200px-Toshiba_logo.svg.png",
+  Siemens: "https://res.cloudinary.com/dcui0elwh/image/upload/v1777846610/semens_rdmiql.svg",
+  Philips: "https://res.cloudinary.com/dcui0elwh/image/upload/v1777845019/philips_wp0ywt.svg",
+  Toshiba: "https://res.cloudinary.com/dcui0elwh/image/upload/v1777845048/tohiba_atxm64.svg",
 };
 
 export function TechPartnersSection() {
@@ -35,7 +32,7 @@ export function TechPartnersSection() {
                 <img
                   src={partnerLogos[p.shortName]}
                   alt={p.name}
-                  className="h-8 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                  className="h-8 w-auto object-contain grayscale-0 group-hover:grayscale transition-all duration-300 group-hover:scale-110"
                 />
               </div>
 
