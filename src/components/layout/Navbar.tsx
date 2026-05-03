@@ -20,7 +20,7 @@ const primaryLinks: ReadonlyArray<{
 ];
 
 const LOGO_URL =
-  "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482775/Ray_Lab_dual_logo_klipdn.svg";
+  "https://res.cloudinary.com/dcui0elwh/image/upload/v1777848885/Ray_Lab_dual_logo_s21wwm.svg";
 
 function NavLink({
   to,
