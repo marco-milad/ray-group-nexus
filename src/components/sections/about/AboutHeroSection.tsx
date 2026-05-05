@@ -5,8 +5,8 @@ import { aboutCopy } from "@/data/en/about";
 import { useCountUp } from "@/hooks/useCountUp";
 
 const aboutStats = [
-  { value: "2019", label: "Founded", raw: 2019, suffix: "" },
-  { value: "3", label: "Countries", raw: 3, suffix: "" },
+  { value: "1983", label: "Founded", raw: 1983, suffix: "" },
+  { value: "3", label: "Markets", raw: 3, suffix: "" },
   { value: "6", label: "Brands", raw: 6, suffix: "" },
   { value: "74", label: "Branches", raw: 74, suffix: "+" },
 ];

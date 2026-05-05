@@ -6,7 +6,7 @@ export const services: ServiceItem[] = [
     id: "mri",
     name: "MRI (Open & Closed)",
     description:
-      "Standard and open-bore MRI for all body parts. 3T Tesla (Lumina) and 1.5T available. Open MRI for claustrophobic or larger patients.",
+      "Standard and open-bore MRI for all body parts. 3T Lumina and 1.5T available. Open MRI for claustrophobic or larger patients.",
     categoryId: "imaging",
     availableAt: ["cairo-scan", "technoscan", "medray", "crc"],
     icon: "scan",

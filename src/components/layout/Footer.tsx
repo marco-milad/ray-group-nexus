@@ -12,7 +12,7 @@ const footerStats = [
   { value: "74+", label: "Branches" },
   { value: "3", label: "Markets" },
   { value: "1.6M+", label: "Annual Exams" },
-  { value: "2019", label: "Est." },
+  { value: "1983", label: "Est." },
 ];
 
 const socials = [
@@ -180,9 +180,6 @@ export function Footer() {
         <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/40">{globalCopy.footer.copyright}</p>
           <div className="flex items-center gap-4 text-xs text-white/40">
-            <span>Privacy Policy</span>
-            <span className="h-3 w-px bg-white/20" />
-            <span>Terms of Use</span>
             <span className="h-3 w-px bg-white/20" />
             <span className="font-semibold" style={{ color: "var(--rl-green)" }}>
               Ray Lab Group

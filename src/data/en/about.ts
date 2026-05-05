@@ -13,7 +13,7 @@ export const aboutCopy = {
     headline: "Building the Future of",
     headlineAccent: "Healthcare Diagnostics.",
     subheadline:
-      "A Malta-headquartered multinational diagnostic group operating across 4 countries through 6 specialised brands.",
+      "A Malta-headquartered multinational diagnostic group operating across 3 operating markets through 6 specialised brands.",
   },
   vision: {
     eyebrow: "Our Vision",
@@ -63,8 +63,8 @@ export const aboutCopy = {
     events: [
       {
         year: "2009",
-        title: "MetaMed & TechnoScan Established",
-        body: "Gulf Capital Private Equity Partners Fund II established MetaMed and acquired a majority stake in TechnoScan Egypt — operating 13 diagnostic imaging centers.",
+        title: "MetaMed Established — TechnoScan Acquisition",
+        body: "Gulf Capital Private Equity Partners Fund II established MetaMed and acquired a majority stake in TechnoScan Egypt (founded 1986 by Prof. Dr. Osama Khalil) — operating 13 diagnostic imaging centers.",
       },
       {
         year: "2010",
@@ -80,6 +80,11 @@ export const aboutCopy = {
         year: "2016",
         title: "Mediterrania Acquires Cairo Scan",
         body: "Mediterrania Capital Partners (MCP) acquires Cairo Scan — the leading private provider of radiology and laboratory services in Egypt.",
+      },
+      {
+        year: "2019",
+        title: "Group Platform Formed",
+        body: "The foundation of the unified diagnostic platform is established, bringing together Cairo Scan, TechnoScan, CRC, and MedRay under a shared operational and governance framework.",
       },
       {
         year: "2020",

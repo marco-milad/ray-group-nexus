@@ -35,7 +35,7 @@ export const contactCopy = {
     submitting: "Sending...",
     successTitle: "Message Received",
     successBody:
-      "Thank you for reaching out. A member of our team will be in touch within 2 business days.",
+      "Thank you for reaching out. A member of our team will be in touch within 1 : 2 business days.",
     errorMessage: "Something went wrong. Please try again.",
   },
   offices: {

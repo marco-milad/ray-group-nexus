@@ -104,7 +104,10 @@ function BrandPage() {
     {
       icon: <MapPin className="h-4 w-4" />,
       label: labels.countryLabel,
-      value: COUNTRY_LABEL[brand.country] ?? brand.country,
+      value:
+        brand.slug === "ray-medical"
+          ? "Egypt + KSA"
+          : (COUNTRY_LABEL[brand.country] ?? brand.country),
     },
     {
       icon: <Calendar className="h-4 w-4" />,
@@ -179,8 +182,8 @@ function BrandPage() {
                         className="group"
                         style={{ backgroundColor: brand.color, color: "white" }}
                       >
-                        <Link to="/contact">
-                          {labels.primaryCta}
+                        <Link to={brand.slug === "ray-medical" ? "/contact" : "/network"}>
+                          {brand.slug === "ray-medical" ? "Request Access" : labels.primaryCta}
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Link>
                       </Button>
@@ -342,9 +345,15 @@ function BrandPage() {
                           {b.name}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {b.branches > 0 ? `${b.branches} branches` : "Coming soon"}
+                          {b.branches > 0
+                            ? `${b.branches} branches`
+                            : b.status === "live"
+                              ? "Now Live"
+                              : "Coming soon"}
                           {" · "}
-                          {COUNTRY_LABEL[b.country] ?? b.country}
+                          {b.slug === "ray-medical"
+                            ? "Egypt + KSA"
+                            : (COUNTRY_LABEL[b.country] ?? b.country)}
                         </div>
                       </div>
                       <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />

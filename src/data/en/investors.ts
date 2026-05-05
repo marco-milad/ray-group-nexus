@@ -421,7 +421,7 @@ export const investorsCopy = {
       },
       {
         category: "Technology",
-        headline: "LUMINA 3T Tesla MRI Now Available at 8 Cairo Scan Locations",
+        headline: "LUMINA 3T MRI Now Available at 8 Cairo Scan Locations",
         date: "February 2025",
       },
       {

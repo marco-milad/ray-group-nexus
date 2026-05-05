@@ -9,6 +9,7 @@ export const brands: Brand[] = [
     color: "#E53935",
     founded: 1983,
     branches: 20,
+    status: "active",
     serviceIds: [
       "mri",
       "mri-arthrography",
@@ -52,6 +53,7 @@ export const brands: Brand[] = [
     color: "#00897B",
     founded: 1986,
     branches: 35,
+    status: "active",
     serviceIds: [
       "mri",
       "ct-scan",
@@ -89,6 +91,7 @@ export const brands: Brand[] = [
     color: "#C8A96E",
     founded: 1997,
     branches: 3,
+    status: "active",
     serviceIds: [
       "mri",
       "mri-arthrography",
@@ -118,6 +121,7 @@ export const brands: Brand[] = [
     color: "#1E88E5",
     founded: 2009,
     branches: 7,
+    status: "active",
     serviceIds: [
       "mri",
       "mri-arthrography",
@@ -152,6 +156,7 @@ export const brands: Brand[] = [
     color: "#F57C00",
     founded: 2025,
     branches: 9,
+    status: "active",
     serviceIds: [],
     description:
       "Multi-specialty outpatient care under Cairo Scan and TechnoScan Clinics — 18 specialties, 50+ consultant physicians.",
@@ -165,6 +170,7 @@ export const brands: Brand[] = [
     color: "#7B1FA2",
     founded: 2026,
     branches: 0,
+    status: "live",
     serviceIds: [
       "neuroradiology",
       "msk-radiology",

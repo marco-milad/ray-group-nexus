@@ -19,26 +19,25 @@ const REGIONAL_OFFICES = [
   {
     label: "Cairo — Regional Operations Hub",
     flag: "🇪🇬",
-    address: "Cairo, Egypt\n[Address to be confirmed]",
+    address: "Cairo, Egypt",
     email: "egypt@raylabgroup.com",
     color: "var(--cairo-scan)",
   },
   {
     label: "Riyadh — KSA Operations",
     flag: "🇸🇦",
-    address: "Riyadh, Saudi Arabia\n[Address to be confirmed]",
+    address: "Riyadh, Saudi Arabia",
     email: "ksa@raylabgroup.com",
     color: "var(--crc)",
   },
   {
     label: "Amman — Jordan Operations",
     flag: "🇯🇴",
-    address: "Amman, Jordan\n[Address to be confirmed]",
+    address: "Amman, Jordan",
     email: "jordan@raylabgroup.com",
     color: "var(--medray)",
   },
 ];
-
 export function OfficesSection() {
   const { offices } = contactCopy;
   const maltaOffices = [offices.primary, offices.secondary];

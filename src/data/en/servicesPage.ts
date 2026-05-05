@@ -49,7 +49,7 @@ export const servicesCopy = {
   featured: {
     imaging: {
       tag: "Featured — MRI",
-      headline: "LUMINA 3T Tesla — Next-Generation MRI",
+      headline: "LUMINA 3T MRI — Next-Generation MRI",
       body: "Ray Lab Group's flagship MRI offering delivers faster scans with superior image resolution. Now available across Cairo Scan and TechnoScan centers.",
       chips: ["Open MRI available", "MR Arthrography", "Paediatric protocol", "3T & 1.5T options"],
       stats: [

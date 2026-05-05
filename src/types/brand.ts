@@ -1,7 +1,6 @@
 /**
  * Ray Lab Group — Brand types
  */
-
 export interface Brand {
   id: string;
   slug: string;
@@ -10,6 +9,7 @@ export interface Brand {
   color: string;
   founded: number;
   branches: number;
+  status?: "active" | "live" | "coming-soon";
   /** refs to ServiceItem.id — NOT inline strings */
   serviceIds: string[];
   description: string;
