@@ -40,7 +40,7 @@ const steps = [
   {
     number: "03",
     title: "Receive the Report",
-    body: "Structured subspecialty report delivered in 90 minutes, any time of day.",
+    body: "Structured subspecialty report delivered within an average of 90 minutes, any time of day.",
   },
 ];
 
@@ -110,7 +110,7 @@ export function TeleradiologySection() {
 
             <p className="mt-6 max-w-xl mx-auto text-lg leading-relaxed text-white/70">
               No comparable network exists in the region. 60+ consultant radiologists, available
-              around the clock — results in 90 minutes, guaranteed.
+              around the clock — average turnaround of ~90 minutes, any time of day.
             </p>
           </div>
         </Reveal>

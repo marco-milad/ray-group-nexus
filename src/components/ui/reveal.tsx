@@ -13,27 +13,32 @@ interface RevealProps {
 /**
  * Reveal — IntersectionObserver-driven scroll fade-in.
  * Respects prefers-reduced-motion. Triggers once, then stays visible.
+ * Content is visible by default before hydration to avoid no-JS issues.
  */
 export function Reveal({ children, className, delay = 0, as: Tag = "div" }: RevealProps) {
   const ref = React.useRef<HTMLElement | null>(null);
   const [visible, setVisible] = React.useState(false);
+  const [hydrated, setHydrated] = React.useState(false);
 
-  // After mount, sync visibility for elements already in viewport (above-the-fold heroes).
-  // This avoids the flash where IntersectionObserver hasn't fired yet on first paint.
   useIsoLayoutEffect(() => {
+    setHydrated(true);
     if (typeof window === "undefined") return;
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
       setVisible(true);
       return;
     }
+
     const node = ref.current;
     if (!node) return;
+
     const rect = node.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       setVisible(true);
       return;
     }
+
     const obs = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -51,15 +56,16 @@ export function Reveal({ children, className, delay = 0, as: Tag = "div" }: Reve
   }, []);
 
   const Component = Tag as React.ElementType;
+
   return (
     <Component
       ref={ref as React.Ref<HTMLElement>}
       className={cn("will-change-transform", className)}
       style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(32px)",
+        opacity: !hydrated || visible ? 1 : 0,
+        transform: !hydrated || visible ? "translateY(0)" : "translateY(32px)",
         transitionDelay: `${delay}ms`,
-        transition: "opacity 1.2s ease-out, transform 1.2s ease-out",
+        transition: hydrated ? "opacity 1.2s ease-out, transform 1.2s ease-out" : "none",
       }}
     >
       {children}

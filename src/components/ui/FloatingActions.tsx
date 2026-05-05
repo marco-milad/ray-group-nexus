@@ -3,7 +3,7 @@ import * as React from "react";
 const socials = [
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/company/ray-lab-group",
+    href: "https://linkedin.com/company/ray-lab-groupgi",
     icon: (
       <svg
         width="14"
@@ -101,13 +101,13 @@ export function FloatingActions() {
 
   return (
     <div
+      className="hidden sm:flex"
       style={{
         position: "fixed",
         right: "1.25rem",
         top: "50%",
         transform: "translateY(-50%)",
         zIndex: 50,
-        display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
