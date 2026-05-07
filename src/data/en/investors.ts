@@ -393,7 +393,6 @@ export const investorsCopy = {
       },
     },
   },
-
   // ── PRESS ROOM ────────────────────────────────
   press: {
     eyebrow: "Press Room",
@@ -412,31 +411,69 @@ export const investorsCopy = {
       headline: "Ray Lab Group Completes 1.6 Million Diagnostic Examinations in 2025",
       date: "April 2025",
       body: "Ray Lab Group announces record diagnostic output for 2025, driven by Egypt expansion and growing teleradiology demand. Total operating revenue reaches $36.2M across the group's three-market operating network.",
+      content: `Ray Lab Group announced a record operating year for 2025, completing 1,605,605 diagnostic examinations and 344,600 laboratory tests across its regional diagnostic platform. The Group also reported total operating revenue of USD 36,239,316, reflecting continued growth across Egypt, Jordan and Saudi Arabia.
+
+The 2025 performance was supported by sustained demand for advanced diagnostic imaging, wider geographic access in Egypt, and growing market need for subspecialty reporting and remote radiology capabilities. During the year, Ray Lab Group launched 12 new branches across Egypt's Delta, Suez Canal and Upper Egypt regions, extending the Group's reach into high-demand communities.
+
+Ray Lab Group operates through a portfolio of established healthcare brands, including Cairo Scan and TechnoScan in Egypt, MedRay in Jordan and CRC in Saudi Arabia. The Group brings together decades of local clinical experience with a shared regional operating model focused on diagnostic accuracy, patient accessibility, consultant-led expertise and technology-enabled care.
+
+Ray Lab Group's growth strategy continues to combine organic branch expansion, investment in advanced imaging technology and the development of scalable reporting infrastructure.`,
     },
     articles: [
       {
         category: "Expansion",
         headline: "TechnoScan Opens 3 New Branches in Upper Egypt",
         date: "March 2025",
+        content: `TechnoScan, one of Egypt's most established private diagnostic imaging providers and a key platform within Ray Lab Group, has opened three new branches in Upper Egypt as part of its continued national expansion.
+
+The new branches extend TechnoScan's reach into underserved and high-growth communities, improving patient access to advanced radiology services outside Greater Cairo and reinforcing Ray Lab Group's commitment to bringing high-quality diagnostics closer to patients across Egypt.
+
+Founded in 1986 by the late Prof. Dr. Osama Khalil, TechnoScan has grown into a nationwide diagnostic imaging network with more than 35 branches across Cairo, Greater Cairo, the Delta, Canal cities and Upper Egypt.
+
+The new branches are designed to support faster access to core diagnostic imaging services and strengthen local referral pathways between physicians, patients and specialist radiologists. TechnoScan's service portfolio includes MRI, CT, nuclear medicine, PET-CT, women's imaging, ultrasound, echocardiography, Doppler and conventional X-ray.`,
       },
       {
         category: "Technology",
         headline: "LUMINA 3T MRI Now Available at 8 Cairo Scan Locations",
         date: "February 2025",
+        content: `Cairo Scan has expanded access to LUMINA 3T MRI technology across 8 of its branches, bringing next-generation imaging capabilities to more patients and referring physicians across Cairo and Giza.
+
+The LUMINA 3T MRI system offers high-resolution soft tissue imaging with improved patient comfort, including enhanced bore design and reduced scan times. The technology is particularly valuable for complex neurological, musculoskeletal and oncological imaging pathways.
+
+Cairo Scan's investment in advanced MRI infrastructure reflects its ongoing commitment to diagnostic excellence and its role as Egypt's leading private provider of radiological and clinical laboratory services.`,
       },
       {
         category: "Clinics",
         headline: "TechnoScan Specialized Clinics Launches Across Cairo",
         date: "January 2025",
+        content: `TechnoScan Specialized Clinics has launched across four premium locations in Cairo, marking a major step in Ray Lab Group's expansion from diagnostics into integrated outpatient specialty care.
+
+The new platform extends TechnoScan's role beyond diagnostic imaging by connecting patients with consultant-level physicians across key specialties and linking clinical consultation directly with Ray Lab Group's diagnostic imaging and laboratory infrastructure.
+
+The model is designed to create a more coordinated patient journey, from physician assessment to diagnostic testing, reporting and follow-up. The clinics are designed around a patient-centric, convenience-driven model that improves continuity of care and strengthens referral pathways across the Ray Lab ecosystem.`,
       },
       {
         category: "Expansion",
         headline: "MedRay Jordan Expands to 7th Branch in Abdoun District",
         date: "December 2024",
+        content: `MedRay Jordan, Ray Lab Group's diagnostic imaging platform in the Kingdom, has expanded to its seventh branch with a new location in Abdoun District, strengthening its accessibility across Greater Amman.
+
+The Abdoun branch marks the latest step in MedRay's growth from a single-site radiology provider into one of Amman's most accessible diagnostic imaging networks. The expansion follows the launch of two additional branches in 2026, bringing the network to seven locations.
+
+Established in 2009, MedRay has built its reputation on specialist radiology, advanced imaging technology and a referral-driven clinical model. The network offers a comprehensive diagnostic portfolio including MRI, CT, ultrasound, mammography, PET/CT, nuclear medicine, FibroScan and EOS Imaging.`,
+      },
+      {
+        category: "Technology",
+        headline: "Cairo Scan Introduces AI-Assisted MRI Protocol Modelling",
+        date: "2025",
+        content: `Cairo Scan has introduced advanced AI-assisted MRI protocol modelling to help optimize scan duration, improve protocol consistency and support more efficient, patient-centered imaging workflows across selected MRI services.
+
+AI-assisted MRI modelling is designed to support radiology teams in selecting and optimizing protocols based on clinical indication, anatomy, image quality requirements and workflow needs. By helping teams refine MRI duration and protocol structure, the technology can improve patient comfort, reduce avoidable delays and support greater consistency across high-volume imaging pathways.
+
+The deployment will be governed through clinical validation, radiologist oversight and protocol review to ensure that workflow improvements are aligned with diagnostic confidence and patient safety. The initiative also supports Ray Lab Group's broader strategy of combining established clinical expertise with advanced technology across its regional diagnostic platform.`,
       },
     ],
   },
-
   // ── PAGE TABS ─────────────────────────────────
   tabs: {
     thesis: "Investment Thesis",
