@@ -13,6 +13,9 @@ type Article = {
   content?: string;
 };
 
+const BOILERPLATE =
+  "Ray Lab Group is a regional diagnostic imaging and healthcare platform operating across Egypt, Jordan and Saudi Arabia through established brands including Cairo Scan, TechnoScan, MedRay Jordan and CRC. The Group's services span diagnostic imaging, laboratory testing, specialized outpatient care and teleradiology, supported by consultant-led expertise, modern medical technology and a patient-centered operating model.";
+
 function PressModal({ article, onClose }: { article: Article; onClose: () => void }) {
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -29,9 +32,7 @@ function PressModal({ article, onClose }: { article: Article; onClose: () => voi
     };
   }, []);
 
-  if (typeof document === "undefined") return null;
-
-  return createPortal(
+  const modal = (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-6"
       style={{ backgroundColor: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
@@ -82,6 +83,11 @@ function PressModal({ article, onClose }: { article: Article; onClose: () => voi
           ) : (
             <p className="text-muted-foreground text-sm">Full release coming soon.</p>
           )}
+
+          {/* Boilerplate */}
+          <div className="mt-6 pt-5 border-t border-border/40">
+            <p className="text-xs leading-relaxed text-muted-foreground/60 italic">{BOILERPLATE}</p>
+          </div>
         </div>
 
         {/* Footer */}
@@ -104,9 +110,10 @@ function PressModal({ article, onClose }: { article: Article; onClose: () => voi
           </button>
         </div>
       </div>
-    </div>,
-    document.body,
+    </div>
   );
+
+  return typeof document !== "undefined" ? createPortal(modal, document.body) : null;
 }
 
 export function PressTab() {
