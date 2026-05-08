@@ -10,11 +10,12 @@ import { cn } from "@/lib/utils";
 const links = globalCopy.nav.links;
 
 const primaryLinks: ReadonlyArray<{
-  to: "/about" | "/services" | "/network" | "/investors";
+  to: "/about" | "/services" | "/gallery" | "/network" | "/investors";
   label: string;
 }> = [
   { to: "/about", label: links.about },
   { to: "/services", label: links.services },
+  { to: "/gallery", label: links.gallery },
   { to: "/network", label: links.network },
   { to: "/investors", label: links.investors },
 ];
@@ -26,7 +27,7 @@ function NavLink({
   to,
   label,
 }: {
-  to: "/about" | "/services" | "/network" | "/investors";
+  to: "/about" | "/services" | "/gallery" | "/network" | "/investors";
   label: string;
 }) {
   const [hovered, setHovered] = React.useState(false);

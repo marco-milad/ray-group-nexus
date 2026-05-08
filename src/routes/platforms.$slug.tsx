@@ -87,6 +87,12 @@ void getCategoryById;
 
 function BrandPage() {
   const { brand } = Route.useLoaderData();
+
+  // Umbrella page: Specialized Clinics shows both polyclinic platforms together
+  if (brand.slug === "specialized-clinics") {
+    return <SpecializedClinicsPage />;
+  }
+
   const services = getServicesByBrand(brand.slug);
   const labels = platformsCopy.brandPage;
 
@@ -399,5 +405,266 @@ function MetaTile({
         <div className="mt-0.5 text-base font-semibold text-foreground">{value}</div>
       </div>
     </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Specialized Clinics — umbrella page over both polyclinic brands
+// ─────────────────────────────────────────────────────────────
+
+const SC_COLOR = "#F57C00";
+
+const SC_HERO_STATS: { value: string; label: string }[] = [
+  { value: "62", label: "Specialties" },
+  { value: "50+", label: "Physicians" },
+  { value: "6", label: "Locations" },
+];
+
+function SpecializedClinicsPage() {
+  // Both polyclinic brands share the same 62 services — read once from either
+  const services = getServicesByBrand("cairo-scan-polyclinics");
+
+  const grouped = categories
+    .filter((c) => c.id.startsWith("clinics-"))
+    .sort((a, b) => a.order - b.order)
+    .map((cat) => ({
+      category: cat,
+      items: services.filter((s) => s.categoryId === cat.id),
+    }))
+    .filter((g) => g.items.length > 0);
+
+  const csPoly = brands.find((b) => b.slug === "cairo-scan-polyclinics");
+  const tsPoly = brands.find((b) => b.slug === "technoscan-polyclinics");
+  const platformBrands = [csPoly, tsPoly].filter(
+    (b): b is NonNullable<typeof b> => Boolean(b),
+  );
+
+  return (
+    <main>
+      {/* ── HERO ──────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden"
+        style={{
+          background: `radial-gradient(900px 480px at 80% -10%, color-mix(in oklab, ${SC_COLOR} 16%, transparent), transparent 60%), var(--rl-light-bg)`,
+        }}
+      >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--rl-eerie) 1px, transparent 1px), linear-gradient(90deg, var(--rl-eerie) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+
+        <PageWrapper className="relative py-16 md:py-24">
+          <Reveal>
+            <Link
+              to="/platforms"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              All platforms
+            </Link>
+
+            {/* SC initials badge — mirrors BrandLogo fallback */}
+            <div className="mt-8">
+              <div
+                className="inline-flex h-16 w-16 items-center justify-center rounded-2xl text-2xl font-bold text-white"
+                style={{ backgroundColor: SC_COLOR }}
+                aria-label="Specialized Clinics"
+              >
+                SC
+              </div>
+            </div>
+
+            <h1 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+              Specialized Clinics
+            </h1>
+            <p className="mt-5 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
+              Consultant-led outpatient care across Cairo Scan and TechnoScan Polyclinics — 62
+              specialties, 50+ physicians.
+            </p>
+
+            {/* Inline stats with · separators */}
+            <div className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-3">
+              {SC_HERO_STATS.map((s, i) => (
+                <React.Fragment key={s.label}>
+                  {i > 0 && (
+                    <span aria-hidden className="text-muted-foreground/40">
+                      ·
+                    </span>
+                  )}
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="text-3xl md:text-4xl font-bold tabular-nums"
+                      style={{ color: SC_COLOR }}
+                    >
+                      {s.value}
+                    </span>
+                    <span className="text-sm md:text-base text-muted-foreground">{s.label}</span>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          </Reveal>
+        </PageWrapper>
+      </section>
+
+      {/* ── TWO PLATFORM CARDS ────────────────────────── */}
+      <SectionShell bg="bg-background">
+        <Reveal>
+          <div className="mx-auto max-w-3xl text-center mb-10">
+            <div
+              className="text-xs font-semibold uppercase tracking-[0.18em] mb-3"
+              style={{ color: SC_COLOR }}
+            >
+              Our Polyclinic Brands
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Two Brands. One Standard.
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
+          {platformBrands.map((b, i) => (
+            <Reveal key={b.id} delay={i * 100}>
+              <Link
+                to="/platforms/$slug"
+                params={{ slug: b.slug }}
+                className="group flex h-full flex-col rounded-2xl border border-border/60 bg-card p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                style={{ borderTopColor: b.color, borderTopWidth: "3px" }}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl text-base font-bold text-white"
+                    style={{ backgroundColor: b.color }}
+                    aria-hidden
+                  >
+                    {b.name
+                      .split(" ")
+                      .map((w) => w[0])
+                      .filter(Boolean)
+                      .slice(0, 2)
+                      .join("")}
+                  </div>
+                  <div className="text-xl md:text-2xl font-bold tracking-tight">{b.name}</div>
+                </div>
+                <p className="mt-4 flex-1 text-sm text-muted-foreground leading-relaxed">
+                  {b.description}
+                </p>
+                <div className="mt-6 flex items-center justify-between gap-3 border-t border-border/60 pt-4">
+                  <div className="text-xs text-muted-foreground">
+                    {b.branches} branch{b.branches === 1 ? "" : "es"} · Est. {b.founded}
+                  </div>
+                  <span
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold transition-transform group-hover:translate-x-1"
+                    style={{ color: b.color }}
+                  >
+                    View Platform
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </SectionShell>
+
+      {/* ── SPECIALTIES (62 services across 6 categories) ── */}
+      <SectionShell bg="bg-[color:var(--rl-light-bg)]">
+        <Reveal>
+          <div className="max-w-3xl">
+            <div
+              className="text-xs font-semibold uppercase tracking-[0.18em]"
+              style={{ color: SC_COLOR }}
+            >
+              62 Specialties
+            </div>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight">
+              All Specialties at a Glance
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="mt-10 space-y-12">
+          {grouped.map(({ category, items }) => (
+            <div key={category.id}>
+              <Reveal>
+                <div className="flex items-center justify-between gap-4 border-b border-border/60 pb-3 mb-5">
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="h-2 w-2 rounded-full"
+                      style={{ backgroundColor: SC_COLOR }}
+                    />
+                    <h3 className="text-lg font-semibold text-foreground">{category.label}</h3>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    {items.length} specialt{items.length === 1 ? "y" : "ies"}
+                  </span>
+                </div>
+              </Reveal>
+
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((s, idx) => (
+                  <Reveal key={s.id} delay={Math.min(idx * 50, 300)}>
+                    <div
+                      className="group rounded-xl border border-border/60 bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md h-full"
+                      style={{ borderTopColor: SC_COLOR, borderTopWidth: "2px" }}
+                    >
+                      <div className="text-sm font-semibold text-foreground">{s.name}</div>
+                      <div
+                        className="mt-1 text-xs font-semibold"
+                        style={{ color: SC_COLOR }}
+                      >
+                        {s.highlight}
+                      </div>
+                      <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
+                        {s.description}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionShell>
+
+      {/* ── CTA ───────────────────────────────────────── */}
+      <SectionShell bg="bg-background" size="sm">
+        <Reveal>
+          <div
+            className="rounded-2xl border p-8 md:p-10 max-w-4xl mx-auto text-center"
+            style={{
+              borderColor: `${SC_COLOR}30`,
+              backgroundColor: `${SC_COLOR}08`,
+            }}
+          >
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+              Ready to Book a Consultation?
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground">
+              Reach out and our team will route your request to the right consultant.
+            </p>
+            <div className="mt-6">
+              <Button
+                asChild
+                size="lg"
+                className="group"
+                style={{ backgroundColor: SC_COLOR, color: "white" }}
+              >
+                <Link to="/contact">
+                  Book a Consultation
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </Reveal>
+      </SectionShell>
+    </main>
   );
 }

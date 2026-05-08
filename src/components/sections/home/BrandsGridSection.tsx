@@ -24,18 +24,16 @@ const COUNTRY_FLAG: Record<string, string> = {
 };
 
 export function BrandsGridSection() {
-  const featured = brands.find((b) => b.slug === "cairo-scan") ?? brands[0];
-  const others = brands.filter((b) => b.id !== featured.id);
-  const lastCard = others[others.length - 1];
-  const middleCards = others.slice(0, -1);
-
-  const allBrands = [featured, ...middleCards, lastCard];
   const [visibleCount, setVisibleCount] = React.useState(0);
 
   React.useEffect(() => {
-    const timers = allBrands.map((_, i) => setTimeout(() => setVisibleCount(i + 1), 200 + i * 180));
+    const timers = brands.map((_, i) => setTimeout(() => setVisibleCount(i + 1), 200 + i * 150));
     return () => timers.forEach(clearTimeout);
   }, []);
+
+  // ترتيب الـ brands: 0=Cairo Scan, 1=TechnoScan, 2=CRC, 3=MedRay,
+  // 4=Cairo Scan Polyclinics, 5=TechnoScan Polyclinics, 6=Specialized Clinics, 7=Ray Medical
+  const b = brands;
 
   return (
     <SectionShell bg="bg-[color:var(--rl-light-bg)]">
@@ -46,17 +44,30 @@ export function BrandsGridSection() {
       />
 
       <div className="mt-12 grid gap-5 lg:grid-cols-3">
+        {/* Row 1 — Cairo Scan (featured 2cols) + TechnoScan (1col) */}
         <div className="lg:col-span-2">
-          <BrandCard brand={featured} featured index={0} visibleCount={visibleCount} />
+          <BrandCard brand={b[0]} featured index={0} visibleCount={visibleCount} />
         </div>
         <div>
-          <BrandCard brand={middleCards[0]} index={1} visibleCount={visibleCount} />
+          <BrandCard brand={b[1]} index={1} visibleCount={visibleCount} />
         </div>
-        {middleCards.slice(1).map((b, i) => (
-          <BrandCard key={b.id} brand={b} index={i + 2} visibleCount={visibleCount} />
-        ))}
+
+        {/* Row 2 — CRC, MedRay, Cairo Scan Polyclinics (3 equal) */}
+        <BrandCard brand={b[2]} index={2} visibleCount={visibleCount} />
+        <BrandCard brand={b[3]} index={3} visibleCount={visibleCount} />
+        <BrandCard brand={b[4]} index={4} visibleCount={visibleCount} />
+
+        {/* Row 3 — TechnoScan Poly (2cols) + Specialized Clinics (1col) */}
+        <div className="lg:col-span-2">
+          <BrandCard brand={b[5]} featured index={5} visibleCount={visibleCount} />
+        </div>
+        <div>
+          <BrandCard brand={b[6]} index={6} visibleCount={visibleCount} />
+        </div>
+
+        {/* Row 4 — Ray Medical (full width) */}
         <div className="lg:col-span-3">
-          <BrandCard brand={lastCard} wide index={5} visibleCount={visibleCount} />
+          <BrandCard brand={b[7]} wide index={7} visibleCount={visibleCount} />
         </div>
       </div>
 
@@ -94,14 +105,19 @@ function BrandCard({
   const [hovered, setHovered] = React.useState(false);
   const isRayMedical = brand.slug === "ray-medical";
   const isSpecializedClinics = brand.slug === "specialized-clinics";
+  const isCairoScanPoly = brand.slug === "cairo-scan-polyclinics";
+  const isTechnoScanPoly = brand.slug === "technoscan-polyclinics";
+
+  const showInitials = !hasLogo && (isSpecializedClinics || isCairoScanPoly || isTechnoScanPoly);
+  const initials = isSpecializedClinics ? "SC" : isCairoScanPoly ? "CS" : "TS";
 
   return (
     <Link
       to="/platforms/$slug"
       params={{ slug: brand.slug }}
       className={cn(
-        "group relative flex overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full",
-        wide ? "flex-col p-6 sm:flex-row sm:items-center sm:gap-8 sm:p-7" : "flex-col p-6",
+        "group relative flex flex-col overflow-hidden rounded-2xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full",
+        wide && "sm:flex-row sm:items-center sm:gap-8 sm:p-7",
       )}
       style={{
         opacity: visibleCount > index ? 1 : 0,
@@ -114,44 +130,28 @@ function BrandCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Color accent */}
-      {wide ? (
-        <span
-          className="absolute inset-y-0 left-0 w-1 rounded-l-2xl transition-all duration-300 hidden sm:block"
-          style={{ backgroundColor: brand.color }}
-          aria-hidden
-        />
-      ) : (
-        <span
-          className="absolute inset-x-0 top-0 h-1 transition-all duration-300"
-          style={{ backgroundColor: brand.color }}
-          aria-hidden
-        />
-      )}
-
-      {/* Wide — top accent on mobile */}
-      {wide && (
-        <span
-          className="absolute inset-x-0 top-0 h-1 block sm:hidden"
-          style={{ backgroundColor: brand.color }}
-          aria-hidden
-        />
-      )}
+      {/* Color accent top */}
+      <span
+        className="absolute inset-x-0 top-0 h-1 transition-all duration-300"
+        style={{ backgroundColor: brand.color }}
+        aria-hidden
+      />
 
       {/* Logo / Badge */}
-      <div
-        className={cn("flex items-center", wide ? "shrink-0 sm:pl-4 sm:w-48" : "justify-between")}
-      >
+      <div className="flex items-center justify-between">
         <div className="flex h-12 items-center">
           {hasLogo ? (
-            <BrandLogo brand={brand} variant="dark" className="h-10 w-auto max-w-[160px]" />
-          ) : isSpecializedClinics ? (
-            /* Specialized Clinics — initials placeholder */
+            <BrandLogo
+              brand={brand}
+              variant="dark"
+              className={cn("w-auto", featured ? "h-12 max-w-[200px]" : "h-10 max-w-[160px]")}
+            />
+          ) : showInitials ? (
             <div
               className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black text-white"
               style={{ backgroundColor: brand.color }}
             >
-              SC
+              {initials}
             </div>
           ) : (
             <span
@@ -162,32 +162,23 @@ function BrandCard({
             </span>
           )}
         </div>
-        {!wide && (
-          <ArrowUpRight
-            className="h-4 w-4 shrink-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            style={{ color: hovered ? brand.color : undefined }}
-          />
-        )}
+        <ArrowUpRight
+          className="h-4 w-4 shrink-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          style={{ color: hovered ? brand.color : undefined }}
+        />
       </div>
 
       {/* Content */}
-      <div className={cn("flex flex-col flex-1", !wide && "mt-5", wide && "mt-4 sm:mt-0")}>
-        {wide && (
-          <div className="flex items-center gap-2 mb-2">
-            <h3 className="text-lg font-semibold" style={{ color: brand.color }}>
-              {brand.name}
-            </h3>
-            {/* Now Live badge */}
-            {isRayMedical && (
-              <span
-                className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
-                style={{ backgroundColor: brand.color }}
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-                Now Live
-              </span>
-            )}
-          </div>
+      <div className={cn("flex flex-col flex-1 mt-5", wide && "sm:mt-0")}>
+        {/* Ray Medical — Now Live badge */}
+        {isRayMedical && (
+          <span
+            className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white mb-2 w-fit"
+            style={{ backgroundColor: brand.color }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+            Now Live
+          </span>
         )}
 
         <p
@@ -199,13 +190,8 @@ function BrandCard({
           {brand.description}
         </p>
 
-        {/* Footer — country flag + est + branches */}
-        <div
-          className={cn(
-            "flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground",
-            wide ? "mt-4" : "mt-auto pt-6",
-          )}
-        >
+        {/* Footer */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground mt-auto pt-6">
           <span className="inline-flex items-center gap-1.5">
             <span className="text-sm">{COUNTRY_FLAG[brand.country] ?? "🌍"}</span>
             {COUNTRY_LABEL[brand.country] ?? brand.country}
@@ -214,13 +200,6 @@ function BrandCard({
           {brand.branches > 0 && <span>· {brand.branches} branches</span>}
         </div>
       </div>
-
-      {wide && (
-        <ArrowUpRight
-          className="h-5 w-5 shrink-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ml-auto hidden sm:block"
-          style={{ color: hovered ? brand.color : undefined }}
-        />
-      )}
     </Link>
   );
 }

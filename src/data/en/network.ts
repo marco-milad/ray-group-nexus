@@ -2,7 +2,7 @@ export const networkCopy = {
   seo: {
     title: "Network — Ray Lab Group",
     description:
-      "Ray Lab Group operates 74+ branches across Egypt, Saudi Arabia, and Jordan — the most geographically diverse private diagnostic network in MENA.",
+      "Ray Lab Group operates 71+ branches across Egypt, Saudi Arabia, and Jordan — the most geographically diverse private diagnostic network in MENA.",
   },
 
   hero: {
@@ -10,7 +10,7 @@ export const networkCopy = {
     headline: "Diagnostic Coverage",
     headlineAccent: "Across MENA.",
     subheadline:
-      "74+ branches across 3 operating markets, under 6 brands — unified by group governance and Ray Medical teleradiology infrastructure.",
+      "71+ branches across 3 operating markets, under 6 brands — unified by group governance and Ray Medical teleradiology infrastructure.",
   },
 
   countries: {
@@ -22,8 +22,8 @@ export const networkCopy = {
       {
         country: "Egypt",
         flag: "🇪🇬",
-        branches: 64,
-        brands: ["Cairo Scan", "TechnoScan", "Specialized Clinics"],
+        branches: 61,
+        brands: ["Cairo Scan", "TechnoScan", "Cairo Scan Polyclinics", "TechnoScan Polyclinics"],
         cities: ["Cairo", "Alexandria", "Mansoura", "Tanta", "Ismailia", "Suez", "Assiut", "Sohag"],
         soWhat:
           "Largest national footprint — Upper Egypt presence is unmatched by any private competitor.",
@@ -57,7 +57,18 @@ export const networkCopy = {
     items: [
       { brand: "Cairo Scan", country: "Egypt", branches: 20, color: "var(--cairo-scan)" },
       { brand: "TechnoScan", country: "Egypt", branches: 35, color: "var(--technoscan)" },
-      { brand: "Specialized Clinics", country: "Egypt", branches: 9, color: "var(--clinics)" },
+      {
+        brand: "Cairo Scan Polyclinics",
+        country: "Egypt",
+        branches: 5,
+        color: "var(--cairo-scan)",
+      },
+      {
+        brand: "TechnoScan Polyclinics",
+        country: "Egypt",
+        branches: 1,
+        color: "var(--technoscan)",
+      },
       { brand: "CRC", country: "Saudi Arabia", branches: 3, color: "var(--crc)" },
       { brand: "MedRay", country: "Jordan", branches: 7, color: "var(--medray)" },
       {

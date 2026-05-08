@@ -1,5 +1,16 @@
 import * as React from "react";
-import { Scan, Activity, Heart, HeartPulse, Zap, FlaskConical, Monitor } from "lucide-react";
+import {
+  Scan,
+  Activity,
+  Heart,
+  HeartPulse,
+  Zap,
+  FlaskConical,
+  Monitor,
+  Stethoscope,
+  Baby,
+  Scissors,
+} from "lucide-react";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,15 +26,19 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   "activity":      Activity,
   "heart":         Heart,
   "heartpulse":    HeartPulse,
+  "heart-pulse":   HeartPulse,
   "zap":           Zap,
   "flask-conical": FlaskConical,
   "monitor":       Monitor,
+  "stethoscope":   Stethoscope,
+  "baby":          Baby,
+  "scissors":      Scissors,
 };
 
 export function CategoryTabsSection() {
-  const sorted = [...categories].sort((a, b) => a.order - b.order);
+  const sorted = [...categories].filter((c) => c.order <= 8).sort((a, b) => a.order - b.order);
   const first  = sorted[0]?.id ?? "imaging";
-  const [active, setActive] = React.useState(first);
+  const [active, setActive] = React.useState<string>(first);
 
   return (
 <SectionShell bg="bg-[color:var(--rl-light-bg)]">      <Reveal>

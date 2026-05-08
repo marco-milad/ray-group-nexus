@@ -55,6 +55,48 @@ export const categories: ServiceCategory[] = [
     icon: "monitor",
     order: 7,
   },
+  {
+    id: "clinics-adult",
+    label: "Adult Medicine",
+    description: "Consultant-led adult medicine specialties.",
+    icon: "stethoscope",
+    order: 10,
+  },
+  {
+    id: "clinics-general",
+    label: "General Medicine",
+    description: "General and internal medicine specialties.",
+    icon: "heart-pulse",
+    order: 11,
+  },
+  {
+    id: "clinics-pediatrics",
+    label: "Pediatrics",
+    description: "Specialist pediatric care across all disciplines.",
+    icon: "baby",
+    order: 12,
+  },
+  {
+    id: "clinics-surgery",
+    label: "Surgery",
+    description: "Surgical specialties across all disciplines.",
+    icon: "scissors",
+    order: 13,
+  },
+  {
+    id: "clinics-womens",
+    label: "Women's Health",
+    description: "Obstetrics, gynecology and women's health.",
+    icon: "heart",
+    order: 14,
+  },
+  {
+    id: "clinics-allied",
+    label: "Allied Health",
+    description: "Physiotherapy, nutrition, dermatology and more.",
+    icon: "activity",
+    order: 15,
+  },
 ];
 
 export function getCategoryById(id: string): ServiceCategory | undefined {

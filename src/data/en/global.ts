@@ -14,6 +14,7 @@ export const globalCopy = {
       about: "About",
       platforms: "Platforms",
       services: "Services",
+      gallery: "Gallery",
       network: "Network",
       investors: "Investors",
       contact: "Contact",

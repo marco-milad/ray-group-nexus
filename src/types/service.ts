@@ -9,7 +9,13 @@ export type ServiceCategoryId =
   | "cardiology"
   | "advanced"
   | "lab"
-  | "teleradiology";
+  | "teleradiology"
+  | "clinics-adult"
+  | "clinics-general"
+  | "clinics-pediatrics"
+  | "clinics-surgery"
+  | "clinics-womens"
+  | "clinics-allied";
 
 export type ServicePriority = "high" | "medium" | "low";
 

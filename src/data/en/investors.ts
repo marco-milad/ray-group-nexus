@@ -434,10 +434,9 @@ The new branches are designed to support faster access to core diagnostic imagin
       },
       {
         category: "Technology",
-        headline: "LUMINA 3T MRI Now Available at 8 Cairo Scan Locations",
+        headline: "LUMINA 3T MRI Now Available at Cairo Scan Soliman Abaza Branch",
         date: "February 2025",
-        content: `Cairo Scan has expanded access to LUMINA 3T MRI technology across 8 of its branches, bringing next-generation imaging capabilities to more patients and referring physicians across Cairo and Giza.
-
+        content: `Cairo Scan has introduced the LUMINA 3T MRI system at its Soliman Abaza branch, bringing next-generation imaging capabilities to patients and referring physicians in the area.
 The LUMINA 3T MRI system offers high-resolution soft tissue imaging with improved patient comfort, including enhanced bore design and reduced scan times. The technology is particularly valuable for complex neurological, musculoskeletal and oncological imaging pathways.
 
 Cairo Scan's investment in advanced MRI infrastructure reflects its ongoing commitment to diagnostic excellence and its role as Egypt's leading private provider of radiological and clinical laboratory services.`,
