@@ -126,23 +126,33 @@ export function HeroSection() {
     >
       <style>{`
         @keyframes hero-pulseRing {
-          0%   { transform: scale(0.4); opacity: 0; }
-          15%  { opacity: 0.32; }
-          100% { transform: scale(2.4); opacity: 0; }
-        }
-        @keyframes hero-scanSweep {
-          0%   { transform: translateY(-20%); opacity: 0; }
-          8%   { opacity: 0.55; }
-          92%  { opacity: 0.55; }
-          100% { transform: translateY(120%); opacity: 0; }
+          0%   { transform: scale(0.3); opacity: 0; }
+          20%  { opacity: 0.08; }
+          100% { transform: scale(2.6); opacity: 0; }
         }
         @keyframes hero-nodePulse {
-          0%, 100% { opacity: 0.25; }
-          50%      { opacity: 0.85; }
+          0%, 100% { opacity: 0.04; }
+          50%      { opacity: 0.10; }
         }
-        @keyframes hero-linkPulse {
-          0%, 100% { opacity: 0.06; }
-          50%      { opacity: 0.22; }
+        @keyframes hero-float {
+          0%, 100% { transform: translateY(0); }
+          50%      { transform: translateY(-14px); }
+        }
+        @keyframes hero-floatAlt {
+          0%, 100% { transform: translateY(0); }
+          50%      { transform: translateY(10px); }
+        }
+        @keyframes hero-rotateSlow {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes hero-helixDrift {
+          0%, 100% { transform: translateY(0); }
+          50%      { transform: translateY(-8px); }
+        }
+        .hero-svg-pivot {
+          transform-box: fill-box;
+          transform-origin: center;
         }
         @media (prefers-reduced-motion: reduce) {
           .hero-anim-layer,
@@ -152,84 +162,125 @@ export function HeroSection() {
         }
       `}</style>
 
-      {/* Grid overlay — base texture */}
+      {/* Grid overlay — base texture (kept) */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "linear-gradient(var(--rl-eerie) 1px, transparent 1px), linear-gradient(90deg, var(--rl-eerie) 1px, transparent 1px)",
+            "linear-gradient(#1E1E1E 1px, transparent 1px), linear-gradient(90deg, #1E1E1E 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
 
-      {/* Radiating pulse rings — center-right (ultrasound waves) */}
-      <div
-        aria-hidden
-        className="hero-anim-layer pointer-events-none absolute inset-0"
-      >
-        <div
-          className="absolute"
-          style={{ top: "50%", left: "78%", transform: "translate(-50%, -50%)" }}
-        >
-          {[0, 1.4, 2.8].map((delay, i) => (
-            <span
-              key={i}
-              className="absolute block rounded-full border-2"
-              style={{
-                top: "-180px",
-                left: "-180px",
-                width: "360px",
-                height: "360px",
-                borderColor: "var(--rl-green)",
-                opacity: 0,
-                animation: `hero-pulseRing 4.2s ease-out ${delay}s infinite`,
-                willChange: "transform, opacity",
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Diagnostic network — nodes + connecting lines (opacity-only animation) */}
+      {/* Decorative SVG illustration — DNA helix, network, pulse rings, floating hexagons */}
       <svg
         aria-hidden
         viewBox="0 0 1440 800"
         preserveAspectRatio="xMidYMid slice"
         className="hero-anim-layer pointer-events-none absolute inset-0 h-full w-full"
       >
-        <g stroke="var(--rl-green)" strokeWidth="1" fill="none">
-          <line x1="180" y1="160" x2="420" y2="240" style={{ animation: "hero-linkPulse 5s ease-in-out 0.2s infinite" }} />
-          <line x1="420" y1="240" x2="320" y2="500" style={{ animation: "hero-linkPulse 5.4s ease-in-out 0.6s infinite" }} />
-          <line x1="420" y1="240" x2="780" y2="120" style={{ animation: "hero-linkPulse 5.8s ease-in-out 1.0s infinite" }} />
-          <line x1="780" y1="120" x2="1180" y2="320" style={{ animation: "hero-linkPulse 5.2s ease-in-out 1.4s infinite" }} />
-          <line x1="1180" y1="320" x2="1280" y2="540" style={{ animation: "hero-linkPulse 5.6s ease-in-out 1.8s infinite" }} />
-          <line x1="900" y1="640" x2="1280" y2="540" style={{ animation: "hero-linkPulse 6s ease-in-out 2.2s infinite" }} />
-          <line x1="320" y1="500" x2="900" y2="640" style={{ animation: "hero-linkPulse 5.4s ease-in-out 2.6s infinite" }} />
+        {/* DNA helix — right side (subtle, with slow drift) */}
+        <g
+          className="hero-svg-pivot"
+          stroke="#4F9907"
+          strokeWidth="1.5"
+          strokeOpacity="0.08"
+          fill="none"
+          style={{ animation: "hero-helixDrift 12s ease-in-out infinite" }}
+        >
+          {/* Strand A — sinusoidal */}
+          <path d="M 1200 60 C 1140 135 1140 185 1200 260 C 1260 335 1260 385 1200 460 C 1140 535 1140 585 1200 660 C 1260 735 1260 760 1200 760" />
+          {/* Strand B — opposite phase */}
+          <path d="M 1200 60 C 1260 135 1260 185 1200 260 C 1140 335 1140 385 1200 460 C 1260 535 1260 585 1200 660 C 1140 735 1140 760 1200 760" />
+          {/* Rungs at maximum strand separation */}
+          <line x1="1140" y1="160" x2="1260" y2="160" />
+          <line x1="1260" y1="360" x2="1140" y2="360" />
+          <line x1="1140" y1="560" x2="1260" y2="560" />
+          <line x1="1260" y1="710" x2="1140" y2="710" />
         </g>
-        <g fill="var(--rl-green)">
-          <circle cx="180" cy="160" r="3.5" style={{ animation: "hero-nodePulse 3s ease-in-out 0s infinite" }} />
-          <circle cx="420" cy="240" r="3.5" style={{ animation: "hero-nodePulse 3.2s ease-in-out 0.4s infinite" }} />
-          <circle cx="320" cy="500" r="3.5" style={{ animation: "hero-nodePulse 3.4s ease-in-out 0.8s infinite" }} />
-          <circle cx="780" cy="120" r="3.5" style={{ animation: "hero-nodePulse 3s ease-in-out 1.2s infinite" }} />
-          <circle cx="1180" cy="320" r="3.5" style={{ animation: "hero-nodePulse 3.2s ease-in-out 1.6s infinite" }} />
-          <circle cx="900" cy="640" r="3.5" style={{ animation: "hero-nodePulse 3.4s ease-in-out 2.0s infinite" }} />
-          <circle cx="1280" cy="540" r="3.5" style={{ animation: "hero-nodePulse 3.2s ease-in-out 2.4s infinite" }} />
+
+        {/* Pulse rings — center-right (ultrasound emanation) */}
+        <g fill="none" stroke="#4F9907" strokeWidth="1.5">
+          <circle
+            cx="1100"
+            cy="400"
+            r="60"
+            className="hero-svg-pivot"
+            style={{ animation: "hero-pulseRing 5.2s ease-out 0s infinite" }}
+          />
+          <circle
+            cx="1100"
+            cy="400"
+            r="60"
+            className="hero-svg-pivot"
+            style={{ animation: "hero-pulseRing 5.2s ease-out 1.7s infinite" }}
+          />
+          <circle
+            cx="1100"
+            cy="400"
+            r="60"
+            className="hero-svg-pivot"
+            style={{ animation: "hero-pulseRing 5.2s ease-out 3.4s infinite" }}
+          />
+        </g>
+
+        {/* Connecting node network — across the plane */}
+        <g stroke="#1E1E1E" strokeWidth="1" strokeOpacity="0.05" fill="none">
+          <line x1="180" y1="160" x2="420" y2="240" />
+          <line x1="420" y1="240" x2="320" y2="500" />
+          <line x1="420" y1="240" x2="780" y2="120" />
+          <line x1="780" y1="120" x2="1180" y2="320" />
+          <line x1="900" y1="640" x2="1280" y2="540" />
+          <line x1="320" y1="500" x2="900" y2="640" />
+          <line x1="180" y1="160" x2="320" y2="500" />
+        </g>
+        <g fill="#4F9907">
+          <circle cx="180" cy="160" r="3.5" style={{ animation: "hero-nodePulse 4s ease-in-out 0s infinite" }} />
+          <circle cx="420" cy="240" r="3.5" style={{ animation: "hero-nodePulse 4.2s ease-in-out 0.4s infinite" }} />
+          <circle cx="320" cy="500" r="3.5" style={{ animation: "hero-nodePulse 4.4s ease-in-out 0.8s infinite" }} />
+          <circle cx="780" cy="120" r="3.5" style={{ animation: "hero-nodePulse 4s ease-in-out 1.2s infinite" }} />
+          <circle cx="1180" cy="320" r="3.5" style={{ animation: "hero-nodePulse 4.2s ease-in-out 1.6s infinite" }} />
+          <circle cx="900" cy="640" r="3.5" style={{ animation: "hero-nodePulse 4.4s ease-in-out 2.0s infinite" }} />
+          <circle cx="1280" cy="540" r="3.5" style={{ animation: "hero-nodePulse 4s ease-in-out 2.4s infinite" }} />
+        </g>
+
+        {/* Floating geometric shapes — hexagons (low-opacity outlines) */}
+        <g fill="none" strokeWidth="1.5">
+          {/* Hexagon 1 — bottom-left, slow float up */}
+          <polygon
+            points="180,560 214.64,580 214.64,620 180,640 145.36,620 145.36,580"
+            stroke="#71C247"
+            strokeOpacity="0.08"
+            className="hero-svg-pivot"
+            style={{ animation: "hero-float 9s ease-in-out 0s infinite" }}
+          />
+          {/* Hexagon 2 — top-center, slow rotation */}
+          <polygon
+            points="700,150 743.30,175 743.30,225 700,250 656.70,225 656.70,175"
+            stroke="#4F9907"
+            strokeOpacity="0.07"
+            className="hero-svg-pivot"
+            style={{ animation: "hero-rotateSlow 48s linear 0s infinite" }}
+          />
+          {/* Hexagon 3 — mid-right, gentle counter-float */}
+          <polygon
+            points="1000,465 1030.31,482.5 1030.31,517.5 1000,535 969.69,517.5 969.69,482.5"
+            stroke="#1E1E1E"
+            strokeOpacity="0.06"
+            className="hero-svg-pivot"
+            style={{ animation: "hero-floatAlt 11s ease-in-out 1s infinite" }}
+          />
+          {/* Hexagon 4 — far-left, slow rotation reverse */}
+          <polygon
+            points="80,360 101.65,372.5 101.65,397.5 80,410 58.35,397.5 58.35,372.5"
+            stroke="#71C247"
+            strokeOpacity="0.07"
+            className="hero-svg-pivot"
+            style={{ animation: "hero-rotateSlow 60s linear reverse 0s infinite" }}
+          />
         </g>
       </svg>
-
-      {/* Scan line sweep — top to bottom */}
-      <div
-        aria-hidden
-        className="hero-anim-layer pointer-events-none absolute inset-x-0 top-0"
-        style={{
-          height: "140px",
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(79,153,7,0.08) 35%, rgba(79,153,7,0.55) 50%, rgba(79,153,7,0.08) 65%, transparent 100%)",
-          animation: "hero-scanSweep 9s linear infinite",
-          willChange: "transform",
-        }}
-      />
 
       <PageWrapper className="relative py-24 md:py-32 lg:py-40">
         <Reveal>
