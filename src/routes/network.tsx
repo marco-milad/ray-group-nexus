@@ -7,7 +7,7 @@ import { NetworkHeroSection } from "@/components/sections/network/NetworkHeroSec
 import { CountriesGridSection } from "@/components/sections/network/CountriesGridSection";
 import { BrandDistributionSection } from "@/components/sections/network/BrandDistributionSection";
 import { GrowthInsightSection } from "@/components/sections/network/GrowthInsightSection";
-import { MapComingSoonSection } from "@/components/sections/network/MapComingSoonSection";
+import { InteractiveMapSection } from "@/components/sections/network/InteractiveMapSection";
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/network")({
@@ -28,7 +28,7 @@ function NetworkPage() {
     countries: { id: "countries", data: {}, state: "success", required: false },
     distribution: { id: "distribution", data: {}, state: "success", required: false },
     growth: { id: "growth", data: {}, state: "success", required: false },
-    mapSoon: { id: "mapSoon", data: {}, state: "success", required: false },
+    map: { id: "map", data: {}, state: "success", required: false },
     contactCta: { id: "contactCta", data: {}, state: "success", required: false },
   };
 
@@ -42,7 +42,7 @@ function NetworkPage() {
       </Section>
       <Section id="distribution">{() => <BrandDistributionSection />}</Section>
       <Section id="growth">{() => <GrowthInsightSection />}</Section>
-      <Section id="mapSoon">{() => <MapComingSoonSection />}</Section>
+      <Section id="map">{() => <InteractiveMapSection />}</Section>
       <Section id="contactCta">{() => <ContactCtaSection />}</Section>
     </Page>
   );
