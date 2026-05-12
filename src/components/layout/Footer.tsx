@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Twitter, Facebook, Youtube, Mail } from "lucide-react";
+import { Linkedin, Twitter, Facebook, Instagram, Mail } from "lucide-react";
 import { globalCopy } from "@/data/en/global";
 import { brands } from "@/data/en/brands";
 import { BrandChip } from "@/components/ui/brand-chip";
@@ -16,10 +16,10 @@ const footerStats = [
 ];
 
 const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/ray-lab-group" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/ray-lab" },
   { icon: Twitter, label: "X", href: "https://x.com/raylabgroup" },
   { icon: Facebook, label: "Facebook", href: "https://facebook.com/raylabgroup" },
-  { icon: Youtube, label: "YouTube", href: "https://youtube.com/@raylabgroup" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/raylabgroup" },
 ];
 
 export function Footer() {
@@ -179,7 +179,14 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/40">{globalCopy.footer.copyright}</p>
-          <div className="flex items-center gap-4 text-xs text-white/40">
+          <div className="flex items-center gap-4 text-xs">
+            <Link to="/privacy" className="text-white/50 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="h-3 w-px bg-white/20" />
+            <Link to="/terms" className="text-white/50 hover:text-white transition-colors">
+              Terms &amp; Conditions
+            </Link>
             <span className="h-3 w-px bg-white/20" />
             <span className="font-semibold" style={{ color: "var(--rl-green)" }}>
               Ray Lab Group

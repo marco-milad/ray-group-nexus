@@ -3,7 +3,7 @@ import { useSearch } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, Send, Clock } from "lucide-react";
+import { AlertCircle, CheckCircle2, Send, Clock } from "lucide-react";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { contactCopy } from "@/data/en/contact";
+import { sendContactEmail } from "@/server/contact";
 
 const fields = contactCopy.form.fields;
 
@@ -36,6 +37,7 @@ export function ContactFormSection() {
   const [submitted, setSubmitted] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
   const [submittedName, setSubmittedName] = React.useState("");
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
 
   // Read query params
   const search = useSearch({ strict: false }) as Record<string, string>;
@@ -80,10 +82,17 @@ export function ContactFormSection() {
   }, [prefillMessage, setValue]);
 
   const onSubmit = async (values: FormValues) => {
-    await new Promise((r) => setTimeout(r, 700));
-    setSubmittedName(values.firstName);
-    setSubmitted(true);
-    reset();
+    setSubmitError(null);
+    try {
+      await sendContactEmail({ data: values });
+      setSubmittedName(values.firstName);
+      setSubmitted(true);
+      reset();
+    } catch (err) {
+      const message =
+        err instanceof Error && err.message ? err.message : contactCopy.form.errorMessage;
+      setSubmitError(message);
+    }
   };
 
   const inquiryValue = watch("inquiryType");
@@ -167,6 +176,21 @@ export function ContactFormSection() {
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+              {submitError && (
+                <div
+                  className="rounded-xl border px-4 py-3 text-sm flex items-start gap-2.5"
+                  style={{
+                    backgroundColor: "rgba(220,38,38,0.06)",
+                    borderColor: "rgba(220,38,38,0.25)",
+                    color: "rgb(153,27,27)",
+                  }}
+                  role="alert"
+                >
+                  <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span className="leading-relaxed">{submitError}</span>
+                </div>
+              )}
+
               {/* First + Last name */}
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>

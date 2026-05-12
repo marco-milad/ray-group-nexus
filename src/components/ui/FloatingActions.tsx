@@ -1,75 +1,32 @@
 import * as React from "react";
+import { Linkedin, Twitter, Facebook, Instagram, ChevronUp, type LucideIcon } from "lucide-react";
 
-const socials = [
+type Social = {
+  label: string;
+  href: string;
+  Icon: LucideIcon;
+};
+
+const socials: ReadonlyArray<Social> = [
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/company/ray-lab-groupgi",
-    icon: (
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
+    href: "https://www.linkedin.com/company/ray-lab",
+    Icon: Linkedin,
   },
   {
     label: "X",
     href: "https://x.com/raylabgroup",
-    icon: (
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
+    Icon: Twitter,
   },
   {
     label: "Facebook",
     href: "https://facebook.com/raylabgroup",
-    icon: (
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-      </svg>
-    ),
+    Icon: Facebook,
   },
   {
-    label: "YouTube",
-    href: "https://youtube.com/@raylabgroup",
-    icon: (
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-        <polygon
-          points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"
-          fill="currentColor"
-          stroke="none"
-        />
-      </svg>
-    ),
+    label: "Instagram",
+    href: "https://www.instagram.com/raylabgroup",
+    Icon: Instagram,
   },
 ];
 
@@ -134,7 +91,7 @@ export function FloatingActions() {
           width: "40px",
         }}
       >
-        {socials.map(({ label, href, icon }) => (
+        {socials.map(({ label, href, Icon }) => (
           <a
             key={label}
             href={href}
@@ -151,7 +108,7 @@ export function FloatingActions() {
               e.currentTarget.style.backgroundColor = "transparent";
             }}
           >
-            {icon}
+            <Icon size={14} strokeWidth={2} />
           </a>
         ))}
 
@@ -167,6 +124,7 @@ export function FloatingActions() {
 
         {/* Scroll to top */}
         <button
+          type="button"
           onClick={scrollToTop}
           aria-label="Scroll to top"
           style={{
@@ -179,18 +137,7 @@ export function FloatingActions() {
             cursor: showScrollUp ? "pointer" : "default",
           }}
         >
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M18 15l-6-6-6 6" />
-          </svg>
+          <ChevronUp size={13} strokeWidth={2.5} />
         </button>
       </div>
 

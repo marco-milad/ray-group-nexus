@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 // BRANCHES DATA — src/data/en/branches.ts
-// Auto-generated from RayLab_Branches_Master.xlsx
+// Updated: KSA + Jordan data corrected, franchise brands fixed
 // ═══════════════════════════════════════════════════════════
 
 export interface Branch {
@@ -15,6 +15,7 @@ export interface Branch {
 }
 
 export const branches: Branch[] = [
+  // ─── Cairo Scan — Cairo & Giza ───────────────────────────
   {
     id: "branch-1",
     brand: "cairo-scan",
@@ -42,7 +43,7 @@ export const branches: Branch[] = [
     city: "الجيزة",
     address: "55 شارع عبد المنعم رياض - برج الأطباء - الدور الرابع عشر",
     lat: 30.0614,
-    lng: 31.201,
+    lng: 31.2018, // offset: same building, different floor
     mapsUrl: "https://bit.ly/3qRiPMo",
   },
   {
@@ -165,6 +166,8 @@ export const branches: Branch[] = [
     lng: 31.244,
     mapsUrl: "https://bit.ly/44v3LBQ",
   },
+
+  // ─── TechnoScan ──────────────────────────────────────────
   {
     id: "branch-16",
     brand: "technoscan",
@@ -222,7 +225,7 @@ export const branches: Branch[] = [
     city: "القاهرة",
     address: "ميديكال بارك 2 - داخل عيادات النسائم",
     lat: 30.0196,
-    lng: 31.4684,
+    lng: 31.4692, // offset: same building, different unit
     mapsUrl: "https://goo.gl/maps/7qStza2DQy9HZpCs8",
   },
   {
@@ -355,9 +358,11 @@ export const branches: Branch[] = [
     lng: 30.9764,
     mapsUrl: "https://goo.gl/maps/NjfHBk9BUeKRTayU6",
   },
+
+  // ─── TechnoScan Franchise ─────────────────────────────────
   {
     id: "branch-35",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "أسيوط",
     city: "أسيوط",
     address: "شارع سيتي الأول - بجوار الجمعية الشرعية",
@@ -367,7 +372,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-36",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "السويس",
     city: "السويس",
     address: "322 شارع الجيش",
@@ -377,7 +382,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-37",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "أبو كبير",
     city: "الشرقية",
     address: "أمام المستشفى العام - أبو كبير",
@@ -387,7 +392,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-38",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "أولاد صقر",
     city: "الشرقية",
     address: "أسفل بنك مصر - أولاد صقر",
@@ -397,7 +402,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-39",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "العبور - دار الكيان",
     city: "القليوبية",
     address: "مدينة العبور - الحي الأول - أمام سنتر العبور - أعلى الفرجاني ماركت",
@@ -407,7 +412,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-40",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "كفر الشيخ",
     city: "كفر الشيخ",
     address: "أمام مستشفى كفر الشيخ العام - خلف معرض سيارات أباظة",
@@ -417,7 +422,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-41",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "بلبيس",
     city: "الشرقية",
     address: "1 و2 شارع بورسعيد أمام قسم شرطة بلبيس",
@@ -427,7 +432,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-42",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "مشتول السوق",
     city: "الشرقية",
     address: "شارع عمر بن الخطاب - ميدان علي كامل",
@@ -437,7 +442,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-43",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "دمياط",
     city: "دمياط",
     address: "دمياط الجديدة - المنطقة المركزية ب - شارع الاستاد - بجوار بنزينة إيني",
@@ -447,7 +452,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-44",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "أشمون",
     city: "المنوفية",
     address: "شارع أسماء بنت أبي بكر أمام البنزينة الجديدة بجوار مركز الشرطة القديم",
@@ -457,7 +462,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-45",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "المحلة الكبرى",
     city: "الغربية",
     address: "12 شارع قناة السويس متفرع من شارع محب - دوران نادي البلدية",
@@ -467,7 +472,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-46",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "طنطا - نيوسكان",
     city: "الغربية",
     address: "سبرباي - أمام مستشفى طنطا العام - بجوار صيدلية مكة",
@@ -477,7 +482,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-47",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "الوسيم - جراحات اليوم الواحد",
     city: "القاهرة",
     address: "المرج - شارع مؤسسة الزكاة - أمام مستشفى اليوم الواحد",
@@ -487,7 +492,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-48",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "الوسيم - الشرفاء",
     city: "القاهرة",
     address: "المرج - شارع مؤسسة الزكاة الشرفا - برج الفاروق",
@@ -497,7 +502,7 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-49",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "الوسيم - النزهة 2",
     city: "القاهرة",
     address: "حي السلام - شارع الخمسين - بجوار مستشفى أمان",
@@ -507,17 +512,17 @@ export const branches: Branch[] = [
   },
   {
     id: "branch-50",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "الحوامدية - بالم هيلث",
     city: "الجيزة",
     address: "11 شارع فتحي عفيفي - طريق أسوان الزراعي - الحوامدية",
     lat: 29.8603,
     lng: 31.2428,
-    mapsUrl: "https://",
+    mapsUrl: "", // link pending — "Open in Maps" hidden until provided
   },
   {
     id: "branch-51",
-    brand: "cairo-scan",
+    brand: "technoscan",
     name: "أبو حماد - الحكمة سكان",
     city: "الشرقية",
     address: "62 شارع بورسعيد - أمام صيدلية عاطف",
@@ -525,6 +530,8 @@ export const branches: Branch[] = [
     lng: 31.6762,
     mapsUrl: "https://maps.app.goo.gl/BbfjKXMN9GG2fS6W8",
   },
+
+  // ─── Cairo Scan Polyclinics ───────────────────────────────
   {
     id: "branch-52",
     brand: "cairo-scan-polyclinics",
@@ -532,7 +539,7 @@ export const branches: Branch[] = [
     city: "القاهرة",
     address: "59 شارع شبرا أعلى فرع فودافون",
     lat: 30.0811,
-    lng: 31.2446,
+    lng: 31.2454, // offset: avoid stacking with branch-14
     mapsUrl: "https://maps.app.goo.gl/BN2U5kGn2K7A8MUy5",
   },
   {
@@ -542,7 +549,7 @@ export const branches: Branch[] = [
     city: "القاهرة",
     address: "66 شارع شبرا بجوار مدرسة التوفيقية",
     lat: 30.0836,
-    lng: 31.244,
+    lng: 31.2448, // offset: avoid stacking with branch-15
     mapsUrl: "https://share.google/rslsqenV7Pj2N5ZVN",
   },
   {
@@ -562,7 +569,7 @@ export const branches: Branch[] = [
     city: "القاهرة",
     address: "برج دار الفؤاد الطبي - تقاطع شارع يوسف عباس مع طريق النصر",
     lat: 30.0724,
-    lng: 31.3389,
+    lng: 31.3397, // offset: avoid stacking with branch-11
     mapsUrl: "https://maps.app.goo.gl/exvMRw9Uvwbo9y2t9",
   },
   {
@@ -572,25 +579,29 @@ export const branches: Branch[] = [
     city: "الجيزة",
     address: "45 شارع أنس ابن مالك متفرع من شارع شهاب",
     lat: 30.0626,
-    lng: 31.2024,
+    lng: 31.2032, // offset: avoid stacking with branch-17
     mapsUrl: "https://share.google/GI9BVOMWYnmtr8YLI",
   },
+
+  // ─── TechnoScan Polyclinics ───────────────────────────────
   {
     id: "branch-57",
     brand: "technoscan-polyclinics",
     name: "المهندسين",
     city: "الجيزة",
     address: "45 شارع أنس ابن مالك متفرع من شارع شهاب",
-    lat: 30.0626,
+    lat: 30.0634, // offset: avoid stacking with branch-17 & 56
     lng: 31.2024,
     mapsUrl: "https://share.google/ronEkad4sZ9CZMXvq",
   },
+
+  // ─── CRC — Saudi Arabia ───────────────────────────────────
   {
     id: "branch-58",
     brand: "crc",
-    name: "العليا - الرياض",
+    name: "فرع العليا - الرياض",
     city: "الرياض",
-    address: "طريق الملك فهد (حي العليا)",
+    address: "طريق الملك فهد",
     lat: 24.6916,
     lng: 46.686,
     mapsUrl: "https://maps.app.goo.gl/bqAfU8JnUaDpTvVk7",
@@ -598,9 +609,9 @@ export const branches: Branch[] = [
   {
     id: "branch-59",
     brand: "crc",
-    name: "التعاون - الرياض",
+    name: "فرع التعاون - الرياض",
     city: "الرياض",
-    address: "طريق الإمام سعود بن عبدالعزيز (حي التعاون)",
+    address: "طريق الإمام سعود بن عبد العزيز",
     lat: 24.7783,
     lng: 46.6783,
     mapsUrl: "https://maps.app.goo.gl/BdsMxaeQDiViakCz6",
@@ -608,9 +619,9 @@ export const branches: Branch[] = [
   {
     id: "branch-60",
     brand: "crc",
-    name: "الخبر",
+    name: "فرع الخير",
     city: "المنطقة الشرقية",
-    address: "طريق الأمير تركي (حي الخبر الجنوبية)",
+    address: "شارع الأمير تركي",
     lat: 26.2154,
     lng: 50.1971,
     mapsUrl: "https://maps.app.goo.gl/RGUAyfHnUpJbwnmn7",
@@ -618,19 +629,21 @@ export const branches: Branch[] = [
   {
     id: "branch-61",
     brand: "crc",
-    name: "الدمام",
+    name: "فرع الدمام",
     city: "المنطقة الشرقية",
-    address: "طريق الأمير محمد بن فهد (حي الطبيشي)",
+    address: "شارع الأمير محمد بن فهد",
     lat: 26.3927,
     lng: 49.9777,
     mapsUrl: "https://maps.app.goo.gl/74Rqb8Ekq6Fe2ioPA",
   },
+
+  // ─── MedRay — Jordan (7 branches) ────────────────────────
   {
     id: "branch-62",
     brand: "medray",
     name: "فرع 1",
-    city: "Amman",
-    address: "",
+    city: "عمان",
+    address: "شارع ابن خلدون، Amman 11183, Jordan",
     lat: 31.9539,
     lng: 35.9106,
     mapsUrl: "https://maps.app.goo.gl/xQ7R68XMwKnb3hC56",
@@ -639,8 +652,8 @@ export const branches: Branch[] = [
     id: "branch-63",
     brand: "medray",
     name: "فرع 2",
-    city: "Amman",
-    address: "",
+    city: "عمان",
+    address: "شارع ابو فراس الحمداني، Amman, Jordan",
     lat: 31.973,
     lng: 35.878,
     mapsUrl: "https://maps.app.goo.gl/BDBUqkFCqeKahXQ88",
@@ -649,8 +662,8 @@ export const branches: Branch[] = [
     id: "branch-64",
     brand: "medray",
     name: "فرع 3",
-    city: "Amman",
-    address: "",
+    city: "عمان",
+    address: "مجمع ماجي الطبي، شارع ابن خلدون 19، Amman, Jordan",
     lat: 31.9607,
     lng: 35.8764,
     mapsUrl: "https://maps.app.goo.gl/2tGgr3RdBUFz5e1Z7",
@@ -659,8 +672,8 @@ export const branches: Branch[] = [
     id: "branch-65",
     brand: "medray",
     name: "فرع 4",
-    city: "Amman",
-    address: "",
+    city: "عمان",
+    address: "شارع ابن خلدون 57، Amman, Jordan",
     lat: 31.9667,
     lng: 35.8614,
     mapsUrl: "https://maps.app.goo.gl/Co4UQAUcJvKZXoYP7",
@@ -669,8 +682,8 @@ export const branches: Branch[] = [
     id: "branch-66",
     brand: "medray",
     name: "فرع 5",
-    city: "Amman",
-    address: "",
+    city: "عمان",
+    address: "شارع جابر ابن حيان، Amman, Jordan",
     lat: 31.985,
     lng: 35.8694,
     mapsUrl: "https://maps.app.goo.gl/3ekWaGv8noRC2soi8",
@@ -679,8 +692,8 @@ export const branches: Branch[] = [
     id: "branch-67",
     brand: "medray",
     name: "فرع 6",
-    city: "Amman",
-    address: "",
+    city: "عمان",
+    address: "شارع العيون، Amman, Jordan",
     lat: 32.0228,
     lng: 35.8717,
     mapsUrl: "https://maps.app.goo.gl/673eAm2DpHbpiwHF8",
@@ -689,31 +702,11 @@ export const branches: Branch[] = [
     id: "branch-68",
     brand: "medray",
     name: "فرع 7",
-    city: "Amman",
-    address: "",
+    city: "عمان",
+    address: "شارع ابن خلدون، Amman, Jordan",
     lat: 31.9328,
     lng: 35.8558,
     mapsUrl: "https://maps.app.goo.gl/y53vyGvWttu44wnM7",
-  },
-  {
-    id: "branch-69",
-    brand: "medray",
-    name: "فرع 8",
-    city: "Amman",
-    address: "",
-    lat: 31.95,
-    lng: 35.92,
-    mapsUrl: "https://share.google/sfht9uoJskrD34Fg1",
-  },
-  {
-    id: "branch-70",
-    brand: "medray",
-    name: "فرع 9",
-    city: "Amman",
-    address: "",
-    lat: 31.94,
-    lng: 35.89,
-    mapsUrl: "https://share.google/4IN2WgsPREspbgWeO",
   },
 ];
 

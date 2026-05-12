@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PlatformsRouteImport } from './routes/platforms'
 import { Route as NetworkRouteImport } from './routes/network'
 import { Route as InvestorsRouteImport } from './routes/investors'
@@ -20,9 +22,19 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlatformsIndexRouteImport } from './routes/platforms.index'
 import { Route as PlatformsSlugRouteImport } from './routes/platforms.$slug'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformsRoute = PlatformsRouteImport.update({
@@ -79,7 +91,9 @@ export interface FileRoutesByFullPath {
   '/investors': typeof InvestorsRoute
   '/network': typeof NetworkRoute
   '/platforms': typeof PlatformsRouteWithChildren
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
   '/platforms/': typeof PlatformsIndexRoute
 }
@@ -90,7 +104,9 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/investors': typeof InvestorsRoute
   '/network': typeof NetworkRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
   '/platforms': typeof PlatformsIndexRoute
 }
@@ -103,7 +119,9 @@ export interface FileRoutesById {
   '/investors': typeof InvestorsRoute
   '/network': typeof NetworkRoute
   '/platforms': typeof PlatformsRouteWithChildren
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
   '/platforms/$slug': typeof PlatformsSlugRoute
   '/platforms/': typeof PlatformsIndexRoute
 }
@@ -117,7 +135,9 @@ export interface FileRouteTypes {
     | '/investors'
     | '/network'
     | '/platforms'
+    | '/privacy'
     | '/services'
+    | '/terms'
     | '/platforms/$slug'
     | '/platforms/'
   fileRoutesByTo: FileRoutesByTo
@@ -128,7 +148,9 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/investors'
     | '/network'
+    | '/privacy'
     | '/services'
+    | '/terms'
     | '/platforms/$slug'
     | '/platforms'
   id:
@@ -140,7 +162,9 @@ export interface FileRouteTypes {
     | '/investors'
     | '/network'
     | '/platforms'
+    | '/privacy'
     | '/services'
+    | '/terms'
     | '/platforms/$slug'
     | '/platforms/'
   fileRoutesById: FileRoutesById
@@ -153,16 +177,32 @@ export interface RootRouteChildren {
   InvestorsRoute: typeof InvestorsRoute
   NetworkRoute: typeof NetworkRoute
   PlatformsRoute: typeof PlatformsRouteWithChildren
+  PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/platforms': {
@@ -253,7 +293,9 @@ const rootRouteChildren: RootRouteChildren = {
   InvestorsRoute: InvestorsRoute,
   NetworkRoute: NetworkRoute,
   PlatformsRoute: PlatformsRouteWithChildren,
+  PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

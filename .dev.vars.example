@@ -1,0 +1,3 @@
+# Used by `wrangler dev` (Cloudflare local emulator).
+# For `vite dev` (npm run dev) — use .env instead; both files have the same keys.
+RESEND_API_KEY=re_your_resend_api_key_here

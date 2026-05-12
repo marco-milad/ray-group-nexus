@@ -21,6 +21,7 @@ import { contactCopy } from "./contact";
 import { platformsCopy } from "./platforms";
 import { servicesCopy } from "./servicesPage";
 import { networkCopy } from "./network";
+import { privacyCopy, termsCopy } from "./legal";
 
 import { ecosystemCopy } from "./sections/ecosystem";
 import { statsCopy } from "./sections/stats";
@@ -37,6 +38,8 @@ export const contact = contactCopy;
 export const platforms = platformsCopy;
 export const services = servicesCopy;
 export const network = networkCopy;
+export const privacy = privacyCopy;
+export const terms = termsCopy;
 
 // Reusable sections — namespaced under `sections.*`
 export const sections = {
@@ -58,5 +61,7 @@ export {
   platformsCopy,
   servicesCopy,
   networkCopy,
+  privacyCopy,
+  termsCopy,
 };
 export { ecosystemCopy, statsCopy, physiciansCopy, networkPreviewCopy, contactCtaCopy };
