@@ -24,7 +24,7 @@ export const investorsCopy = {
     headlineAccent: "Regional Scale.",
     subheadline:
       "Ray Lab Group is the MENA region's most geographically diverse private diagnostic group — backed by leading development finance institutions and growing across Egypt, Saudi Arabia, and Jordan.",
-    primaryCta: "Download Group Overview",
+    primaryCta: "Group Overview",
     secondaryCta: "Submit Investor Inquiry",
   },
 

@@ -241,6 +241,17 @@ export function Navbar() {
                     {l.label}
                   </Link>
                 ))}
+                <Link
+                  to="/directory"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-accent"
+                  activeProps={{
+                    className:
+                      "rounded-md px-3 py-2 text-sm font-medium text-foreground bg-accent border-l-2 border-[var(--rl-green)]",
+                  }}
+                >
+                  Directory
+                </Link>
                 <Button
                   asChild
                   className="mt-4 rounded-md"

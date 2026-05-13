@@ -127,6 +127,11 @@ export function Footer() {
                   </li>
                 );
               })}
+              <li>
+                <Link to="/directory" className="text-white/60 hover:text-white transition-colors">
+                  Corporate Directory
+                </Link>
+              </li>
             </ul>
           </div>
 

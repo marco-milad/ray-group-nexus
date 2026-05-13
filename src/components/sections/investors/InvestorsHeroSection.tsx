@@ -121,18 +121,14 @@ export function InvestorsHeroSection() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              {/* Primary CTA — يروح على contact مؤقتاً */}
+              {/* Primary CTA — takes investors to the About page for the group overview */}
               <Button
                 asChild
                 size="lg"
                 className="group"
                 style={{ backgroundColor: "var(--rl-green)", color: "white" }}
               >
-                <Link
-                  to="/contact"
-                  search={{ inquiry: "investor-overview" } as Record<string, string>}
-                  className="flex items-center"
-                >
+                <Link to="/about" className="flex items-center">
                   {hero.primaryCta}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
