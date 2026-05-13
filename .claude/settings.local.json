@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o response.tmp -w \"HTTP_STATUS:%{http_code}\\\\n\" -X GET https://api.resend.com/domains -H \"Authorization: Bearer re_L5guvAQN_BSYTGKaW2fLVJocvgnTq2vn8\")",
+      "Bash(curl -s -o resend.tmp -w \"HTTP_STATUS:%{http_code}\\\\n\" -X POST https://api.resend.com/emails -H \"Authorization: Bearer re_L5guvAQN_BSYTGKaW2fLVJocvgnTq2vn8\" -H \"Content-Type: application/json\" -d '{\"from\":\"Ray Lab Group <onboarding@resend.dev>\",\"to\":\"Info@raylab.health\",\"subject\":\"Test from Claude diagnostic\",\"html\":\"<p>If you see this, the API key works.</p>\"}')",
+      "Bash(curl -s -X GET https://api.resend.com/domains -H \"Authorization: Bearer re_L5guvAQN_BSYTGKaW2fLVJocvgnTq2vn8\")",
+      "Bash(curl -s -X GET https://api.resend.com/domains/ce44958e-5b70-440e-8e23-4a9a83c45a7c -H \"Authorization: Bearer re_L5guvAQN_BSYTGKaW2fLVJocvgnTq2vn8\")",
+      "Bash(curl -s -o resp.tmp -w \"HTTP_STATUS:%{http_code}\\\\n\" -X POST https://api.resend.com/emails -H \"Authorization: Bearer re_L5guvAQN_BSYTGKaW2fLVJocvgnTq2vn8\" -H \"Content-Type: application/json\" -d '{\"from\":\"Ray Lab Group <onboarding@resend.dev>\",\"to\":\"bezo.shamoon155@gmail.com\",\"subject\":\"Ray Lab — Resend pipeline test\",\"html\":\"<p>If you see this, the Resend pipeline works end-to-end.</p>\"}')",
+      "Bash(npm run *)",
+      "Bash(npx wrangler *)",
+      "Bash(curl -s -o body.tmp -w \"HTTP_STATUS:%{http_code}\\\\n\" -X POST \"https://ray-lab-group.marcomankaruios.workers.dev/_serverFn/653ba9b1684ddbc8a23e2a735fcd73a03a7dc7d8ea4ade0a15e155f48c5a9896\" -H \"Content-Type: application/json\" -H \"x-tsr-serverFn: true\" -d '{\"firstName\":\"Diagnostic\",\"lastName\":\"Test\",\"email\":\"diag@test.com\",\"organisation\":\"\",\"inquiryType\":\"general\",\"message\":\"Automated diagnostic test from Claude to confirm env vars.\"}')",
+      "Bash(rm body.tmp)",
+      "Bash(curl -s -o body2.tmp -w \"HTTP_STATUS:%{http_code}\\\\n\" -X POST \"https://ray-lab-group.marcomankaruios.workers.dev/_serverFn/653ba9b1684ddbc8a23e2a735fcd73a03a7dc7d8ea4ade0a15e155f48c5a9896\" -H \"Content-Type: application/json\" -H \"x-tsr-serverFn: true\" -H \"Accept: application/json\" --data-raw '{\"data\":{\"firstName\":\"Diagnostic\",\"lastName\":\"Test\",\"email\":\"diag@example.com\",\"organisation\":\"\",\"inquiryType\":\"general\",\"message\":\"Diagnostic test to verify env vars from Claude.\"}}')",
+      "Bash(rm body2.tmp)"
+    ]
+  }
+}

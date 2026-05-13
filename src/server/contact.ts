@@ -14,7 +14,7 @@ const inputSchema = z.object({
 export type ContactFormInput = z.infer<typeof inputSchema>;
 
 const TO_EMAIL = "Info@raylab.health";
-const FROM_EMAIL = "Ray Lab Group <onboarding@resend.dev>";
+const FROM_EMAIL = "Ray Lab Group <noreply@raylab.health>";
 
 const escapeHtml = (str: string) =>
   str
