@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { canonical } from "@/lib/seo";
+import { canonical, hreflangLinks } from "@/lib/seo";
 import {
   jsonLdScript,
   webPageSchema,
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/network")({
         { property: "og:description", content: networkCopy.seo.description },
         { property: "og:url", content: url },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: url }, ...hreflangLinks("/network")],
       scripts: [
         jsonLdScript(
           webPageSchema({

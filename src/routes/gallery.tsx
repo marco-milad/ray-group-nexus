@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { canonical } from "@/lib/seo";
+import { canonical, hreflangLinks } from "@/lib/seo";
 import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { Reveal } from "@/components/ui/reveal";
 import { PageWrapper } from "@/components/layout/PageWrapper";
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/gallery")({
         { property: "og:description", content: GALLERY_DESCRIPTION },
         { property: "og:url", content: url },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: url }, ...hreflangLinks("/gallery")],
       scripts: [
         jsonLdScript(
           webPageSchema({

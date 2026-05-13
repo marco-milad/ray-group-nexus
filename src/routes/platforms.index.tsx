@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import { canonical } from "@/lib/seo";
+import { canonical, hreflangLinks } from "@/lib/seo";
 import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { platformsCopy } from "@/data/en/platforms";
 import { brands } from "@/data/en/brands";
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/platforms/")({
         { property: "og:description", content: platformsCopy.seo.description },
         { property: "og:url", content: url },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: url }, ...hreflangLinks("/platforms")],
       scripts: [
         jsonLdScript(
           webPageSchema({

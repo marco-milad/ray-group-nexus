@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Calendar, Building2, ArrowRight } from "lucide-react";
-import { canonical } from "@/lib/seo";
+import { canonical, hreflangLinks } from "@/lib/seo";
 import {
   jsonLdScript,
   webPageSchema,
@@ -108,7 +108,7 @@ export const Route = createFileRoute("/platforms/$slug")({
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: url }, ...hreflangLinks(`/platforms/${params.slug}`)],
       scripts,
     };
   },

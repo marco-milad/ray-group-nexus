@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { canonical } from "@/lib/seo";
+import { canonical, hreflangLinks } from "@/lib/seo";
 import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { termsCopy } from "@/data/en/legal";
 import { Page } from "@/components/layout/Page";
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/terms")({
         { property: "og:description", content: termsCopy.seo.description },
         { property: "og:url", content: url },
       ],
-      links: [{ rel: "canonical", href: url }],
+      links: [{ rel: "canonical", href: url }, ...hreflangLinks("/terms")],
       scripts: [
         jsonLdScript(
           webPageSchema({

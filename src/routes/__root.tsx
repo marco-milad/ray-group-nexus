@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ErrorBoundary } from "@/components/layout/ErrorBoundary";
 import { Preloader } from "@/components/ui/Preloader";
 import { FloatingActions } from "@/components/ui/FloatingActions";
-import { DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, TWITTER_HANDLE } from "@/lib/seo";
 import {
   jsonLdScript,
   organizationSchema,
@@ -73,6 +73,7 @@ export const Route = createRootRoute({
       { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: DEFAULT_OG_IMAGE },
+      ...(TWITTER_HANDLE ? [{ name: "twitter:site", content: TWITTER_HANDLE }] : []),
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

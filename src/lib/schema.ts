@@ -30,6 +30,24 @@ export const BREADCRUMB_LABELS: Record<string, string> = {
   "/terms": "Terms of Service",
 };
 
+/**
+ * Official social/external URLs for the root Organization (Ray Lab Group).
+ *
+ * SCOPE: This list propagates ONLY to organizationSchema() and therefore only
+ * appears on the root Organization entity. It does NOT attach to:
+ *   - MedicalOrganization brand entities (per-brand sameAs is a future feature
+ *     that would extend the Brand type with an optional sameAs field)
+ *   - LocalBusiness branch entities (per-branch sameAs is not supported)
+ *
+ * FORMAT: absolute URLs only. Examples:
+ *   - "https://www.linkedin.com/company/ray-lab-group"
+ *   - "https://twitter.com/raylabgroup"
+ *   - "https://www.facebook.com/raylabgroup"
+ *   - "https://www.instagram.com/raylabgroup"
+ *
+ * Leave as empty array to suppress sameAs emission entirely (current state).
+ * Schema.org accepts empty/missing sameAs without warnings.
+ */
 export const SAME_AS_URLS: string[] = [];
 
 const ORG_ID = `${SITE_URL}/#organization`;
