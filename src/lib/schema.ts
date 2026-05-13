@@ -1,4 +1,5 @@
 import type { Brand } from "@/types/brand";
+import type { Branch } from "@/data/en/branches";
 import { SITE_URL, canonical } from "./seo";
 
 export const COUNTRY_NAMES: Record<Brand["country"], string> = {
@@ -6,6 +7,13 @@ export const COUNTRY_NAMES: Record<Brand["country"], string> = {
   ksa: "Saudi Arabia",
   jordan: "Jordan",
   malta: "Malta",
+};
+
+export const COUNTRY_CODES: Record<Brand["country"], string> = {
+  egypt: "EG",
+  ksa: "SA",
+  jordan: "JO",
+  malta: "MT",
 };
 
 export const BREADCRUMB_LABELS: Record<string, string> = {
@@ -191,5 +199,95 @@ export function medicalOrganizationSchema(brand: Brand) {
     foundingDate: String(brand.founded),
     areaServed: { "@type": "Country", name: COUNTRY_NAMES[brand.country] },
     parentOrganization: { "@id": ORG_ID },
+  };
+}
+
+type BranchCountry = "egypt" | "ksa" | "jordan";
+
+const BRANCH_COUNTRIES: readonly BranchCountry[] = ["egypt", "ksa", "jordan"] as const;
+
+function isBranchCountry(c: Brand["country"]): c is BranchCountry {
+  return c === "egypt" || c === "ksa" || c === "jordan";
+}
+
+export function localBusinessSchema(branch: Branch, brand: Brand) {
+  return {
+    "@type": "LocalBusiness",
+    "@id": `${SITE_URL}/network#branch-${branch.id}`,
+    name: branch.name,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: branch.address,
+      addressLocality: branch.city,
+      addressCountry: COUNTRY_CODES[brand.country],
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: branch.lat,
+      longitude: branch.lng,
+    },
+    hasMap: branch.mapsUrl,
+    areaServed: { "@type": "Country", name: COUNTRY_NAMES[brand.country] },
+    parentOrganization: { "@id": `${SITE_URL}/platforms/${brand.slug}#organization` },
+  };
+}
+
+interface BranchListInput {
+  countryName: string;
+  countryId: string;
+  branchIds: string[];
+}
+
+export function branchListSchema({ countryName, countryId, branchIds }: BranchListInput) {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/network#branches-${countryId}`,
+    name: `${countryName} Branches`,
+    numberOfItems: branchIds.length,
+    itemListElement: branchIds.map((id, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: { "@id": `${SITE_URL}/network#branch-${id}` },
+    })),
+  };
+}
+
+export function networkGraphSchema(branches: Branch[], brands: Brand[]) {
+  const brandMap = new Map(brands.map((b) => [b.slug, b]));
+
+  const byCountry: Record<BranchCountry, { branch: Branch; brand: Brand }[]> = {
+    egypt: [],
+    ksa: [],
+    jordan: [],
+  };
+
+  for (const branch of branches) {
+    const brand = brandMap.get(branch.brand);
+    if (!brand) {
+      if (import.meta.env.DEV) {
+        // eslint-disable-next-line no-console
+        console.warn(`[schema] branch ${branch.id} references unknown brand "${branch.brand}"`);
+      }
+      continue;
+    }
+    if (!isBranchCountry(brand.country)) continue;
+    byCountry[brand.country].push({ branch, brand });
+  }
+
+  const itemLists = BRANCH_COUNTRIES.filter((c) => byCountry[c].length > 0).map((c) =>
+    branchListSchema({
+      countryName: COUNTRY_NAMES[c],
+      countryId: c,
+      branchIds: byCountry[c].map(({ branch }) => branch.id),
+    }),
+  );
+
+  const localBusinesses = BRANCH_COUNTRIES.flatMap((c) =>
+    byCountry[c].map(({ branch, brand }) => localBusinessSchema(branch, brand)),
+  );
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [...itemLists, ...localBusinesses],
   };
 }

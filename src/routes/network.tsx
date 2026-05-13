@@ -1,7 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
-import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
+import {
+  jsonLdScript,
+  webPageSchema,
+  breadcrumbSchema,
+  breadcrumbsForRoute,
+  networkGraphSchema,
+} from "@/lib/schema";
 import { networkCopy } from "@/data/en/network";
+import { branches } from "@/data/en/branches";
+import { brands } from "@/data/en/brands";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
 import type { SectionContract } from "@/types/section";
@@ -34,6 +42,7 @@ export const Route = createFileRoute("/network")({
           }),
         ),
         jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/network") })),
+        jsonLdScript(networkGraphSchema(branches, brands)),
       ],
     };
   },
