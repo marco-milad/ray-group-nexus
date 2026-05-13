@@ -110,15 +110,16 @@ function RootComponent() {
   return (
     <>
       {!ready && <Preloader onComplete={handleComplete} skip={skipPreloader} />}
-      <div
-        className="flex min-h-screen flex-col bg-background"
-        style={{
-          opacity: ready ? 1 : 0,
-          transition: "opacity 0.3s ease",
-        }}
-      >
+      <div className="flex min-h-screen flex-col bg-background">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+          style={{ backgroundColor: "var(--rl-green)" }}
+        >
+          Skip to main content
+        </a>
         <Navbar />
-        <main className="flex-1">
+        <main id="main" className="flex-1">
           <ErrorBoundary>
             <Outlet />
           </ErrorBoundary>
