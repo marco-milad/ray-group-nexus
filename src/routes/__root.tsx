@@ -8,6 +8,12 @@ import { ErrorBoundary } from "@/components/layout/ErrorBoundary";
 import { Preloader } from "@/components/ui/Preloader";
 import { FloatingActions } from "@/components/ui/FloatingActions";
 import { DEFAULT_OG_IMAGE } from "@/lib/seo";
+import {
+  jsonLdScript,
+  organizationSchema,
+  websiteSchema,
+  siteNavigationElementSchema,
+} from "@/lib/schema";
 
 function NotFoundComponent() {
   return (
@@ -69,11 +75,20 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: DEFAULT_OG_IMAGE },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      { rel: "preconnect", href: "https://res.cloudinary.com" },
+      { rel: "dns-prefetch", href: "https://api.maptiler.com" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
       { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+    ],
+    scripts: [
+      jsonLdScript(organizationSchema()),
+      jsonLdScript(websiteSchema()),
+      jsonLdScript(siteNavigationElementSchema()),
     ],
   }),
   shellComponent: RootShell,
