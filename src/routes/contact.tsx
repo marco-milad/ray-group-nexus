@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { contactCopy } from "@/data/en/contact";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -10,16 +11,30 @@ import { OfficesSection } from "@/components/sections/contact/OfficesSection";
 import { InquiryTypeCardsSection } from "@/components/sections/contact/InquiryTypeCardsSection";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: contactCopy.seo.title },
-      { name: "description", content: contactCopy.seo.description },
-      { property: "og:title", content: contactCopy.seo.title },
-      { property: "og:description", content: contactCopy.seo.description },
-      { property: "og:url", content: canonical("/contact") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/contact") }],
-  }),
+  head: () => {
+    const url = canonical("/contact");
+    return {
+      meta: [
+        { title: contactCopy.seo.title },
+        { name: "description", content: contactCopy.seo.description },
+        { property: "og:title", content: contactCopy.seo.title },
+        { property: "og:description", content: contactCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: contactCopy.seo.title,
+            description: contactCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/contact") })),
+      ],
+    };
+  },
   component: ContactPage,
 });
 

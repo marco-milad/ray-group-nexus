@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { aboutCopy } from "@/data/en/about";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -12,16 +13,30 @@ import { TechPartnersSection } from "@/components/sections/about/TechPartnersSec
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: aboutCopy.seo.title },
-      { name: "description", content: aboutCopy.seo.description },
-      { property: "og:title", content: aboutCopy.seo.title },
-      { property: "og:description", content: aboutCopy.seo.description },
-      { property: "og:url", content: canonical("/about") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/about") }],
-  }),
+  head: () => {
+    const url = canonical("/about");
+    return {
+      meta: [
+        { title: aboutCopy.seo.title },
+        { name: "description", content: aboutCopy.seo.description },
+        { property: "og:title", content: aboutCopy.seo.title },
+        { property: "og:description", content: aboutCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: aboutCopy.seo.title,
+            description: aboutCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/about") })),
+      ],
+    };
+  },
   component: AboutPage,
 });
 

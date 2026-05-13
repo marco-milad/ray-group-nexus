@@ -1,6 +1,13 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Calendar, Building2, ArrowRight } from "lucide-react";
 import { canonical } from "@/lib/seo";
+import {
+  jsonLdScript,
+  webPageSchema,
+  breadcrumbSchema,
+  breadcrumbsForRoute,
+  medicalOrganizationSchema,
+} from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { SectionShell } from "@/components/layout/SectionShell";
@@ -71,6 +78,25 @@ export const Route = createFileRoute("/platforms/$slug")({
     const title = brand ? `${brand.name} — Ray Lab Group` : "Platform — Ray Lab Group";
     const description = brand?.description ?? "Ray Lab Group diagnostic platform.";
     const url = canonical(`/platforms/${params.slug}`);
+    const scripts = [
+      jsonLdScript(
+        webPageSchema({
+          url,
+          name: title,
+          description,
+          breadcrumbId: `${url}#breadcrumb`,
+        }),
+      ),
+      jsonLdScript(
+        breadcrumbSchema({
+          url,
+          items: breadcrumbsForRoute(`/platforms/${params.slug}`, brand?.name),
+        }),
+      ),
+    ];
+    if (brand && brand.id !== "unknown") {
+      scripts.push(jsonLdScript(medicalOrganizationSchema(brand)));
+    }
     return {
       meta: [
         { title },
@@ -83,6 +109,7 @@ export const Route = createFileRoute("/platforms/$slug")({
         { name: "twitter:description", content: description },
       ],
       links: [{ rel: "canonical", href: url }],
+      scripts,
     };
   },
   errorComponent: BrandErrorComponent,

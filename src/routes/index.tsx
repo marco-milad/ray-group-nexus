@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema } from "@/lib/schema";
 import { homeCopy } from "@/data/en/home";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -14,16 +15,28 @@ import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSectio
 import { InvestorBadgesSection } from "@/components/sections/home/InvestorBadgesSection";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: homeCopy.seo.title },
-      { name: "description", content: homeCopy.seo.description },
-      { property: "og:title", content: homeCopy.seo.title },
-      { property: "og:description", content: homeCopy.seo.description },
-      { property: "og:url", content: canonical("/") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/") }],
-  }),
+  head: () => {
+    const url = canonical("/");
+    return {
+      meta: [
+        { title: homeCopy.seo.title },
+        { name: "description", content: homeCopy.seo.description },
+        { property: "og:title", content: homeCopy.seo.title },
+        { property: "og:description", content: homeCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: homeCopy.seo.title,
+            description: homeCopy.seo.description,
+          }),
+        ),
+      ],
+    };
+  },
   component: HomePage,
 });
 

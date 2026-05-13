@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { networkCopy } from "@/data/en/network";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -12,16 +13,30 @@ import { InteractiveMapSection } from "@/components/sections/network/Interactive
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/network")({
-  head: () => ({
-    meta: [
-      { title: networkCopy.seo.title },
-      { name: "description", content: networkCopy.seo.description },
-      { property: "og:title", content: networkCopy.seo.title },
-      { property: "og:description", content: networkCopy.seo.description },
-      { property: "og:url", content: canonical("/network") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/network") }],
-  }),
+  head: () => {
+    const url = canonical("/network");
+    return {
+      meta: [
+        { title: networkCopy.seo.title },
+        { name: "description", content: networkCopy.seo.description },
+        { property: "og:title", content: networkCopy.seo.title },
+        { property: "og:description", content: networkCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: networkCopy.seo.title,
+            description: networkCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/network") })),
+      ],
+    };
+  },
   component: NetworkPage,
 });
 

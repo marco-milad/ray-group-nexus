@@ -12,6 +12,7 @@ import {
   Rocket,
 } from "lucide-react";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { investorsCopy } from "@/data/en/investors";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -42,16 +43,30 @@ const TABS = [
 ] as const;
 
 export const Route = createFileRoute("/investors")({
-  head: () => ({
-    meta: [
-      { title: investorsCopy.seo.title },
-      { name: "description", content: investorsCopy.seo.description },
-      { property: "og:title", content: investorsCopy.seo.title },
-      { property: "og:description", content: investorsCopy.seo.description },
-      { property: "og:url", content: canonical("/investors") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/investors") }],
-  }),
+  head: () => {
+    const url = canonical("/investors");
+    return {
+      meta: [
+        { title: investorsCopy.seo.title },
+        { name: "description", content: investorsCopy.seo.description },
+        { property: "og:title", content: investorsCopy.seo.title },
+        { property: "og:description", content: investorsCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: investorsCopy.seo.title,
+            description: investorsCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/investors") })),
+      ],
+    };
+  },
   component: InvestorsPage,
 });
 

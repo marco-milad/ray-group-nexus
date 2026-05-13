@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { privacyCopy } from "@/data/en/legal";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -9,16 +10,30 @@ import { LegalContentSection } from "@/components/sections/legal/LegalContentSec
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/privacy")({
-  head: () => ({
-    meta: [
-      { title: privacyCopy.seo.title },
-      { name: "description", content: privacyCopy.seo.description },
-      { property: "og:title", content: privacyCopy.seo.title },
-      { property: "og:description", content: privacyCopy.seo.description },
-      { property: "og:url", content: canonical("/privacy") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/privacy") }],
-  }),
+  head: () => {
+    const url = canonical("/privacy");
+    return {
+      meta: [
+        { title: privacyCopy.seo.title },
+        { name: "description", content: privacyCopy.seo.description },
+        { property: "og:title", content: privacyCopy.seo.title },
+        { property: "og:description", content: privacyCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: privacyCopy.seo.title,
+            description: privacyCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/privacy") })),
+      ],
+    };
+  },
   component: PrivacyPage,
 });
 

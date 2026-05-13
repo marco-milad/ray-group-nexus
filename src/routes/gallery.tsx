@@ -1,31 +1,42 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { Reveal } from "@/components/ui/reveal";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { brands } from "@/data/en/brands";
 import { useCountUp } from "@/hooks/useCountUp";
 
+const GALLERY_TITLE = "Gallery — Ray Lab Group";
+const GALLERY_DESCRIPTION =
+  "From advanced imaging suites to specialized clinics — a visual journey across Ray Lab Group's diagnostic network.";
+
 export const Route = createFileRoute("/gallery")({
-  head: () => ({
-    meta: [
-      { title: "Gallery — Ray Lab Group" },
-      {
-        name: "description",
-        content:
-          "From advanced imaging suites to specialized clinics — a visual journey across Ray Lab Group's diagnostic network.",
-      },
-      { property: "og:title", content: "Gallery — Ray Lab Group" },
-      {
-        property: "og:description",
-        content:
-          "From advanced imaging suites to specialized clinics — a visual journey across Ray Lab Group's diagnostic network.",
-      },
-      { property: "og:url", content: canonical("/gallery") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/gallery") }],
-  }),
+  head: () => {
+    const url = canonical("/gallery");
+    return {
+      meta: [
+        { title: GALLERY_TITLE },
+        { name: "description", content: GALLERY_DESCRIPTION },
+        { property: "og:title", content: GALLERY_TITLE },
+        { property: "og:description", content: GALLERY_DESCRIPTION },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: GALLERY_TITLE,
+            description: GALLERY_DESCRIPTION,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/gallery") })),
+      ],
+    };
+  },
   component: GalleryPage,
 });
 

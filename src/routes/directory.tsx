@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { directoryCopy } from "@/data/en/directory";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -11,16 +12,30 @@ import { DirectoryHQSection } from "@/components/sections/directory/DirectoryHQS
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/directory")({
-  head: () => ({
-    meta: [
-      { title: directoryCopy.seo.title },
-      { name: "description", content: directoryCopy.seo.description },
-      { property: "og:title", content: directoryCopy.seo.title },
-      { property: "og:description", content: directoryCopy.seo.description },
-      { property: "og:url", content: canonical("/directory") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/directory") }],
-  }),
+  head: () => {
+    const url = canonical("/directory");
+    return {
+      meta: [
+        { title: directoryCopy.seo.title },
+        { name: "description", content: directoryCopy.seo.description },
+        { property: "og:title", content: directoryCopy.seo.title },
+        { property: "og:description", content: directoryCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: directoryCopy.seo.title,
+            description: directoryCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/directory") })),
+      ],
+    };
+  },
   component: DirectoryPage,
 });
 

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { termsCopy } from "@/data/en/legal";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -9,16 +10,30 @@ import { LegalContentSection } from "@/components/sections/legal/LegalContentSec
 import { ContactCtaSection } from "@/components/sections/shared/ContactCtaSection";
 
 export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: termsCopy.seo.title },
-      { name: "description", content: termsCopy.seo.description },
-      { property: "og:title", content: termsCopy.seo.title },
-      { property: "og:description", content: termsCopy.seo.description },
-      { property: "og:url", content: canonical("/terms") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/terms") }],
-  }),
+  head: () => {
+    const url = canonical("/terms");
+    return {
+      meta: [
+        { title: termsCopy.seo.title },
+        { name: "description", content: termsCopy.seo.description },
+        { property: "og:title", content: termsCopy.seo.title },
+        { property: "og:description", content: termsCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: termsCopy.seo.title,
+            description: termsCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/terms") })),
+      ],
+    };
+  },
   component: TermsPage,
 });
 

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { canonical } from "@/lib/seo";
+import { jsonLdScript, webPageSchema, breadcrumbSchema, breadcrumbsForRoute } from "@/lib/schema";
 import { platformsCopy } from "@/data/en/platforms";
 import { brands } from "@/data/en/brands";
 import { Page } from "@/components/layout/Page";
@@ -21,16 +22,30 @@ const COUNTRY_LABEL: Record<string, string> = {
 };
 
 export const Route = createFileRoute("/platforms/")({
-  head: () => ({
-    meta: [
-      { title: platformsCopy.seo.title },
-      { name: "description", content: platformsCopy.seo.description },
-      { property: "og:title", content: platformsCopy.seo.title },
-      { property: "og:description", content: platformsCopy.seo.description },
-      { property: "og:url", content: canonical("/platforms") },
-    ],
-    links: [{ rel: "canonical", href: canonical("/platforms") }],
-  }),
+  head: () => {
+    const url = canonical("/platforms");
+    return {
+      meta: [
+        { title: platformsCopy.seo.title },
+        { name: "description", content: platformsCopy.seo.description },
+        { property: "og:title", content: platformsCopy.seo.title },
+        { property: "og:description", content: platformsCopy.seo.description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        jsonLdScript(
+          webPageSchema({
+            url,
+            name: platformsCopy.seo.title,
+            description: platformsCopy.seo.description,
+            breadcrumbId: `${url}#breadcrumb`,
+          }),
+        ),
+        jsonLdScript(breadcrumbSchema({ url, items: breadcrumbsForRoute("/platforms") })),
+      ],
+    };
+  },
   component: PlatformsPage,
 });
 
