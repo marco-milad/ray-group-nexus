@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, Calendar, Building2, ArrowRight } from "lucide-react";
+import { canonical } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { SectionShell } from "@/components/layout/SectionShell";
@@ -65,17 +66,23 @@ export const Route = createFileRoute("/platforms/$slug")({
     if (brand.id === "unknown") throw notFound();
     return { brand };
   },
-  head: ({ loaderData }) => {
+  head: ({ params, loaderData }) => {
     const brand = loaderData?.brand;
     const title = brand ? `${brand.name} — Ray Lab Group` : "Platform — Ray Lab Group";
     const description = brand?.description ?? "Ray Lab Group diagnostic platform.";
+    const url = canonical(`/platforms/${params.slug}`);
     return {
       meta: [
         { title },
         { name: "description", content: description },
+        { property: "og:type", content: "website" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: url },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
       ],
+      links: [{ rel: "canonical", href: url }],
     };
   },
   errorComponent: BrandErrorComponent,

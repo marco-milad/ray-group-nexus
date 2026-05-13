@@ -1,5 +1,6 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { canonical } from "@/lib/seo";
 import { Reveal } from "@/components/ui/reveal";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { SectionShell } from "@/components/layout/SectionShell";
@@ -21,7 +22,9 @@ export const Route = createFileRoute("/gallery")({
         content:
           "From advanced imaging suites to specialized clinics — a visual journey across Ray Lab Group's diagnostic network.",
       },
+      { property: "og:url", content: canonical("/gallery") },
     ],
+    links: [{ rel: "canonical", href: canonical("/gallery") }],
   }),
   component: GalleryPage,
 });

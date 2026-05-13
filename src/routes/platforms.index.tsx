@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
+import { canonical } from "@/lib/seo";
 import { platformsCopy } from "@/data/en/platforms";
 import { brands } from "@/data/en/brands";
 import { Page } from "@/components/layout/Page";
@@ -26,7 +27,9 @@ export const Route = createFileRoute("/platforms/")({
       { name: "description", content: platformsCopy.seo.description },
       { property: "og:title", content: platformsCopy.seo.title },
       { property: "og:description", content: platformsCopy.seo.description },
+      { property: "og:url", content: canonical("/platforms") },
     ],
+    links: [{ rel: "canonical", href: canonical("/platforms") }],
   }),
   component: PlatformsPage,
 });

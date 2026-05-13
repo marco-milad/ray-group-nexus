@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { canonical } from "@/lib/seo";
 import { directoryCopy } from "@/data/en/directory";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -16,7 +17,9 @@ export const Route = createFileRoute("/directory")({
       { name: "description", content: directoryCopy.seo.description },
       { property: "og:title", content: directoryCopy.seo.title },
       { property: "og:description", content: directoryCopy.seo.description },
+      { property: "og:url", content: canonical("/directory") },
     ],
+    links: [{ rel: "canonical", href: canonical("/directory") }],
   }),
   component: DirectoryPage,
 });

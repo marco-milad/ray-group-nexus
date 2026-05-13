@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { canonical } from "@/lib/seo";
 import { privacyCopy } from "@/data/en/legal";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -14,7 +15,9 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: privacyCopy.seo.description },
       { property: "og:title", content: privacyCopy.seo.title },
       { property: "og:description", content: privacyCopy.seo.description },
+      { property: "og:url", content: canonical("/privacy") },
     ],
+    links: [{ rel: "canonical", href: canonical("/privacy") }],
   }),
   component: PrivacyPage,
 });

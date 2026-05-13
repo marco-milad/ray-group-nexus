@@ -11,6 +11,7 @@ import {
   Building,
   Rocket,
 } from "lucide-react";
+import { canonical } from "@/lib/seo";
 import { investorsCopy } from "@/data/en/investors";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -47,7 +48,9 @@ export const Route = createFileRoute("/investors")({
       { name: "description", content: investorsCopy.seo.description },
       { property: "og:title", content: investorsCopy.seo.title },
       { property: "og:description", content: investorsCopy.seo.description },
+      { property: "og:url", content: canonical("/investors") },
     ],
+    links: [{ rel: "canonical", href: canonical("/investors") }],
   }),
   component: InvestorsPage,
 });

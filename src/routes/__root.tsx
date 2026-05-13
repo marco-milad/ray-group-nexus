@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ErrorBoundary } from "@/components/layout/ErrorBoundary";
 import { Preloader } from "@/components/ui/Preloader";
 import { FloatingActions } from "@/components/ui/FloatingActions";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -59,7 +60,13 @@ export const Route = createRootRoute({
       },
       { name: "author", content: "Ray Lab Group" },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Ray Lab Group" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:image", content: DEFAULT_OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: DEFAULT_OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

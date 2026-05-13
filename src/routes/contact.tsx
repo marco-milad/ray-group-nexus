@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { canonical } from "@/lib/seo";
 import { contactCopy } from "@/data/en/contact";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -15,7 +16,9 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: contactCopy.seo.description },
       { property: "og:title", content: contactCopy.seo.title },
       { property: "og:description", content: contactCopy.seo.description },
+      { property: "og:url", content: canonical("/contact") },
     ],
+    links: [{ rel: "canonical", href: canonical("/contact") }],
   }),
   component: ContactPage,
 });

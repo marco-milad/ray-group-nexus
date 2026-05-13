@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { canonical } from "@/lib/seo";
 import { servicesCopy } from "@/data/en/servicesPage";
 import { Page } from "@/components/layout/Page";
 import { Section } from "@/components/layout/Section";
@@ -17,7 +18,9 @@ export const Route = createFileRoute("/services")({
       { name: "description", content: servicesCopy.seo.description },
       { property: "og:title", content: servicesCopy.seo.title },
       { property: "og:description", content: servicesCopy.seo.description },
+      { property: "og:url", content: canonical("/services") },
     ],
+    links: [{ rel: "canonical", href: canonical("/services") }],
   }),
   component: ServicesPage,
 });
