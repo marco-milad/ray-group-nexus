@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /platforms/
+
+# Cautious crawl rate hint (respected by Bing/Yandex; Google ignores it).
+Crawl-delay: 1
 
 Sitemap: https://raylabgroup.com/sitemap.xml
