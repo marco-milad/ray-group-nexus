@@ -49,34 +49,103 @@ type GalleryItem = {
 };
 
 const galleryItems: GalleryItem[] = [
-  // Cairo Scan — MRI, radiology lab, reception, X-ray
+  // Cairo Scan — MRI, mammography, CT, X-ray, ultrasound, women's imaging reception
   {
     id: "cs-1",
     brandSlug: "cairo-scan",
-    src: "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=900&q=80&auto=format&fit=crop",
-    alt: "Cairo Scan MRI machine",
-    caption: "3T MRI suite delivering advanced neuro and musculoskeletal imaging.",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_2026-05-14_02-08-55_moxv4r.jpg",
+    alt: "Cairo Scan women's imaging team beside Fujifilm Amulet Innovality mammography unit",
+    caption:
+      "Women's Imaging — Cairo Scan's all-female mammography team beside the Fujifilm Amulet Innovality 3D system.",
   },
   {
     id: "cs-2",
     brandSlug: "cairo-scan",
-    src: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80&auto=format&fit=crop",
-    alt: "Cairo Scan radiology lab",
-    caption: "Cairo Scan's clinical pathology lab — accredited workflows end-to-end.",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_2026-05-14_02-08-43_fcqxt2.jpg",
+    alt: "Cairo Scan GE Healthcare CT scanner suite",
+    caption:
+      "GE Healthcare CT Suite — multi-slice volumetric imaging for neuro, chest, and abdominal exams.",
   },
   {
     id: "cs-3",
     brandSlug: "cairo-scan",
-    src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80&auto=format&fit=crop",
-    alt: "Cairo Scan reception desk",
-    caption: "Patient-first reception across 20 centres in Cairo and Giza.",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_2026-05-14_02-08-19_keof8y.jpg",
+    alt: "Cairo Scan Siemens Healthineers digital X-ray room",
+    caption:
+      "Digital Radiography — Siemens Healthineers ceiling-mounted X-ray suite for routine and trauma imaging.",
   },
   {
     id: "cs-4",
     brandSlug: "cairo-scan",
-    src: "https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80&auto=format&fit=crop",
-    alt: "Cairo Scan X-ray room",
-    caption: "Digital X-ray rooms calibrated daily by our radiographers.",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_%D9%A2%D9%A0%D9%A2%D9%A6-%D9%A0%D9%A5-%D9%A1%D9%A2_%D9%A1%D9%A4-%D9%A0%D9%A9-%D9%A2%D9%A7_odvm0v.jpg",
+    alt: "Cairo Scan radiographer positioning a patient for 3D mammography",
+    caption:
+      "Tomosynthesis in Progress — a Cairo Scan radiographer guiding a patient through her 3D mammogram.",
+  },
+  {
+    id: "cs-5",
+    brandSlug: "cairo-scan",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_%D9%A2%D9%A0%D9%A2%D9%A6-%D9%A0%D9%A5-%D9%A1%D9%A2_%D9%A1%D9%A4-%D9%A0%D9%A9-%D9%A2%D9%A0_maojoq.jpg",
+    alt: "Cairo Scan Fujifilm Amulet Innovality mammography suite",
+    caption:
+      "Fujifilm Amulet Innovality — dedicated breast imaging suite at Cairo Scan Women's Imaging.",
+  },
+  {
+    id: "cs-6",
+    brandSlug: "cairo-scan",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_%D9%A2%D9%A0%D9%A2%D9%A6-%D9%A0%D9%A5-%D9%A1%D9%A2_%D9%A1%D9%A4-%D9%A0%D9%A9-%D9%A2%D9%A6_jeoxli.jpg",
+    alt: "Cairo Scan Siemens MAGNETOM Altea MRI scanner with anesthesia trolley",
+    caption:
+      "Siemens MAGNETOM Altea 1.5T MRI — BioMatrix-driven exams with on-site anesthesia support.",
+  },
+  {
+    id: "cs-7",
+    brandSlug: "cairo-scan",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_2026-05-14_02-08-36_buxbvd.jpg",
+    alt: "Cairo Scan Siemens MAGNETOM Lumina 3T MRI suite",
+    caption:
+      "Siemens MAGNETOM Lumina 3T MRI — high-field neuro, body, and musculoskeletal imaging.",
+  },
+  {
+    id: "cs-8",
+    brandSlug: "cairo-scan",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713995/photo_%D9%A2%D9%A0%D9%A2%D9%A6-%D9%A0%D9%A5-%D9%A1%D9%A2_%D9%A1%D9%A4-%D9%A0%D9%A9-%D9%A2%D9%A1_lgenst.jpg",
+    alt: "Cairo Scan Women's Imaging reception desk",
+    caption: "Women's Imaging Reception — dedicated check-in for breast and gynecological exams.",
+  },
+  {
+    id: "cs-9",
+    brandSlug: "cairo-scan",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778713995/photo_2026-05-14_02-08-28_jzx4he.jpg",
+    alt: "Cairo Scan GE LOGIQ P9 ultrasound examination room",
+    caption:
+      "GE LOGIQ P9 Ultrasound — abdominal, OB, and vascular workups in a dedicated exam suite.",
+  },
+
+  // Cairo Scan Polyclinics — MRI, ultrasound, patient lounge
+  {
+    id: "csp-1",
+    brandSlug: "cairo-scan-polyclinics",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778715023/photo_2026-05-14_02-28-04_jn9zes.jpg",
+    alt: "Cairo Scan Polyclinics Toshiba MRI scanner",
+    caption:
+      "Toshiba MRI Suite — open-architecture scanner serving routine neuro and musculoskeletal exams.",
+  },
+  {
+    id: "csp-2",
+    brandSlug: "cairo-scan-polyclinics",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778715024/photo_2026-05-14_02-29-25_iiarof.jpg",
+    alt: "Cairo Scan Polyclinics Siemens ACUSON Redwood ultrasound exam in progress",
+    caption:
+      "Siemens ACUSON Redwood Ultrasound — sonographer-led abdominal and vascular workups in a calming exam suite.",
+  },
+  {
+    id: "csp-3",
+    brandSlug: "cairo-scan-polyclinics",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778715023/photo_2026-05-14_02-27-40_rwkgbr.jpg",
+    alt: "Cairo Scan Polyclinics patient reviewing services brochure in waiting area",
+    caption:
+      "Patient Lounge — guests browse the Cairo Scan services menu while waiting for their consultation.",
   },
 
   // TechnoScan — CT scanner, ultrasound, medical team, diagnostic center
@@ -153,6 +222,68 @@ const galleryItems: GalleryItem[] = [
     src: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80&auto=format&fit=crop",
     alt: "MedRay diagnostic equipment",
     caption: "Full-spectrum diagnostics — including PET-CT, EOS, and breast MRI.",
+  },
+  {
+    id: "mr-4",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716252/photo_2026-05-14_02-50-37_xpwrtd.jpg",
+    alt: "MedRay flagship building at Al-Basma Medical Complex, Amman",
+    caption:
+      "Flagship Branch — MedRay's international radiology centre at the Al-Basma Medical Complex in Amman.",
+  },
+  {
+    id: "mr-5",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716283/photo_2026-05-14_02-51-08_ge3bcp.jpg",
+    alt: "MedRay patient waiting lounge with signature wooden lattice screen",
+    caption: "Patient Lounge — a calm, design-led waiting area welcoming MedRay's Jordan patients.",
+  },
+  {
+    id: "mr-6",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716071/photo_2026-05-14_02-46-51_ssky1l.jpg",
+    alt: "MedRay radiographers at modality workstations between MRI and DXA rooms",
+    caption:
+      "Modality Corridor — radiographers prepping MRI and DXA exams side-by-side at MedRay Amman.",
+  },
+  {
+    id: "mr-7",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716069/photo_2026-05-14_02-46-45_zyt4nw.jpg",
+    alt: "MedRay nuclear medicine gamma camera suite with sky-themed ceiling",
+    caption:
+      "Nuclear Medicine — dual-head gamma camera suite supporting SPECT, bone, and cardiac studies.",
+  },
+  {
+    id: "mr-8",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716069/photo_2026-05-14_02-46-32_ezbeof.jpg",
+    alt: "MedRay Siemens 1.5T MRI suite with floral sky-themed ceiling",
+    caption:
+      "Siemens 1.5T MRI — a wide-bore suite designed for patient comfort across long protocols.",
+  },
+  {
+    id: "mr-9",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716068/photo_2026-05-14_02-46-39_nadmz4.jpg",
+    alt: "MedRay large-bore CT scanner viewed from inside the gantry",
+    caption:
+      "Volumetric CT Suite — large-bore scanner for cardiac, vascular, and oncology imaging.",
+  },
+  {
+    id: "mr-10",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716068/photo_2026-05-14_02-46-20_hixr7l.jpg",
+    alt: "MedRay Siemens ACUSON ultrasound exam room",
+    caption: "Siemens ACUSON Ultrasound — premium imaging for OB, vascular, and small-parts exams.",
+  },
+  {
+    id: "mr-11",
+    brandSlug: "medray",
+    src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778716068/photo_2026-05-14_02-46-04_iksec7.jpg",
+    alt: "MedRay radiologist reporting room with multi-monitor reading workstations",
+    caption:
+      "Radiologist Reading Room — calibrated multi-monitor stations powering MedRay's consultant reads.",
   },
 
   // Specialized Clinics — outpatient clinic, doctor consultation, medical office
@@ -246,9 +377,41 @@ function GalleryPage() {
     <main>
       {/* Hero — tightened padding */}
       <section
-        className="relative overflow-hidden py-10 md:py-14"
+        className="relative overflow-hidden isolate py-10 md:py-14"
         style={{ backgroundColor: "var(--rl-light-bg)" }}
       >
+        {/* Background photo — MedRay patient lounge, Amman */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          <img
+            src="https://res.cloudinary.com/dq0om55vx/image/upload/v1778716283/photo_2026-05-14_02-51-08_ge3bcp.jpg"
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+            className="hero-bg-image absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: "50% 50%" }}
+          />
+        </div>
+
+        {/* Readability overlay — left-to-right white fade so dark text stays crisp */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(90deg, color-mix(in oklab, var(--rl-light-bg) 95%, transparent) 0%, color-mix(in oklab, var(--rl-light-bg) 88%, transparent) 35%, color-mix(in oklab, var(--rl-light-bg) 55%, transparent) 65%, color-mix(in oklab, var(--rl-light-bg) 30%, transparent) 100%)",
+          }}
+        />
+
+        {/* Brand tint — soft green radial accents */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(1400px 700px at 10% -20%, color-mix(in oklab, var(--rl-mantis) 26%, transparent), transparent 55%), radial-gradient(1000px 600px at 95% 20%, color-mix(in oklab, var(--rl-pistachio) 18%, transparent), transparent 55%)",
+          }}
+        />
+
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.05]"

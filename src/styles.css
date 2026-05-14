@@ -91,22 +91,22 @@
   --radius: 0.625rem;
 
   /* Ray Lab brand palette */
-  --rl-green: #4F9907;
-  --rl-mantis: #71C247;
-  --rl-pistachio: #8ED06C;
-  --rl-cornsilk: #FFF5D4;
-  --rl-eerie: #1E1E1E;
-  --rl-white: #FFFFFF;
+  --rl-green: #4f9907;
+  --rl-mantis: #71c247;
+  --rl-pistachio: #8ed06c;
+  --rl-cornsilk: #fff5d4;
+  --rl-eerie: #1e1e1e;
+  --rl-white: #ffffff;
   --rl-muted: #6b7280;
   --rl-light-bg: #f8faf4;
 
   /* Sub-brand colors */
-  --cairo-scan: #E53935;
-  --technoscan: #00897B;
-  --crc: #C8A96E;
-  --medray: #1E88E5;
-  --clinics: #F57C00;
-  --ray-medical: #7B1FA2;
+  --cairo-scan: #e53935;
+  --technoscan: #00897b;
+  --crc: #c8a96e;
+  --medray: #1e88e5;
+  --clinics: #f57c00;
+  --ray-medical: #7b1fa2;
 
   /* Font stacks */
   --font-en: "Montserrat", system-ui, -apple-system, sans-serif;
@@ -198,5 +198,39 @@
   [dir="rtl"],
   [lang="ar"] {
     font-family: var(--font-ar);
+  }
+}
+
+/* ─── Hero background — Ken Burns + mount fade-in ─────────────────────── */
+@keyframes heroKenBurns {
+  0% {
+    transform: scale(1.08) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.18) translate3d(-2%, -1.5%, 0);
+  }
+}
+
+@keyframes heroImageReveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-bg-image {
+  animation:
+    heroImageReveal 1200ms ease-out both,
+    heroKenBurns 28s ease-in-out 1200ms infinite alternate;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-image {
+    animation: heroImageReveal 600ms ease-out both;
+    transform: scale(1.08);
+    will-change: auto;
   }
 }

@@ -121,12 +121,41 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(1400px 700px at 10% -20%, color-mix(in oklab, var(--rl-mantis) 30%, transparent), transparent 55%), radial-gradient(1000px 600px at 95% 20%, color-mix(in oklab, var(--rl-pistachio) 22%, transparent), transparent 55%), var(--rl-light-bg)",
-      }}
+      className="relative overflow-hidden isolate"
+      style={{ backgroundColor: "var(--rl-light-bg)" }}
     >
+      {/* Background photo — Siemens MAGNETOM Lumina 3T MRI suite, Cairo Scan */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <img
+          src="https://res.cloudinary.com/dq0om55vx/image/upload/v1778713996/photo_2026-05-14_02-08-36_buxbvd.jpg"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+          className="hero-bg-image absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: "70% 50%" }}
+        />
+      </div>
+
+      {/* Readability overlay — left-to-right white fade so dark text stays crisp */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(90deg, color-mix(in oklab, var(--rl-light-bg) 95%, transparent) 0%, color-mix(in oklab, var(--rl-light-bg) 88%, transparent) 35%, color-mix(in oklab, var(--rl-light-bg) 55%, transparent) 65%, color-mix(in oklab, var(--rl-light-bg) 30%, transparent) 100%)",
+        }}
+      />
+
+      {/* Brand tint — preserve original soft green radial accents */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(1400px 700px at 10% -20%, color-mix(in oklab, var(--rl-mantis) 26%, transparent), transparent 55%), radial-gradient(1000px 600px at 95% 20%, color-mix(in oklab, var(--rl-pistachio) 18%, transparent), transparent 55%)",
+        }}
+      />
+
       {/* Grid overlay — base texture */}
       <div
         aria-hidden
