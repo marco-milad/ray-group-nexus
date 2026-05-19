@@ -1,0 +1,65 @@
+# Apache config for static SPA on GoDaddy (or any Apache shared host).
+# Vite copies this file into dist/client/ verbatim at build time.
+
+# ─── SPA client-side routing fallback ─────────────────────────────────
+# Any request that doesn't map to a real file or directory falls through
+# to /index.html so the React/TanStack Router can render the route.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Don't rewrite if the request is for an existing file or directory.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Don't rewrite asset/static file requests so 404s on missing assets
+  # surface honestly instead of being masked by index.html.
+  RewriteRule \.(js|mjs|css|map|json|xml|txt|png|jpg|jpeg|gif|webp|avif|svg|ico|woff2?|ttf|otf|eot|mp4|webm|pdf)$ - [L]
+
+  # Everything else → SPA shell.
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# ─── Caching ──────────────────────────────────────────────────────────
+# Hashed assets are immutable; index.html must always be revalidated so
+# users pick up new chunk hashes after each deploy.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|mjs|css|woff2?|ttf|otf|eot|png|jpg|jpeg|gif|webp|avif|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "^(sitemap\.xml|robots\.txt)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+
+  # Security headers (conservative — won't break a typical SPA)
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ─── Compression ──────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/json application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/ttf font/otf application/font-woff application/vnd.ms-fontobject
+</IfModule>
+
+# ─── MIME safety ──────────────────────────────────────────────────────
+# Ensure modern asset types are served with correct Content-Type even
+# if the host's default MIME map is stale.
+<IfModule mod_mime.c>
+  AddType application/javascript .mjs
+  AddType application/wasm .wasm
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType font/woff2 .woff2
+</IfModule>
+
+# ─── Default document ─────────────────────────────────────────────────
+DirectoryIndex index.html
