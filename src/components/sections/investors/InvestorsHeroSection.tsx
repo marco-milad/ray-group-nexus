@@ -8,7 +8,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { investorsCopy } from "@/data/en/investors";
 
 const heroStats = [
-  { raw: 74, suffix: "+", label: "Branches", icon: Building2 },
+  { raw: 78, suffix: "+", label: "Branches", icon: Building2 },
   { raw: 3, suffix: "", label: "Markets", icon: Globe },
   { raw: 40, suffix: "%", label: "Revenue Growth", icon: TrendingUp },
 ];

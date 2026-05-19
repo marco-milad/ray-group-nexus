@@ -90,7 +90,7 @@ export const brands: Brand[] = [
     country: "ksa",
     color: "#C8A96E",
     founded: 1997,
-    branches: 3,
+    branches: 4,
     status: "active",
     serviceIds: [
       "mri",
@@ -120,7 +120,7 @@ export const brands: Brand[] = [
     country: "jordan",
     color: "#1E88E5",
     founded: 2009,
-    branches: 7,
+    branches: 10,
     status: "active",
     serviceIds: [
       "mri",
@@ -141,7 +141,7 @@ export const brands: Brand[] = [
       "eos-imaging",
     ],
     description:
-      "Ray Lab's full-spectrum diagnostic imaging platform in Jordan. Hub-and-spoke model across Greater Amman — 7 branches.",
+      "Ray Lab's full-spectrum diagnostic imaging platform in Jordan. Hub-and-spoke model across Greater Amman — 10 branches.",
     logo: {
       light:
         "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776482760/MedRay_logo_juxtqi.png",
@@ -224,8 +224,7 @@ export const brands: Brand[] = [
     description:
       "Multi-specialty outpatient care under Cairo Scan — 62 specialties, 50+ consultant physicians across Cairo.",
     logo: {
-      light:
-        "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684144/cairo_eng_qq0fsm.svg",
+      light: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684144/cairo_eng_qq0fsm.svg",
       dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684144/cairo_eng_qq0fsm.svg",
     },
   },
@@ -305,8 +304,7 @@ export const brands: Brand[] = [
     description:
       "Multi-specialty outpatient care under TechnoScan — 62 specialties, 50+ consultant physicians across Egypt.",
     logo: {
-      light:
-        "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684373/techno_eng_uptq3p.svg",
+      light: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684373/techno_eng_uptq3p.svg",
       dark: "https://res.cloudinary.com/dcui0elwh/image/upload/v1776684373/techno_eng_uptq3p.svg",
     },
   },

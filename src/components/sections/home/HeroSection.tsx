@@ -20,9 +20,9 @@ const heroStats = [
   {
     ...statsCopy.branches,
     icon: Building2,
-    raw: 74,
+    raw: 78,
     suffix: "+",
-    display: "74",
+    display: "78",
     context: "Largest multi-country network in MENA private diagnostics",
   },
   {

@@ -19,7 +19,7 @@ export const directoryCopy = {
     eyebrow: "Network Summary",
     headline: "Reach by the numbers.",
     items: [
-      { value: "74+", label: "Branches" },
+      { value: "78+", label: "Branches" },
       { value: "6", label: "Brands" },
       { value: "3", label: "Operating Markets" },
       { value: "1.6M+", label: "Annual Exams" },

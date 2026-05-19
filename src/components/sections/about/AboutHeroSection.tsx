@@ -8,7 +8,7 @@ const aboutStats = [
   { value: "1983", label: "Founded", raw: 1983, suffix: "" },
   { value: "3", label: "Markets", raw: 3, suffix: "" },
   { value: "6", label: "Brands", raw: 6, suffix: "" },
-  { value: "74", label: "Branches", raw: 74, suffix: "+" },
+  { value: "78", label: "Branches", raw: 78, suffix: "+" },
 ];
 
 const AUDIENCE_TAGS = [

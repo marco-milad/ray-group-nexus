@@ -8,7 +8,7 @@ export const homeCopy = {
   seo: {
     title: "Ray Lab Group — Diagnostic Intelligence. Delivered at Scale.",
     description:
-      "Ray Lab Group is a multinational diagnostic healthcare group operating across Egypt, Saudi Arabia, and Jordan. Explore our 74+ branches and 6 diagnostic platforms.",
+      "Ray Lab Group is a multinational diagnostic healthcare group operating across Egypt, Saudi Arabia, and Jordan. Explore our 78+ branches and 6 diagnostic platforms.",
   },
   hero: {
     eyebrow: "Ray Lab Group · Est. 1983 · Malta HQ",

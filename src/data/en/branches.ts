@@ -637,7 +637,7 @@ export const branches: Branch[] = [
     mapsUrl: "https://maps.app.goo.gl/74Rqb8Ekq6Fe2ioPA",
   },
 
-  // ─── MedRay — Jordan (7 branches) ────────────────────────
+  // ─── MedRay — Jordan (10 branches) ───────────────────────
   {
     id: "branch-62",
     brand: "medray",

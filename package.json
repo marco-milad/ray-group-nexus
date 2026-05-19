@@ -7,6 +7,7 @@
     "dev": "vite dev",
     "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/sync-to-deploy.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "start": "node app.js",

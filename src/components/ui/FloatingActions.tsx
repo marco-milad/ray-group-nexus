@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Linkedin, Twitter, Facebook, Instagram, ChevronUp, type LucideIcon } from "lucide-react";
+import { Linkedin, Instagram, ChevronUp, type LucideIcon } from "lucide-react";
 
 type Social = {
   label: string;
@@ -14,18 +14,8 @@ const socials: ReadonlyArray<Social> = [
     Icon: Linkedin,
   },
   {
-    label: "X",
-    href: "https://x.com/raylabgroup",
-    Icon: Twitter,
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com/raylabgroup",
-    Icon: Facebook,
-  },
-  {
     label: "Instagram",
-    href: "https://www.instagram.com/raylabgroup",
+    href: "https://www.instagram.com/ray_lab1?igsh=MWI5bTV0YzRremI4MQ==",
     Icon: Instagram,
   },
 ];

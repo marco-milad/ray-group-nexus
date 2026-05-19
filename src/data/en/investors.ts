@@ -52,7 +52,7 @@ export const investorsCopy = {
       {
         number: "03",
         title: "Proven Hub-and-Spoke Scalability",
-        body: "The group's hub-and-spoke expansion model is validated: Jordan grew from 5 to 7 branches; Egypt expanded 12 branches in a single year without proportional fixed cost increases.",
+        body: "The group's hub-and-spoke expansion model is validated: Jordan grew from 5 to 10 branches; Egypt expanded 12 branches in a single year without proportional fixed cost increases.",
         soWhat:
           "Capital-efficient growth model where marginal branches generate high incremental contribution — not high incremental overhead.",
       },
@@ -275,8 +275,8 @@ export const investorsCopy = {
         status: "done",
         year: "2026",
         title: "Jordan Hub-and-Spoke Complete",
-        body: "MedRay grew from 5 to 7 branches across Greater Amman, reinforcing its position as Jordan's most accessible radiology network.",
-        metric: "7 total branches · Greater Amman",
+        body: "MedRay grew from 5 to 10 branches across Greater Amman, reinforcing its position as Jordan's most accessible radiology network.",
+        metric: "10 total branches · Greater Amman",
         soWhat:
           "Proves the model replicates across different regulatory environments and physician ecosystems.",
       },
@@ -453,11 +453,11 @@ The model is designed to create a more coordinated patient journey, from physici
       },
       {
         category: "Expansion",
-        headline: "MedRay Jordan Expands to 7th Branch in Abdoun District",
+        headline: "MedRay Jordan Expands to 10th Branch in Abdoun District",
         date: "December 2024",
-        content: `MedRay Jordan, Ray Lab Group's diagnostic imaging platform in the Kingdom, has expanded to its seventh branch with a new location in Abdoun District, strengthening its accessibility across Greater Amman.
+        content: `MedRay Jordan, Ray Lab Group's diagnostic imaging platform in the Kingdom, has expanded to its tenth branch with a new location in Abdoun District, strengthening its accessibility across Greater Amman.
 
-The Abdoun branch marks the latest step in MedRay's growth from a single-site radiology provider into one of Amman's most accessible diagnostic imaging networks. The expansion follows the launch of two additional branches in 2026, bringing the network to seven locations.
+The Abdoun branch marks the latest step in MedRay's growth from a single-site radiology provider into one of Amman's most accessible diagnostic imaging networks. The expansion follows the launch of five additional branches in 2026, bringing the network to ten locations.
 
 Established in 2009, MedRay has built its reputation on specialist radiology, advanced imaging technology and a referral-driven clinical model. The network offers a comprehensive diagnostic portfolio including MRI, CT, ultrasound, mammography, PET/CT, nuclear medicine, FibroScan and EOS Imaging.`,
       },

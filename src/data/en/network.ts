@@ -2,7 +2,7 @@ export const networkCopy = {
   seo: {
     title: "Network — Ray Lab Group",
     description:
-      "Ray Lab Group operates 71+ branches across Egypt, Saudi Arabia, and Jordan — the most geographically diverse private diagnostic network in MENA.",
+      "Ray Lab Group operates 78+ branches across Egypt, Saudi Arabia, and Jordan — the most geographically diverse private diagnostic network in MENA.",
   },
 
   hero: {
@@ -10,7 +10,7 @@ export const networkCopy = {
     headline: "Diagnostic Coverage",
     headlineAccent: "Across MENA.",
     subheadline:
-      "71+ branches across 3 operating markets, under 6 brands — unified by group governance and Ray Medical teleradiology infrastructure.",
+      "78+ branches across 3 operating markets, under 6 brands — unified by group governance and Ray Medical teleradiology infrastructure.",
   },
 
   countries: {
@@ -31,16 +31,16 @@ export const networkCopy = {
       {
         country: "Saudi Arabia",
         flag: "🇸🇦",
-        branches: 3,
+        branches: 4,
         brands: ["CRC"],
-        cities: ["Riyadh"],
+        cities: ["Riyadh", "Eastern Province"],
         soWhat:
           "Premium, consultant-led positioning in the region's highest-revenue private healthcare market — Jeddah expansion under evaluation.",
       },
       {
         country: "Jordan",
         flag: "🇯🇴",
-        branches: 7,
+        branches: 10,
         brands: ["MedRay"],
         cities: ["Amman", "Abdoun", "Sweifieh", "Khalda", "Marj Al-Hamam"],
         soWhat:
@@ -69,8 +69,8 @@ export const networkCopy = {
         branches: 1,
         color: "var(--technoscan)",
       },
-      { brand: "CRC", country: "Saudi Arabia", branches: 3, color: "var(--crc)" },
-      { brand: "MedRay", country: "Jordan", branches: 7, color: "var(--medray)" },
+      { brand: "CRC", country: "Saudi Arabia", branches: 4, color: "var(--crc)" },
+      { brand: "MedRay", country: "Jordan", branches: 10, color: "var(--medray)" },
       {
         brand: "Ray Medical",
         country: "Egypt + KSA",

@@ -121,31 +121,55 @@ const galleryItems: GalleryItem[] = [
     caption:
       "GE LOGIQ P9 Ultrasound — abdominal, OB, and vascular workups in a dedicated exam suite.",
   },
-
-  // Cairo Scan Polyclinics — MRI, ultrasound, patient lounge
   {
-    id: "csp-1",
-    brandSlug: "cairo-scan-polyclinics",
+    id: "cs-10",
+    brandSlug: "cairo-scan",
     src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778715023/photo_2026-05-14_02-28-04_jn9zes.jpg",
-    alt: "Cairo Scan Polyclinics Toshiba MRI scanner",
+    alt: "Cairo Scan Toshiba MRI scanner suite",
     caption:
       "Toshiba MRI Suite — open-architecture scanner serving routine neuro and musculoskeletal exams.",
   },
   {
-    id: "csp-2",
-    brandSlug: "cairo-scan-polyclinics",
+    id: "cs-11",
+    brandSlug: "cairo-scan",
     src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778715024/photo_2026-05-14_02-29-25_iiarof.jpg",
-    alt: "Cairo Scan Polyclinics Siemens ACUSON Redwood ultrasound exam in progress",
+    alt: "Cairo Scan Siemens ACUSON Redwood ultrasound exam in progress",
     caption:
       "Siemens ACUSON Redwood Ultrasound — sonographer-led abdominal and vascular workups in a calming exam suite.",
   },
   {
-    id: "csp-3",
-    brandSlug: "cairo-scan-polyclinics",
+    id: "cs-12",
+    brandSlug: "cairo-scan",
     src: "https://res.cloudinary.com/dq0om55vx/image/upload/v1778715023/photo_2026-05-14_02-27-40_rwkgbr.jpg",
-    alt: "Cairo Scan Polyclinics patient reviewing services brochure in waiting area",
+    alt: "Cairo Scan patient reviewing services brochure in waiting area",
     caption:
       "Patient Lounge — guests browse the Cairo Scan services menu while waiting for their consultation.",
+  },
+
+  // Cairo Scan Polyclinics — specialty clinic entrance, reception, waiting hall
+  {
+    id: "csp-1",
+    brandSlug: "cairo-scan-polyclinics",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779190380/WhatsApp_Image_2026-05-14_at_14.46.37_2_cj2lxg.jpg",
+    alt: "Cairo Scan Polyclinics entrance corridor with specialty clinic signage",
+    caption:
+      "Specialty Clinics Entrance — Cairo Scan Polyclinics' branded corridor leading to consultation suites.",
+  },
+  {
+    id: "csp-2",
+    brandSlug: "cairo-scan-polyclinics",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779190380/WhatsApp_Image_2026-05-14_at_14.46.37_1_whvr3d.jpg",
+    alt: "Cairo Scan Polyclinics receptionist on the phone at the front desk",
+    caption:
+      "Reception Desk — Cairo Scan Polyclinics' front-of-house team coordinating patient appointments.",
+  },
+  {
+    id: "csp-3",
+    brandSlug: "cairo-scan-polyclinics",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779190380/WhatsApp_Image_2026-05-14_at_14.46.37_m2olpm.jpg",
+    alt: "Cairo Scan Polyclinics waiting hall with bench seating and reception",
+    caption:
+      "Patient Waiting Hall — a spacious, well-lit lounge welcoming patients across our specialty clinics.",
   },
 
   // TechnoScan — CT scanner, ultrasound, medical team, diagnostic center
@@ -178,27 +202,45 @@ const galleryItems: GalleryItem[] = [
     caption: "35+ diagnostic centres across Cairo, the Delta, Canal, and Upper Egypt.",
   },
 
-  // CRC — radiology suite, consultation room, equipment
+  // CRC — consultant review, Siemens CT suite, patient positioning, control room
   {
     id: "crc-1",
     brandSlug: "crc",
-    src: "https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=900&q=80&auto=format&fit=crop",
-    alt: "CRC radiology suite",
-    caption: "CRC's consultant-led imaging suite in Riyadh.",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779188304/DSC09161_pbcueg.jpg",
+    alt: "CRC consultants reviewing vascular imaging at a Riyadh workstation",
+    caption:
+      "Consultant Reads — CRC radiologists reviewing a vascular study side-by-side at our Riyadh centre.",
   },
   {
     id: "crc-2",
     brandSlug: "crc",
-    src: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&q=80&auto=format&fit=crop",
-    alt: "CRC consultation room",
-    caption: "Quiet consultation rooms designed for sub-specialty case reviews.",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779188306/DSC01183_jenlso.jpg",
+    alt: "CRC Siemens Healthineers CT scanner with technologist positioning a patient",
+    caption: "Siemens CT Suite — technologist positioning a patient for a contrast-enhanced study.",
   },
   {
     id: "crc-3",
     brandSlug: "crc",
-    src: "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=900&q=80&auto=format&fit=crop",
-    alt: "CRC medical equipment",
-    caption: "Modality-rich centres covering MRI, CT, mammography, and DEXA.",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779188318/DSC01203_n4ghxm.jpg",
+    alt: "CRC technologist viewed through the bore of a Siemens CT scanner",
+    caption:
+      "Patient-First Care — a CRC technologist guiding the patient through the CT examination.",
+  },
+  {
+    id: "crc-4",
+    brandSlug: "crc",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779188299/DSC01218_i4scq7.jpg",
+    alt: "CRC control room operator at PACS reporting workstation",
+    caption:
+      "Control Room — PACS and reporting workstation overseeing scans in real time at CRC Riyadh.",
+  },
+  {
+    id: "crc-5",
+    brandSlug: "crc",
+    src: "https://res.cloudinary.com/dcui0elwh/image/upload/v1779190756/new_rf0lbh.jpg",
+    alt: "CRC patient positioned for a chest X-ray on a Hitachi digital radiography system",
+    caption:
+      "Digital X-Ray Suite — patient positioning for a chest radiograph on CRC's Hitachi DR system.",
   },
 
   // MedRay — imaging center, hospital corridor, diagnostic equipment
@@ -336,7 +378,7 @@ const galleryItems: GalleryItem[] = [
 type FilterTab = { slug: string; name: string; color: string };
 
 const heroStats: { target: number; suffix: string; label: string }[] = [
-  { target: 74, suffix: "+", label: "Branches" },
+  { target: 78, suffix: "+", label: "Branches" },
   { target: 6, suffix: "", label: "Brands" },
   { target: 3, suffix: "", label: "Operating Markets" },
 ];

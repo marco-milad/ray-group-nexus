@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Twitter, Facebook, Instagram, Mail } from "lucide-react";
+import { Linkedin, Instagram, Mail } from "lucide-react";
 import { globalCopy } from "@/data/en/global";
 import { brands } from "@/data/en/brands";
 import { BrandChip } from "@/components/ui/brand-chip";
@@ -9,7 +9,7 @@ const LOGO_URL =
   "https://res.cloudinary.com/dcui0elwh/image/upload/q_auto/f_auto/v1776657151/svg_final_fwh3x1.svg";
 
 const footerStats = [
-  { value: "74+", label: "Branches" },
+  { value: "78+", label: "Branches" },
   { value: "3", label: "Markets" },
   { value: "1.6M+", label: "Annual Exams" },
   { value: "1983", label: "Est." },
@@ -17,9 +17,11 @@ const footerStats = [
 
 const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/ray-lab" },
-  { icon: Twitter, label: "X", href: "https://x.com/raylabgroup" },
-  { icon: Facebook, label: "Facebook", href: "https://facebook.com/raylabgroup" },
-  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/raylabgroup" },
+  {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/ray_lab1?igsh=MWI5bTV0YzRremI4MQ==",
+  },
 ];
 
 export function Footer() {

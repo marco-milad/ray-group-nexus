@@ -96,7 +96,7 @@ export const services: ServiceItem[] = [
     description:
       "Volume rendering for fetal assessment, gynecological evaluation, and soft tissue characterisation.",
     categoryId: "ultrasound",
-    availableAt: ["cairo-scan", "technoscan", "medray"],
+    availableAt: ["cairo-scan", "technoscan"],
     icon: "box",
     highlight: "Volume fetal & soft tissue imaging",
     priority: "medium",
@@ -108,7 +108,7 @@ export const services: ServiceItem[] = [
     description:
       "Transthoracic echocardiography for cardiac structure and function — reported by cardiology-trained consultants.",
     categoryId: "ultrasound",
-    availableAt: ["cairo-scan", "crc", "medray"],
+    availableAt: ["cairo-scan", "crc"],
     icon: "heart",
     highlight: "Cardiac structure & function",
     priority: "high",
@@ -209,7 +209,7 @@ export const services: ServiceItem[] = [
     description:
       "12-lead resting electrocardiogram with consultant interpretation — available as walk-in at all branches.",
     categoryId: "cardiology",
-    availableAt: ["cairo-scan", "technoscan", "medray", "crc"],
+    availableAt: ["cairo-scan", "technoscan", "crc"],
     icon: "activity",
     highlight: "Walk-in, same-day results",
     priority: "high",
@@ -233,7 +233,7 @@ export const services: ServiceItem[] = [
     description:
       "Ambulatory ECG monitoring for arrhythmia detection and palpitation workup over 24, 48, or 72 hours.",
     categoryId: "cardiology",
-    availableAt: ["cairo-scan", "technoscan", "medray"],
+    availableAt: ["cairo-scan", "technoscan"],
     icon: "timer",
     highlight: "Continuous arrhythmia detection",
     priority: "medium",
