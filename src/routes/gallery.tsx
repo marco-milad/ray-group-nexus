@@ -583,7 +583,7 @@ function GalleryCard({ item }: { item: GalleryItem }) {
 
   return (
     <figure
-      className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+      className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:will-change-transform"
       style={{ borderTopColor: brandColor, borderTopWidth: "3px" }}
     >
       <img
